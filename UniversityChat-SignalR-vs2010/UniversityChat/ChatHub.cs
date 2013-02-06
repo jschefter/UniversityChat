@@ -10,7 +10,6 @@ namespace UniversityChat
 {
     public class ChatHub : Hub
     {
-        
         public override Task OnConnected()
         {
             return base.OnDisconnected();

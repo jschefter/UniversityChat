@@ -73,6 +73,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Android.html" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
