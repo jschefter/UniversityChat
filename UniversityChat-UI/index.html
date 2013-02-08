@@ -1,0 +1,356 @@
+<html>
+
+	<header>
+		<link rel="stylesheet" type="text/css" href="resources/css/ext-all-debug.css" />
+		
+		<script type="text/javascript" src="ext-all-debug-w-comments.js"></script>
+		
+		<script type="text/javascript" src="SearchField.js"></script>
+		
+	</header>
+
+	<body>
+	
+		<script type="text/javascript">
+			Ext.onReady(function(){
+				///
+				Ext.define('ForumThread', {
+        extend: 'Ext.data.Model',
+        fields: [
+            {
+            name: 'title',
+            mapping: 'topic_title'
+            }, {
+            name: 'forumtitle',
+            mapping: 'forum_title'
+            }, {
+            name: 'forumid',
+            type: 'int'
+            }, {
+            name: 'username',
+            mapping: 'author'
+            }, {
+                name: 'replycount', 
+                mapping: 'reply_count',
+                type: 'int'
+            }, {
+                name: 'lastpost', 
+                mapping: 'post_time', 
+                type: 'date', 
+                dateFormat: 'timestamp'
+            },
+            'lastposter', 'excerpt', 'topic_id'
+        ],
+        idProperty: 'post_id'
+    });
+
+    // create the Data Store
+    var store = Ext.create('Ext.data.Store', {
+        id: 'store',
+        model: 'ForumThread',
+        // allow the grid to interact with the paging scroller by buffering
+        buffered: true,
+        
+        // The topics-remote.php script appears to be hardcoded to use 50, and ignores this parameter, so we
+        // are forced to use 50 here instead of a possibly more efficient value.
+        pageSize: 50,
+
+        // This web service seems slow, so keep lots of data in the pipeline ahead!
+        leadingBufferZone: 1000,
+        proxy: {
+            // load using script tags for cross domain, if the data in on the same domain as
+            // this page, an HttpProxy would be better
+            type: 'jsonp',
+            url: 'http://www.sencha.com/forum/topics-remote.php',
+            reader: {
+                root: 'topics',
+                totalProperty: 'totalCount'
+            },
+            // sends single sort as multi parameter
+            simpleSortMode: true,
+            
+            // Parameter name to send filtering information in
+            filterParam: 'query',
+
+            // The PHP script just use query=<whatever>
+            encodeFilters: function(filters) {
+                return filters[0].value;
+            }
+        },
+        listeners: {
+            totalcountchange: onStoreSizeChange
+        },
+        remoteFilter: true,
+        autoLoad: true
+    });
+    
+    function onStoreSizeChange() {
+        grid.down('#status').update({count: store.getTotalCount()});
+    }
+
+    function renderTopic(value, p, record) {
+        return Ext.String.format(
+            '<a href="http://sencha.com/forum/showthread.php?p={1}" target="_blank">{0}</a>',
+            value,
+            record.getId()
+        );
+    }
+				///
+				Ext.create('Ext.container.Viewport', {
+					layout: 'border',
+					items: [{
+						region: 'north',						
+						layout: 'hbox',
+						defaults: { border: false, bodyborder: false, frame: false },
+						bodyStyle: {
+										background: '90EE90'
+						},
+						items: 
+						[
+							{
+								xtype: 'panel',
+								id: 'titlePanel',
+								margin: '5 5 0 5',
+								layout: 'auto',
+								width: '60%',
+								height: '100%',
+								bodyStyle: {
+									background: '90EE90',
+									padding: '30 0 0 10'
+								},
+								html: '<div> <h1> University Chat </h1></div>'
+							},
+							{
+								xtype: 'panel',
+								id: 'controlsPanel',
+								bodyStyle: {
+									background: '90EE90'
+								},
+								width: '40%',
+								height: '100%',
+								margins: '10 10 5 10', 
+								defaults: { border: false, bodyborder: false, frame: false, bodyStyle: {background: '90EE90'} },
+								layout: {
+									type: 'table',
+									columns: 3
+							},
+							items: 
+							[
+								{ xtype: 'panel', width: '90%', margins: '0 0 0 0', items: [{ xtype: 'textfield', emptyText: 'User Name'}] },
+								{ xtype: 'panel', width: '90%', margins: '0 0 0 0', items: [{ xtype: 'textfield', emptyText: 'Password' }] },
+								{ xtype: 'panel', width: '100%', layout: { type: 'hbox', align: 'stretch' }, items: [{ xtype: 'button', width: '100%', text: 'Log In'}] },
+								{ xtype: 'panel', width: '100%', rowspan: 2, items: [{ xtype: 'button', width: '50%', text: 'Sign up' }]},								
+								{ xtype: 'panel', width: '100%', rowspan: 2, items: [{ xtype: 'button', width: '50%', text: 'Forget Password?' }]},
+								{ xtype: 'panel', width: '100%', items: [{ xtype: 'button', text: 'Feedback'}] }						
+							]
+						
+						}],
+						height: 100,
+						minHeight: 100,
+						border: false,
+						margins: '0 0 5 0'
+					},
+					{
+						region: 'south',
+						defaults: { border: false, bodyborder: false, frame: false },
+						items: 
+						[
+							{ 
+								xtype: 'panel',
+								id: 'linksPanel',
+								margin: '5 5 5 5',
+								layout: { type: 'fit' },
+								bodyStyle: {									
+									fontSize: 'large',								
+									padding: '20 0 0 25%'
+								},
+								html: '<a href="">About University Chat</a> | <a href="">Privacy & Terms</a> | <a href="">Feedback</a> ',
+								width: '100%',
+								height: '100%' 
+							}
+						],
+						height: 50,
+						minHeight: 50,						
+						margins: '0 0 5 0'
+						
+					},
+					{
+						region: 'center',
+						layout: {
+							type: 'hbox',
+							align: 'stretch'
+						},						
+						items: 
+						[
+							{ 
+								xtype: 'panel',								
+								flex: 1,								
+								layout: { type: 'vbox', align: 'stretch' },
+								items: 
+								[
+									//{ 
+									//	xtype: 'panel',
+									//	border: false,
+									//	bodyborder: false,
+									//	frame: false,
+									//	flex: 1,
+									//	margins: '10 10 5 10',
+									//	layout: { type: 'vbox', align: 'stretch' },
+									//	items: [{ xtype: 'searchfield', store: store, emptyText: 'Search' }] 
+									//},
+									{
+										xtype: 'panel',
+										//flex: 20,
+										layout: { type: 'vbox', align: 'stretch' },
+										items: 
+										[
+											{ xtype: 'searchfield', store: store, emptyText: 'Search', width: '100%', 
+													  margins: '0 0 0 0' },
+											{ 
+												xtype: 'panel',
+												id: 'publicRoomsPanel',
+												items: 
+												[													
+													{
+														xtype: 'gridpanel',														
+														collapsible: true,
+														hideHeaders: true,
+														frame: false,
+														title: 'Public Rooms',														
+														loadMask: true,														
+														selModel: {
+															pruneRemoved: false
+														},
+														multiSelect: true,
+														viewConfig: {
+															trackOver: false
+														},
+														features:[{
+															ftype: 'grouping',
+															hideGroupedHeader: false
+														}],
+														verticalScroller:{
+															variableRowHeight: true
+
+														},
+														// grid columns
+														columns:
+														[
+															{
+																xtype: 'rownumberer',
+																width: 50,
+																sortable: false
+															},
+															{
+																text: "Room",
+																dataIndex: 'username',
+																width: 100,
+																hidden: true,
+																sortable: true
+															}
+														]
+													}													
+												]
+											},
+{ 
+												xtype: 'panel',
+												id: 'privateRoomsPanel',
+												items: 
+												[
+													{
+														xtype: 'gridpanel',														
+														collapsible: true,
+														hideHeaders: true,
+														frame: false,
+														title: 'Private Rooms',														
+														loadMask: true,
+														selModel: {
+															pruneRemoved: false
+														},
+														multiSelect: true,
+														viewConfig: {
+															trackOver: false
+														},
+														features:[{
+															ftype: 'grouping',
+															hideGroupedHeader: false
+														}],
+														verticalScroller:{
+															variableRowHeight: true
+
+														},
+														// grid columns
+														columns:
+														[
+															{
+																xtype: 'rownumberer',
+																width: 50,
+																sortable: false
+															},
+															{
+																text: "Room",
+																dataIndex: 'username',
+																width: 100,
+																hidden: true,
+																sortable: true
+															}
+														]
+													}													
+												]
+											}											
+										]
+									}
+								]
+							},
+							{ 
+								xtype: 'panel',
+								flex: 3,
+								layout: { type: 'vbox', align: 'stretch' },
+								items: 
+								[
+									{ xtype: 'panel', flex: 10, html: 'Messages' },
+									{ 
+										xtype: 'panel',
+										flex: 2,
+										layout: { type: 'hbox', align: 'stretch' },
+										items: 
+										[
+											{ 
+												xtype: 'panel',
+												flex: 9,
+												layout: { type: 'hbox', align: 'stretch' },  
+												items: 
+												[{ 
+													xtype: 'htmleditor',
+													flex: 1,
+													enableLinks: false,
+													enableLists: false,
+													enableSourceEdit: false,
+													listeners: {
+														change: function(comp, newVal, oldVal, opts) { console.log(newVal); }
+													}
+												}] 
+											},
+											{ xtype: 'panel', flex: 1, layout: { type: 'hbox', align: 'stretch' }, items: [{ xtype: 'button', text: 'Send', flex: 1 }] }
+										]
+									}
+								]
+								
+							},
+							{ 
+								xtype: 'panel',
+								flex: 1,
+								title: 'Users',
+								html: 'users',
+								
+							}
+						]
+					}
+					]
+				});
+				
+				
+			});
+		</script>
+	</body>
+</html>
