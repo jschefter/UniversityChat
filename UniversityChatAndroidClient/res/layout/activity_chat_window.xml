@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:id="@+id/textViewUsername" android:layout_gravity="left|center_vertical"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Android"
+            android:id="@+id/editUsername" android:singleLine="true" android:enabled="false" android:focusable="true"/>
+    <Button
+        android:id="@+id/buttonJoinChat"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Join Chat"
+        android:enabled="false"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="170dp"
+            android:id="@+id/textViewChat"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="chat message"
+            android:id="@+id/editMessage" android:singleLine="true" android:enabled="false"/>
+    <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:id="@+id/buttonSendMessage" android:enabled="false"/>
+    <WebView
+            android:id="@+id/webView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" android:visibility="invisible">
+    </WebView>
+</LinearLayout>
