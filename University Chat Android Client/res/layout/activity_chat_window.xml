@@ -7,14 +7,7 @@
     <TextView
         android:id="@+id/textViewChat"
         android:layout_width="fill_parent"
-        android:layout_height="408dp" />
-
-    <WebView
-            android:id="@+id/webView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" android:visibility="invisible">
-    </WebView>
+        android:layout_height="342dp" />
 
     <EditText
         android:id="@+id/editMessage"
@@ -23,10 +16,7 @@
         android:ems="10"
         android:enabled="false"
         android:hint="@string/type_msg_prompt"
-        android:singleLine="true" >
-
-        <requestFocus />
-    </EditText>
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/buttonSendMessage"
@@ -35,6 +25,20 @@
         android:enabled="false"
         android:hint="@string/send_btn"
         android:onClick="sendMessage"
-        android:text="Send" />
+        android:text="@string/send_btn" />
+
+    <Button
+        android:id="@+id/buttonExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="killApp"
+        android:text="@string/exit_btn" />
+
+    <WebView
+            android:id="@+id/webView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" android:visibility="invisible">
+    </WebView>
 
 </LinearLayout>

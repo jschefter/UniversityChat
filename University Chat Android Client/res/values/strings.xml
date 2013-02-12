@@ -11,6 +11,7 @@
     <string name="Sign_up_link">Sign-up for University Chat</string>
     <string name="type_msg_prompt">Type message here...</string>
     <string name="send_btn">Send</string>
+    <string name="exit_btn">Exit (for Debug)</string>
 
 
 </resources>

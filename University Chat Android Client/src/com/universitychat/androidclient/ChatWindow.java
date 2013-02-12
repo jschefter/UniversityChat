@@ -24,6 +24,7 @@ public class ChatWindow extends FragmentActivity {
     private TextView textViewChat;
     private EditText editMessage;
     private Button buttonSendMessage;
+    private Button buttonExit;
     private String userName;
     private String password;
     private String userInfo[];
@@ -55,6 +56,7 @@ public class ChatWindow extends FragmentActivity {
         textViewChat = (TextView)findViewById(R.id.textViewChat);
         editMessage = (EditText)findViewById(R.id.editMessage);
         buttonSendMessage = (Button)findViewById(R.id.buttonSendMessage);
+        buttonExit = (Button)findViewById(R.id.buttonExit);
     }
 
     private void setWebView() 
@@ -96,6 +98,12 @@ public class ChatWindow extends FragmentActivity {
             editMessage.setText("");
             webView.loadUrl(url);
         }
+    }
+    
+    //method only for debugging, will be removed in beta release
+    public void killApp(View view)
+    {
+    	this.finish();
     }
 
     // the methods of this class with the @JavascriptInterface attributes are called from javascript executed by the WebView
