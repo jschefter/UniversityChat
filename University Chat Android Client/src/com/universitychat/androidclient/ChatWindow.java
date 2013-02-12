@@ -20,7 +20,7 @@ public class ChatWindow extends FragmentActivity {
     private WebView webView;
     private final Handler chatWindowActivityHandler = new Handler();
 
-    private static String HOST = "http://universitychat.azurewebsites.net/Android.html";
+
     private TextView textViewChat;
     private EditText editMessage;
     private Button buttonSendMessage;
@@ -72,7 +72,7 @@ public class ChatWindow extends FragmentActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         final WebAppInterface webAppInterface = new WebAppInterface(this);
         webView.addJavascriptInterface(webAppInterface, "Android");
-        webView.loadUrl(HOST);
+        webView.loadUrl("http://universitychat.azurewebsites.net/Android.html");
     }
 
     
@@ -91,9 +91,10 @@ public class ChatWindow extends FragmentActivity {
         if(!message.isEmpty()) 
         {
             // send message to server.
-            String url = String.format("javascript:sendMessage('%s', '%s')", userName, message);
-            webView.loadUrl(url);
+        	String message2 = message.replace("'", "\\'");
+            String url = String.format("javascript:sendMessage('%s', '%s')", userName, message2);
             editMessage.setText("");
+            webView.loadUrl(url);
         }
     }
 
@@ -118,12 +119,6 @@ public class ChatWindow extends FragmentActivity {
                 public void run() 
                 {
                     textViewChat.append(formattedMessage);
-                    
-                    final int offset = 
-                    		textViewChat.getLayout().getLineTop(textViewChat.getLineCount())  - textViewChat.getHeight();
-
-                    if(offset > 0) textViewChat.scrollTo(0, offset);
-                    else textViewChat.scrollTo(0, 0);
                 }
             });
         }
