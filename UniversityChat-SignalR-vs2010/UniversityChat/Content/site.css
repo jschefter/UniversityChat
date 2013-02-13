@@ -1,0 +1,97 @@
+﻿body, div, p, h1, h4, ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: Arial, Sans-Serif;
+}
+
+.container {
+    width: 960px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.header {
+    position: relative;
+	background-color: green;
+    padding: 10px;
+}
+
+.footer {
+    padding: 1em;
+    text-align: center;
+}
+
+.header h1 a {
+    color: White;
+    font-size: 45px;
+    font-family: monospace;
+    text-decoration: none;
+}
+
+.login-container {
+    position:absolute;
+	right:10px;
+	top:10px;
+}
+
+.login-container div {
+    display: inline-block;
+}
+
+.chat-container {
+    position: relative;
+    height: 450px;
+}
+
+.chat-container > div {
+    position:absolute;
+    vertical-align: top;
+    border: 1px solid black;
+}
+
+.chat-container .channels {
+    width: 20%;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    border-left: none;
+    border-right: none;
+}
+
+.channels li, .users li {
+    list-style-type:none;
+    padding-left: 5px;
+}
+
+.chat-container .active-chat {
+    right: 20%;
+    left: 20%;
+    top: 0px;
+    bottom: 0px;
+}
+
+.chat-container .users {
+    width: 20%;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-left: none;
+    border-right: none;
+}
+
+#chat {
+    overflow-y: scroll;
+    background-color: white;
+    padding: 5px;
+    height: 350px;
+}
+
+#chat-form input[type="text"] {
+    vertical-align: middle;
+    width: 80%;
+    padding: 20px 10px;
+}
