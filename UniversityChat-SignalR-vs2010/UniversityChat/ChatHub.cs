@@ -12,7 +12,7 @@ namespace UniversityChat
     {
         public override Task OnConnected()
         {
-            return base.OnDisconnected();
+            return base.OnConnected();
         }
 
         public override Task OnDisconnected()

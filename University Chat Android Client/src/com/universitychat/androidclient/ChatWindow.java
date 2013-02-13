@@ -130,6 +130,17 @@ public class ChatWindow extends FragmentActivity {
                 }
             });
         }
+        
+        @JavascriptInterface
+        public void setChannelUsers(String[] users)
+        {
+        	// Shane - this code is just placeholder while you figure out where to put the user list.
+        	String userlist = "Connected Users:";
+        	for(String user: users) {
+        		userlist += String.format("\n%s", user);
+        	}
+        	appendMessage(userlist);
+        }
 
         @JavascriptInterface
         public void pageLoadComplete() 

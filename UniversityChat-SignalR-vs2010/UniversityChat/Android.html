@@ -19,9 +19,8 @@
 
         // received the user list from server.
         chat.client.setUserList = function (userlist) {
-            appendMessage("received user list from server");
+            Android.setChannelUsers(userlist);
         };
-
 
         function appendMessage(message) {
             Android.appendMessage(message);
