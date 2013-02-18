@@ -75,12 +75,32 @@
   <ItemGroup>
     <Content Include="Android.html" />
     <Content Include="Content\site.css" />
+    <Content Include="Content\south-street\images\animated-overlay.gif" />
+    <Content Include="Content\south-street\images\ui-bg_glass_55_fcf0ba_1x400.png" />
+    <Content Include="Content\south-street\images\ui-bg_gloss-wave_100_ece8da_500x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_highlight-hard_100_f5f3e5_1x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_highlight-hard_100_fafaf4_1x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_highlight-hard_15_459e00_1x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_highlight-hard_95_cccccc_1x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_highlight-soft_25_67b021_1x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_highlight-soft_95_ffedad_1x100.png" />
+    <Content Include="Content\south-street\images\ui-bg_inset-soft_15_2b2922_1x100.png" />
+    <Content Include="Content\south-street\images\ui-icons_808080_256x240.png" />
+    <Content Include="Content\south-street\images\ui-icons_847e71_256x240.png" />
+    <Content Include="Content\south-street\images\ui-icons_8DC262_256x240.png" />
+    <Content Include="Content\south-street\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\south-street\images\ui-icons_eeeeee_256x240.png" />
+    <Content Include="Content\south-street\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\south-street\jquery-ui-1.10.0.custom.css" />
+    <Content Include="Content\south-street\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Index.html" />
-    <Content Include="Scripts\university-chat.js" />
-    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\web-client.js" />
+    <Content Include="Scripts\chat-data-source.js" />
+    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Scripts\chat-ui.js" />
     <Content Include="Scripts\jquery.signalR-1.0.0-rc2.js" />
     <Content Include="Scripts\jquery.signalR-1.0.0-rc2.min.js" />
     <Content Include="Web.config" />
@@ -90,21 +110,33 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Index.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatHub.cs" />
-    <Compile Include="ConnectedUsers.cs" />
+    <Compile Include="Chat\ChatChannels.cs" />
+    <Compile Include="Chat\ChatChannel.cs" />
+    <Compile Include="Chat\ChatHub.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\uc-channels - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\uc-channels - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\universitychat - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\universitychat - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -62,9 +62,33 @@ body {
     border-right: none;
 }
 
+.channels .channel-list {
+    position: absolute;
+    top: 20px;
+    bottom: 60px;
+}
+
+.channels button {
+    width: 100%;
+    position: absolute;
+}
+
+.channels .add-channel {
+    bottom: 30px;
+}
+
+.channels .remove-channel {
+    bottom: 0px;
+}
+
 .channels li, .users li {
     list-style-type:none;
     padding-left: 5px;
+}
+
+.channel-list .active-channel {
+    color: White;
+    background-color: LawnGreen;
 }
 
 .chat-container .active-chat {
@@ -83,15 +107,29 @@ body {
     border-right: none;
 }
 
-#chat {
+#chat-tabs .content > div {
     overflow-y: scroll;
     background-color: white;
     padding: 5px;
-    height: 350px;
+    height: 320px;
+}
+
+#chat-form {
+    position: absolute;
+	bottom: 0px;
+	width: 100%;
 }
 
 #chat-form input[type="text"] {
     vertical-align: middle;
     width: 80%;
     padding: 20px 10px;
+}
+
+.user-lists > ul {
+	display: none;
+}
+
+.user-lists > ul.active {
+    display: block;
 }
