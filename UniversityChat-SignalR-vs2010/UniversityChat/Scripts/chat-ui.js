@@ -11,9 +11,8 @@ function ChatUI($containingElement, chatDataSource) {
     var $messageInput = $containingElement.find("#message");
     var $sendMessageButton = $containingElement.find("#sendmessage")
     var username = "invalid";
-    var self = this;
 
-    var init = function () {
+    var init = function (self) {
         chatDataSource.RegisterUserInterface(self);
 
         $chatTabs.tabs({
@@ -159,5 +158,5 @@ function ChatUI($containingElement, chatDataSource) {
         }
     });
 
-    init();
+    init(this);
 }
