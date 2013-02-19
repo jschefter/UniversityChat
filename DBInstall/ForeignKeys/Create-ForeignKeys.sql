@@ -19,3 +19,13 @@ ALTER TABLE [UniversityChat].[RoomUsers]
 	ADD CONSTRAINT FK_UserRooms_Rooms
 	FOREIGN KEY([RoomId])
 	REFERENCES [UniversityChat].[Rooms](RoomId)
+	
+ALTER TABLE [UniversityChat].[History]  
+	ADD CONSTRAINT FK_History_Sessions
+	FOREIGN KEY([SessionId])
+	REFERENCES [UniversityChat].[Sessions](SessionId)
+
+ALTER TABLE [UniversityChat].[History]  
+	ADD CONSTRAINT FK_History_Users
+	FOREIGN KEY([SenderId])
+	REFERENCES [UniversityChat].[Users](UserId)
