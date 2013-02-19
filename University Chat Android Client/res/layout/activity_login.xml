@@ -63,11 +63,13 @@
         android:text="@string/loginAnon_btn" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_signuplink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
+        android:onClick="startSignUpActivity"                
+        android:clickable="true"
         android:text="@string/Sign_up_link"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

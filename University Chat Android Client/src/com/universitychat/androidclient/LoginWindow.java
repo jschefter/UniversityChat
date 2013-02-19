@@ -21,12 +21,13 @@ public class LoginWindow extends Activity
 	private EditText passwordText;
 	private Button loginButton;
 	private Button loginAnonymousButton;
+	private TextView signUpLink;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
+		setContentView(R.layout.activity_login);
 		setUIVariables();
 		Typeface orbitron = Typeface.createFromAsset(getAssets(), "fonts/orbitron-black.otf");
 		TextView tv = (TextView) findViewById(R.id.uchatheader);
@@ -39,6 +40,7 @@ public class LoginWindow extends Activity
         passwordText = (EditText)findViewById(R.id.txt_pw);
         loginButton = (Button)findViewById(R.id.btn_login);
         loginAnonymousButton = (Button)findViewById(R.id.btn_loginAnonymous);
+        signUpLink = (TextView)findViewById(R.id.textView_signuplink);
     }
 
 	@Override
@@ -47,6 +49,13 @@ public class LoginWindow extends Activity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+	
+	public void startSignUpActivity(View view)
+	{
+		Intent signUpIntent = new Intent(this, SignupActivity.class);
+		startActivity(signUpIntent);
+		
 	}
 	
 	public void loginAttempt(View view)
@@ -69,7 +78,7 @@ public class LoginWindow extends Activity
 
         }
 		loginInfo = new String[]{userName, password};
-		Intent chatWindowIntent = new Intent(this, ChatWindow.class);
+		Intent chatWindowIntent = new Intent(this, ChatActivity.class);
 		chatWindowIntent.putExtra("user_info",loginInfo);
 		startActivity(chatWindowIntent);
 		this.finish();

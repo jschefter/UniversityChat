@@ -1,9 +1,15 @@
 package com.universitychat.androidclient;
 
+
+import com.universitychat.androidclient.ChatRoom.ChatRoomInterface;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +22,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class ChatWindow extends FragmentActivity {
+public class ChatActivity extends FragmentActivity implements ChatRoomInterface
+{
     private WebView webView;
     private final Handler chatWindowActivityHandler = new Handler();
 
@@ -25,10 +32,17 @@ public class ChatWindow extends FragmentActivity {
     private EditText editMessage;
     private Button buttonSendMessage;
     private Button buttonExit;
+    private Button tempWebView;
     private String userName;
     private String password;
     private String userInfo[];
-    //private ViewPager mViewPager;
+    private ChatRoom chatRoomFragment;
+    private ChatMemberList chatMemberListFragment;
+    private ChatRoomList chatRoomListFragment;
+    private ViewPager pager;
+    private FragmentManager fm;
+    private MyViewPagerAdapter pagerAdapter;
+    private String[] chatUserList;
 
     /**
      * Called when the activity is first created.
@@ -37,32 +51,75 @@ public class ChatWindow extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_window);
+        setContentView(R.layout.activity_chat);
+        
         Bundle extras = getIntent().getExtras();
+  
+        
+        userInfo = extras.getStringArray("user_info");
+        
+        /** Getting a reference to the ViewPager defined the layout file */
+        pager = (ViewPager) findViewById(R.id.pager);
+ 
+        /** Getting fragment manager */
+        fm = getSupportFragmentManager();
+ 
+        /** Instantiating FragmentPagerAdapter */
+        pagerAdapter = new MyViewPagerAdapter(fm);
+ 
+        /** Setting the pagerAdapter to the pager object */
+        pager.setAdapter(pagerAdapter);
+        
         
         setUIVariables();
+        pager.setCurrentItem(1);
+
         setWebView();
-        userInfo = extras.getStringArray("user_info");
-
-        // Set up the ViewPager, attaching the adapter and setting up a listener for when the
-        // user swipes between sections.
-//        mViewPager = (ViewPager) findViewById(R.id.pager);
-//        mViewPager.setAdapter(mAppSectionsPagerAdapter);
     }
+    
+    
+    
+    public void enableChatButtons()
+    {
+    	ChatRoom frag2 = (ChatRoom)pagerAdapter.getItem(1);
 
+        frag2.enableButtons();
+    }
+	public void apendMessageToChat(String msg)
+	{
+		ChatRoom frag2 = (ChatRoom)pagerAdapter.getItem(1);
+
+        frag2.updateChatText(msg);
+		
+	}
+	
+	public String getMsgText()
+	{
+		ChatRoom frag2 = (ChatRoom)pagerAdapter.getItem(1);
+
+        return frag2.getUserMsg();
+	}
+	
+	public void updateChatMemberList(String[] list)
+	{
+
+		ChatMemberList frag2 = (ChatMemberList)pagerAdapter.getItem(2);
+		frag2.setChatMemberList(list);
+	}
+	
 
     private void setUIVariables() 
     {
-        textViewChat = (TextView)findViewById(R.id.textViewChat);
-        editMessage = (EditText)findViewById(R.id.editMessage);
-        buttonSendMessage = (Button)findViewById(R.id.buttonSendMessage);
+        editMessage = (EditText)findViewById(R.id.editChatMessage);
         buttonExit = (Button)findViewById(R.id.buttonExit);
     }
 
-    private void setWebView() 
+    public void setWebView() 
     {
-        webView = (WebView)findViewById(R.id.webView1);
+    	
+        webView = (WebView)findViewById(R.id.androidWebViewTwo);
         
+
         // set up logging of javascript console messages (for debugging purposes)
         webView.setWebChromeClient(new WebChromeClient(){
             public boolean onConsoleMessage(ConsoleMessage cm) {
@@ -86,16 +143,16 @@ public class ChatWindow extends FragmentActivity {
     	webView.loadUrl("javascript:joinChat('" + userName + "')");
     }
     
+
     public void sendMessage(View view)
     {
-    	String message = editMessage.getText().toString();
+    	String message = getMsgText();
     	
         if(!message.isEmpty()) 
         {
             // send message to server.
-        	String message2 = message.replace("'", "\\'");
-            String url = String.format("javascript:sendMessage('%s', '%s')", userName, message2);
-            editMessage.setText("");
+//        	String message2 = message.replace("'", "\\'");
+            String url = String.format("javascript:sendMessage('%s', '%s')", userName, message);
             webView.loadUrl(url);
         }
     }
@@ -126,7 +183,7 @@ public class ChatWindow extends FragmentActivity {
                 @Override
                 public void run() 
                 {
-                    textViewChat.append(formattedMessage);
+                	apendMessageToChat(formattedMessage);
                 }
             });
         }
@@ -134,12 +191,11 @@ public class ChatWindow extends FragmentActivity {
         @JavascriptInterface
         public void setChannelUsers(String[] users)
         {
-        	// Shane - this code is just placeholder while you figure out where to put the user list.
-        	String userlist = "Connected Users:";
-        	for(String user: users) {
-        		userlist += String.format("\n%s", user);
-        	}
-        	appendMessage(userlist);
+//        	String userlist = "Connected Users:";
+
+        	chatUserList = users;
+        	updateChatMemberList(chatUserList);
+
         }
 
         @JavascriptInterface
@@ -164,8 +220,7 @@ public class ChatWindow extends FragmentActivity {
                 public void run() 
                 {
                     // enable Message input & button
-                    editMessage.setEnabled(true);
-                    buttonSendMessage.setEnabled(true);
+                	enableChatButtons();
                 }
             });
         }

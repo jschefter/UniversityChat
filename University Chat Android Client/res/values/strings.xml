@@ -11,7 +11,18 @@
     <string name="Sign_up_link">Sign-up for University Chat</string>
     <string name="type_msg_prompt">Type message here...</string>
     <string name="send_btn">Send</string>
-    <string name="exit_btn">Exit (for Debug)</string>
+    <string name="exit_btn">Kill App (for Debug)</string>
+    <string name="singup_name_hint">Enter Name Here...</string>
+    <string name="signup_username_hint">Enter User Name Here...</string>
+    <string name="signup_email_hint">Enter Email Here...</string>
+    <string name="signup_pw_hint">Enter Password Here...</string>
+    <string name="signup_vpw_hint">Verify Password Here...</string>
+    <string name="signup_btn_confirm">Confirm</string>
+    <string name="signup_header_text">Sign-Up</string>
+    <string name="signup_window">Sign-Up</string>
+    <string name="chatroom_public">Public</string>
+    <string name="chatroom_private">Private</string>
+    <string name="chatmemberlist">Members</string>
 
 
 </resources>
