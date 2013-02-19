@@ -16,6 +16,11 @@
     <script src="Scripts/chat-data-source.js" type="text/javascript"></script>
     <script src="Scripts/chat-ui.js" type="text/javascript"></script>
     <script src="Scripts/web-client.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+// <![CDATA[
+
+// ]]>
+</script>
 </head>
 <body>
     
@@ -25,17 +30,17 @@
             <div class="login-container">
                 <form action="" id="login-form">
                     <div>
-                        <input type="text" size="25" id="username" name="username" placeholder="Anonymous" value="Anonymous" /><br />
+                        <input type="text" size="25" id="username" name="username" 
+                            placeholder="Anonymous" /><br />
                         <a href="">Sign Up</a>
                     </div>
-                    <!--
                     <div>
-                        <input type="password" size="25" name="password" placeholder="Password" /><br />
+                        <input type="password" size="25" id="password" name="password" 
+                            placeholder="Password" /><br />
                         <a href="">Forgot Password?</a>
                     </div>
-                    -->
                     <div>
-                        <button id="sign-in-button" type="submit">Sign In</button><br />
+                        <button id="sign-in-button" type="submit" onclick="return sign-in-button_onclick()">Sign In</button><br />
                         <button>Feedback</button>
                     </div>
                 </form>
@@ -63,7 +68,7 @@
 
                 <form action="" id="chat-form">
                     <input type="text" id="message" disabled="disabled"/>
-                    <input type="submit" id="sendmessage" value="Send" disabled="disabled" />
+                    <input type="submit" id="sendmessage" value="Send" disabled="disabled" onclick="return sendmessage_onclick()" />
                     <input type="hidden" id="displayname" />
                 </form>
             </div>

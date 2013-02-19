@@ -38,13 +38,17 @@ function ChatUI($containingElement, chatDataSource) {
         $removeChannelButton.removeAttr("disabled");
         userName = $("#username").val();
     };
-    
+
     // called from data service when a message is received from server.
     this.BroadcastMessageToChat = function (channelName, username, message) {
+
+        var date = new Date((+new Date()));
+        var timeStamp = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
         var encodedName = $("<div />").text(username).html();
         var encodedMsg = $("<div />").text(message).html();
         var $contentDiv = $chatTabs.find(".content #" + channelName);
-        $contentDiv.append("<div><strong>" + encodedName + "</strong>:&nbsp;&nbsp;" + encodedMsg + "</div>");
+        $contentDiv.append("<div><strong>" + timeStamp + " - " + encodedName + "</strong>:&nbsp;&nbsp;" + encodedMsg + "</div>");
 
         $contentDiv.animate({
             scrollTop: $contentDiv.find("div:last-child").offset().top

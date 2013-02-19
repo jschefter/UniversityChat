@@ -12,6 +12,6 @@ namespace UniversityChat.Model
         public string LName { get; set; }
         public int RoleId { get; set; }
         public string EmailAddress { get; set; }
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
