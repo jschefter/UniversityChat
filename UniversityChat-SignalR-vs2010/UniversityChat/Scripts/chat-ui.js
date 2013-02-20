@@ -38,16 +38,23 @@ function ChatUI($containingElement, chatDataSource) {
         userName = $("#username").val();
     };
 
+    function getTimeStamp() {
+        var date = new Date((+new Date()));
+        var h = (date.getHours() > 12) ? h = date.getHours() - 12 : h = date.getHours();
+        var m = (date.getMinutes() < 10) ? m = "0" + date.getMinutes() : m = date.getMinutes();
+        var s = (date.getSeconds() < 10) ? s = "0" + date.getSeconds() : s = date.getSeconds();
+        var timeOfDay = (date.getHours() == h) ? "am" : "pm";
+        var timeStamp = h + ':' + m + ':' + s + timeOfDay;
+        return timeStamp;
+    }
+
     // called from data service when a message is received from server.
     this.BroadcastMessageToChat = function (channelName, username, message) {
-
-        var date = new Date((+new Date()));
-        var timeStamp = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
         var encodedName = $("<div />").text(username).html();
         var encodedMsg = $("<div />").text(message).html();
         var $contentDiv = $chatTabs.find(".content #" + channelName);
-        $contentDiv.append("<div><strong>" + timeStamp + " - " + encodedName + "</strong>:&nbsp;&nbsp;" + encodedMsg + "</div>");
+        $contentDiv.append("<div><strong>" + getTimeStamp() + " - " + encodedName + "</strong>:&nbsp;&nbsp;" + encodedMsg + "</div>");
 
         $contentDiv.animate({
             scrollTop: $contentDiv.find("div:last-child").offset().top
