@@ -1,4 +1,4 @@
-USE [CSS490];
+USE [ucdatabase];
 
 IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'UniversityChat' 
 				AND TABLE_NAME = 'Users' AND TABLE_TYPE = 'BASE TABLE')
@@ -12,15 +12,8 @@ BEGIN
 		[LName] [varchar](50) NULL,
 		[NickName] [varchar](50) NOT NULL,
 		[Email] [varchar](50) NOT NULL,
-		[UserRoleId] [int] NOT NULL,
-		
-		CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
-		(
-			[UserId] ASC
-		)
-		WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, 
-		IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		[UserRoleId] [int] NOT NULL
+	) 
 
 	ALTER TABLE [UniversityChat].[Users]
 		ADD CONSTRAINT UNQ_Users_NickName

@@ -1,4 +1,4 @@
-USE [CSS490];
+USE [ucdatabase];
 
 ALTER TABLE [UniversityChat].[Users]
 	ADD CONSTRAINT FK_Users_Roles

@@ -1,4 +1,4 @@
-USE [CSS490];
+USE [ucdatabase];
 
 IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'UniversityChat' 
 				AND TABLE_NAME = 'Rooms' AND TABLE_TYPE = 'BASE TABLE')
@@ -16,16 +16,8 @@ BEGIN
 		[ExpirationDate] [date] NOT NULL,
 		[StartDate] [date] NOT NULL,
 		[LastUsedDate] [date] NOT NULL,
-		[ModeratorId] [uniqueidentifier] NULL,
-		
-		CONSTRAINT [PK_Rooms] PRIMARY KEY CLUSTERED 
-		(
-			[RoomId] ASC
-		)
-		WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, 
-			ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-			
-	) ON [PRIMARY]
+		[ModeratorId] [uniqueidentifier] NULL			
+	)
 
 	ALTER TABLE [UniversityChat].[Rooms]
 		ADD CONSTRAINT UNQ_Rooms_RoomName
