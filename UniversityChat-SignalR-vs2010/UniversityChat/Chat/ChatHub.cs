@@ -45,7 +45,10 @@ namespace UniversityChat
 
         public void LeaveChannel(string channelName, string userName)
         {
-            // TODO: handle user leaving an open channel
+            ChatChannels.RemoveUser(channelName, Context.ConnectionId);
+            Groups.Remove(Context.ConnectionId, channelName);
+            Clients.Group(channelName).broadcastMessageToChat(channelName, userName, "left the chat");
+            Clients.Group(channelName).setUserList(channelName, ChatChannels.GetConnectedUsers(channelName));
         }
         
         public void Send(string channelName, string userName, string message)

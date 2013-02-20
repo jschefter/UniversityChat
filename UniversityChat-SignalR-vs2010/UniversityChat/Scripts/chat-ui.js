@@ -101,33 +101,48 @@ function ChatUI($containingElement, chatDataSource) {
         // handle user-click to join/leave a channel
         $channelList.find("li").click(function () {
             var $this = $(this);
+            var channelName = $this.html();
 
             if (!$this.hasClass("active-channel")) {
-                var channelName = $this.html();
-                var joinChannel = true; // window.confirm("Join channel " + channelName + "?");
+                // joining a channel...
+                $this.addClass("active-channel");
 
-                if (joinChannel) {
-                    $this.addClass("active-channel");
+                $(".active-chat h4").hide();
+                $chatTabs.show();
+                $chatTabs.find(".tabs").append('<li class="' + channelName + '"><a href="#' + channelName + '">' + channelName + '</a></li>');
+                $chatTabs.find(".content").append('<div id="' + channelName + '"></div>');
+                $chatTabs.tabs("refresh");
 
-                    $(".active-chat h4").hide();
-                    $chatTabs.show();
-                    $chatTabs.find(".tabs").append('<li><a href="#' + channelName + '">' + channelName + '</a></li>');
-                    $chatTabs.find(".content").append('<div id="' + channelName + '"></div>');
-                    $chatTabs.tabs("refresh");
+                $userLists.append("<ul class='" + channelName + "' />");
 
-                    $userLists.append("<ul class='" + channelName + "' />");
+                $messageInput.removeAttr("disabled");
+                $sendMessageButton.removeAttr("disabled");
 
-                    $messageInput.removeAttr("disabled");
-                    $sendMessageButton.removeAttr("disabled");
-                    
-                    $messageInput.focus();
-                    chatDataSource.JoinChannel(channelName, userName);
+                $messageInput.focus();
+                chatDataSource.JoinChannel(channelName, userName);
 
-                    $chatTabs.tabs("option", "active", 0);
-                }
+                $chatTabs.tabs("option", "active", 0);
 
             } else {
-                // TODO: handle leaving a channel.
+                // leaving a channel.
+                $this.removeClass("active-channel");
+
+                $chatTabs.find(".tabs").find("." + channelName).remove();
+                $chatTabs.find(".content").find("#" + channelName).remove();
+                $chatTabs.tabs("refresh");
+
+                $userLists.find("." + channelName).remove();
+
+                // if no channels left, lock up UI.
+                var lastChannel = ($chatTabs.find(".tabs li").length === 0) ? true : false;
+                if (lastChannel) {
+                    $(".active-chat h4").show();
+                    $chatTabs.hide();
+                    $messageInput.attr("disabled", "disabled");
+                    $sendMessageButton.attr("disabled", "disabled");
+                }
+
+                chatDataSource.LeaveChannel(channelName, userName);
             }
         });
     };

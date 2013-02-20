@@ -48,7 +48,7 @@ function ChatDataSource() {
 
     // called from UI when user wants to leave a chat channel.
     this.LeaveChannel = function (channelName, userName) {
-        chat.server.LeaveChannel(channelName, userName);
+        chat.server.leaveChannel(channelName, userName);
     };
 
     // called from UI when user wants to send a message to a channel.
