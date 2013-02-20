@@ -75,7 +75,7 @@
             
         </div>
         <div class="footer">
-            <a href="">About University Chat</a> | <a href="">Privacy & Terms</a> | <a href="">Feedback</a>
+            <a href="">About University Chat</a> | <a href="">Privacy & Terms</a> | <a href="">Feedback</a> | <a href="https://github.com/jschefter/UniversityChat">Github</a>
         </div>
     </div>
 </body>
