@@ -28,7 +28,7 @@
                     <div>
                         <input type="text" size="25" id="username" name="username" 
                             placeholder="Username" /><br />
-                        <a href="">Sign Up</a>
+                        <button id="signUp">Sign Up</button>
                     </div>
                     <div>
                         <input type="password" size="25" id="password" name="password" 
@@ -37,7 +37,6 @@
                     </div>
                     <div>
                         <button id="sign-in-button" type="submit">Sign In</button><br />
-                        <button>Feedback</button>
                     </div>
                 </form>
             </div>
@@ -75,8 +74,52 @@
             
         </div>
         <div class="footer">
-            <a href="">About University Chat</a> | <a href="">Privacy & Terms</a> | <a href="">Feedback</a> | <a href="https://github.com/jschefter/UniversityChat">Github</a>
+            <a href="About.aspx">About University Chat</a> | <a href="Privacy.aspx">Privacy & Terms</a> | <a href="https://github.com/jschefter/UniversityChat">Github</a>
         </div>
     </div>
+    
+    <!-- Image links -->
+    <div class="content">
+        <a class="activator" id="welcome"></a>
+        <a class="feedback" id="feedback"></a>
+    </div>
+
+    <!-- The overlay -->
+    <div class="overlay" id="overlay" style="display:none;"></div>
+    
+    <!-- Description Box -->
+    <div class="box" id="aboutBox">
+        <a class="boxclose" id="boxclose"></a>
+        <h1>Welcome</h1>
+        <p>
+            Welcome to University Chat!
+        </p>
+    </div>
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+        $(function () {
+            $('#welcome').click(function () {
+                $('#overlay').fadeIn('fast', function () {
+                    $('#aboutBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#boxclose').click(function () {
+                $('#aboutBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlay').fadeOut('fast');
+                });
+            });
+            $('#feedback').click(function () {
+                window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
+            });
+            $('#signUp').click(function () {
+                var myWindow = window.open('', '', 'width=500, height=500');
+                myWindow.document.write("<p>Registration Page</p>");
+                myWindow.document.write("<p>On Progress..</p>");
+                myWindow.focus();
+            });
+        });
+    </script>
+
 </body>
 </html>

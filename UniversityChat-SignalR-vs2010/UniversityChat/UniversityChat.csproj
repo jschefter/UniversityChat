@@ -73,7 +73,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="About.aspx" />
     <Content Include="Android.html" />
+    <Content Include="Content\overlay\cancel.png" />
+    <Content Include="Content\overlay\clickme.png" />
+    <Content Include="Content\overlay\feedback.jpg" />
+    <Content Include="Content\overlay\overlay.png" />
     <Content Include="Content\site.css" />
     <Content Include="Content\south-street\images\animated-overlay.gif" />
     <Content Include="Content\south-street\images\ui-bg_glass_55_fcf0ba_1x400.png" />
@@ -94,6 +99,7 @@
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.css" />
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Privacy.aspx" />
     <Content Include="Scripts\web-client.js" />
     <Content Include="Scripts\chat-data-source.js" />
     <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
@@ -113,11 +119,25 @@
     <Content Include="Index.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Chat\ChatChannels.cs" />
     <Compile Include="Chat\ChatChannel.cs" />
     <Compile Include="Chat\ChatHub.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Privacy.aspx.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Privacy.aspx.designer.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Index.aspx.cs">
