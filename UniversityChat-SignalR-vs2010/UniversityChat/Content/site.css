@@ -150,7 +150,8 @@ body {
 
 /* Overlay css properties */
 .overlay {
-    background:transparent url(/content/overlay/overlay.png) repeat top left;
+    background-color: #333333;
+    opacity: 0.4;
     position:fixed;
     top:0px;
     bottom:0px;

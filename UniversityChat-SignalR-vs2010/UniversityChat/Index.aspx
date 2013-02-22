@@ -76,8 +76,8 @@
             
         </div>
         <div class="footer">
-            <a id="about">About</a> |
-            <a id="privacy">Privacy & Terms</a> |
+            <a id="about" style="cursor: pointer; color: crimson;">About</a> |
+            <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
             <a href="https://github.com/jschefter/UniversityChat" target="_blank">Github</a>
         </div>
     </div>
@@ -88,8 +88,9 @@
         <a class="feedback" id="feedback"></a>
     </div>-->
 
-    <!-- The overlay -->
-    <div class="overlay" id="overlay" style="display:none;"></div>
+    <!-- The overlays -->
+    <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
+    <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
     
     <!-- Description Box -->
     <div class="box" id="welcomeBox">
@@ -130,25 +131,27 @@
                 });
             });
 
+            // About overlay
             $('#about').click(function () {
-                $('#overlay').fadeIn('fast', function () {
+                $('#overlayOrange').fadeIn('fast', function () {
                     $('#aboutBox').animate({ 'top': '160px' }, 500);
                 });
             });
             $('#boxclose2').click(function () {
                 $('#aboutBox').animate({ 'top': '-200px' }, 500, function () {
-                    $('#overlay').fadeOut('fast');
+                    $('#overlayOrange').fadeOut('fast');
                 });
             });
 
+            // Privacy & Terms overlay
             $('#privacy').click(function () {
-                $('#overlay').fadeIn('fast', function () {
+                $('#overlayLB').fadeIn('fast', function () {
                     $('#privacyBox').animate({ 'top': '160px' }, 500);
                 });
             });
             $('#boxclose3').click(function () {
                 $('#privacyBox').animate({ 'top': '-200px' }, 500, function () {
-                    $('#overlay').fadeOut('fast');
+                    $('#overlayLB').fadeOut('fast');
                 });
             });
 
