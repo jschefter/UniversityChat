@@ -24,7 +24,7 @@
     
     <div class="container">
         <div class="header">
-            <h1><a href="/">University Chat</a></h1>
+            <h1><a href="">University Chat</a></h1>
             <div class="login-container">
                 <form action="" id="login-form">
                     <div>
