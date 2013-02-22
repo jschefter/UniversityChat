@@ -28,7 +28,7 @@ body {
 
 .header {
     position: relative;
-	background-color: green;
+	background-color: #119638;
     padding: 10px;
 }
 
@@ -42,6 +42,7 @@ body {
     font-size: 50px;
     font-family: poiret-one;
     text-decoration: none;
+    text-shadow: #333 3px 3px 5px;
 }
 
 .login-container {
