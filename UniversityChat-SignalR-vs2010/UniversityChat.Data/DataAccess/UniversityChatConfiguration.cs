@@ -1,29 +1,35 @@
 ﻿using System.Configuration;
 
-public static class UniversityChatConfiguration
+namespace UniversityChat.Data.DataAccess
 {
-    private static string dbConnectionString;
-    private static string dbProviderName;
-
-    static UniversityChatConfiguration()
+    public static class UniversityChatConfiguration
     {
-        dbConnectionString = @"";
-        dbProviderName = @"";
-    }
+        private static string dbConnectionString;
+        private static string dbProviderName;
 
-    public static string DbConnectionString
-    {
-        get
+        static UniversityChatConfiguration()
         {
-            return dbConnectionString;
+            dbConnectionString = @"Server=tcp:yrinp8w9up.database.windows.net,1433;Database=ucdatabase;
+                                User ID=ucadmin@yrinp8w9up;Password=css490UniversityChat;
+                                Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+
+            dbProviderName = @"System.Data.SqlClient";
         }
-    }
 
-    public static string DbProviderName
-    {
-        get
+        public static string DbConnectionString
         {
-            return dbProviderName;
+            get
+            {
+                return dbConnectionString;
+            }
+        }
+
+        public static string DbProviderName
+        {
+            get
+            {
+                return dbProviderName;
+            }
         }
     }
 }
