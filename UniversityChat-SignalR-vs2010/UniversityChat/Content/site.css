@@ -1,17 +1,29 @@
-﻿body, div, p, h1, h4, ul {
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body, div, p, h1, h4, ul {
     margin: 0px;
     padding: 0px;
 }
 
 body {
-    font-family: Arial, Sans-Serif;
+    font-family: Calibri;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-pack: center;
 }
 
 .container {
-    width: 960px;
+    width: 1000px;
     margin: auto;
-    border: 1px solid black;
-    border-radius: 4px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-flex: 1;
 }
 
 .header {
@@ -27,8 +39,8 @@ body {
 
 .header h1 a {
     color: White;
-    font-size: 45px;
-    font-family: monospace;
+    font-size: 50px;
+    font-family: poiret-one;
     text-decoration: none;
 }
 
@@ -45,6 +57,7 @@ body {
 .chat-container {
     position: relative;
     height: 450px;
+    -webkit-box-flex:1;
 }
 
 .chat-container > div {
