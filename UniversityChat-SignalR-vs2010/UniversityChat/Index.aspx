@@ -74,13 +74,20 @@
             
         </div>
         <div class="footer">
-            <a href="About.aspx">About University Chat</a> | <a href="Privacy.aspx">Privacy & Terms</a> | <a href="https://github.com/jschefter/UniversityChat">Github</a>
+            <!--
+            <a href="About.aspx">About University Chat</a> |
+            <a href="Privacy.aspx">Privacy & Terms</a> |
+            <a href="https://github.com/jschefter/UniversityChat">Github</a>
+            -->
+            <a id="about">About</a> |
+            <a id="privacy">Privacy & Terms</a> |
+            <a href="https://github.com/jschefter/UniversityChat">Github</a>
         </div>
     </div>
     
     <!-- Image links -->
     <div class="content">
-        <a class="activator" id="welcome"></a>
+        <a class="welcome" id="welcome"></a>
         <a class="feedback" id="feedback"></a>
     </div>
 
@@ -88,11 +95,27 @@
     <div class="overlay" id="overlay" style="display:none;"></div>
     
     <!-- Description Box -->
-    <div class="box" id="aboutBox">
+    <div class="box" id="welcomeBox">
         <a class="boxclose" id="boxclose"></a>
         <h1>Welcome</h1>
         <p>
             Welcome to University Chat!
+        </p>
+    </div>
+
+    <div class="box" id="aboutBox">
+        <a class="boxclose" id="boxclose2"></a>
+        <h1>About University Chat</h1>
+        <p>
+            University Chat was developed to ...
+        </p>
+    </div>
+
+    <div class="box" id="privacyBox">
+        <a class="boxclose" id="boxclose3"></a>
+        <h1>Privacy & Terms</h1>
+        <p>
+            Privacy Page
         </p>
     </div>
     
@@ -101,17 +124,41 @@
         $(function () {
             $('#welcome').click(function () {
                 $('#overlay').fadeIn('fast', function () {
-                    $('#aboutBox').animate({ 'top': '160px' }, 500);
+                    $('#welcomeBox').animate({ 'top': '160px' }, 500);
                 });
             });
             $('#boxclose').click(function () {
+                $('#welcomeBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlay').fadeOut('fast');
+                });
+            });
+
+            $('#about').click(function () {
+                $('#overlay').fadeIn('fast', function () {
+                    $('#aboutBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#boxclose2').click(function () {
                 $('#aboutBox').animate({ 'top': '-200px' }, 500, function () {
                     $('#overlay').fadeOut('fast');
                 });
             });
+
+            $('#privacy').click(function () {
+                $('#overlay').fadeIn('fast', function () {
+                    $('#privacyBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#boxclose3').click(function () {
+                $('#privacyBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlay').fadeOut('fast');
+                });
+            });
+
             $('#feedback').click(function () {
                 window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
             });
+            
             $('#signUp').click(function () {
                 var myWindow = window.open('', '', 'width=500, height=500');
                 myWindow.document.write("<p>Registration Page</p>");
