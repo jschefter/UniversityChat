@@ -17,6 +17,8 @@
     <script src="Scripts/chat-ui.js" type="text/javascript"></script>
     <script src="Scripts/web-client.js" type="text/javascript"></script>
 
+    <script src="http://use.edgefonts.net/poiret-one.js"></script>  <!-- font: poiret-one -->
+
 </head>
 <body>
     
@@ -74,22 +76,17 @@
             
         </div>
         <div class="footer">
-            <!--
-            <a href="About.aspx">About University Chat</a> |
-            <a href="Privacy.aspx">Privacy & Terms</a> |
-            <a href="https://github.com/jschefter/UniversityChat">Github</a>
-            -->
             <a id="about">About</a> |
             <a id="privacy">Privacy & Terms</a> |
-            <a href="https://github.com/jschefter/UniversityChat">Github</a>
+            <a href="https://github.com/jschefter/UniversityChat" target="_blank">Github</a>
         </div>
     </div>
     
     <!-- Image links -->
-    <div class="content">
+    <!--<div class="content">
         <a class="welcome" id="welcome"></a>
         <a class="feedback" id="feedback"></a>
-    </div>
+    </div>-->
 
     <!-- The overlay -->
     <div class="overlay" id="overlay" style="display:none;"></div>
@@ -158,7 +155,7 @@
             $('#feedback').click(function () {
                 window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
             });
-            
+
             $('#signUp').click(function () {
                 var myWindow = window.open('', '', 'width=500, height=500');
                 myWindow.document.write("<p>Registration Page</p>");
