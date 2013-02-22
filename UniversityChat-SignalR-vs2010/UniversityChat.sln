@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityChat.Model", "Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityChat.Data", "UniversityChat.Data\UniversityChat.Data.csproj", "{71ABB62C-302F-4362-88BB-56B2C7D34A70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityChat.Tests", "UniversityChat.Tests\UniversityChat.Tests.csproj", "{B2169CBD-BF3C-4689-A2D7-B5E50DC302D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{71ABB62C-302F-4362-88BB-56B2C7D34A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71ABB62C-302F-4362-88BB-56B2C7D34A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71ABB62C-302F-4362-88BB-56B2C7D34A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2169CBD-BF3C-4689-A2D7-B5E50DC302D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2169CBD-BF3C-4689-A2D7-B5E50DC302D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2169CBD-BF3C-4689-A2D7-B5E50DC302D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2169CBD-BF3C-4689-A2D7-B5E50DC302D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
