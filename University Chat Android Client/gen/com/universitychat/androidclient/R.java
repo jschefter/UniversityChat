@@ -15,27 +15,28 @@ public final class R {
         public static final int roundedbutton=0x7f020001;
     }
     public static final class id {
-        public static final int androidWebView=0x7f070018;
+        public static final int androidWebView=0x7f070019;
         public static final int androidWebViewTwo=0x7f070001;
         public static final int btn_login=0x7f070005;
         public static final int btn_loginAnonymous=0x7f070006;
         public static final int btn_signup_confirm=0x7f07000e;
-        public static final int buttonExit=0x7f070017;
-        public static final int buttonSendMessage=0x7f070016;
-        public static final int editChatMessage=0x7f070015;
+        public static final int buttonExit=0x7f070018;
+        public static final int buttonSendMessage=0x7f070017;
+        public static final int editChatMessage=0x7f070016;
         public static final int editText1=0x7f07000f;
         public static final int editTextEmail=0x7f07000b;
         public static final int editTextName=0x7f070009;
         public static final int editTextPassword=0x7f07000c;
         public static final int editTextUserName=0x7f07000a;
         public static final int editTextVPassword=0x7f07000d;
+        public static final int list=0x7f070014;
         public static final int list_chat_private_room=0x7f070013;
         public static final int list_chat_public_room=0x7f070011;
-        public static final int menu_settings=0x7f070019;
+        public static final int menu_settings=0x7f07001a;
         public static final int pager=0x7f070000;
         public static final int textView1=0x7f070010;
         public static final int textView2=0x7f070012;
-        public static final int textViewChat=0x7f070014;
+        public static final int textViewChat=0x7f070015;
         public static final int textView_signup=0x7f070008;
         public static final int textView_signuplink=0x7f070007;
         public static final int txt_pw=0x7f070004;

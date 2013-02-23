@@ -15,8 +15,7 @@ import java.util.Random;
 
 public class LoginWindow extends Activity 
 {
-	
-	private String[] loginInfo;
+	private String[] userCredentials;
 	private EditText userNameText;
 	private EditText passwordText;
 	private Button loginButton;
@@ -75,11 +74,11 @@ public class LoginWindow extends Activity
             	int r = randomGen.nextInt(100);
             	userName = userName + r;
             	break;
-
         }
-		loginInfo = new String[]{userName, password};
+		
+		userCredentials = new String[]{userName, password};
 		Intent chatWindowIntent = new Intent(this, ChatActivity.class);
-		chatWindowIntent.putExtra("user_info",loginInfo);
+		chatWindowIntent.putExtra("user_credentials",userCredentials);
 		startActivity(chatWindowIntent);
 		this.finish();
 	}

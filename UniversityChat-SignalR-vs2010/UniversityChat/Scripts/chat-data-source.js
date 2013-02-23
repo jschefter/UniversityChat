@@ -23,9 +23,9 @@ function ChatDataSource() {
         });
     };
 
-    var enableChat = function () {
+    var hubStartDone = function () {
         $.each(userInterfaces, function (index, userInterface) {
-            userInterface.EnableChat();
+            userInterface.HubStartDone();
         });
     };
 
@@ -36,7 +36,7 @@ function ChatDataSource() {
     // called from main script when user has submitted their login credentials.
     this.StartHub = function () {
         $.connection.hub.start().done(function () {
-            enableChat();
+            hubStartDone();
             chat.server.getChannelList();
         });
     }

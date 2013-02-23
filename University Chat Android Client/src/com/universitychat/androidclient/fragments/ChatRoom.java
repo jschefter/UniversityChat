@@ -1,4 +1,6 @@
-package com.universitychat.androidclient;
+package com.universitychat.androidclient.fragments;
+
+import com.universitychat.androidclient.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,22 +17,13 @@ public class ChatRoom extends Fragment
 {
 	private EditText editMessage;
     private Button buttonSendMessage;
-    private Button buttonExit;
     private TextView textViewChat;
-	
-	
+
 	@Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
     }
-	
-	public interface ChatRoomInterface
-	{
-		public void enableChatButtons();
-		public void apendMessageToChat(String msg);
-		
-	}
 	
 	public String getUserMsg()
 	{
@@ -44,15 +37,16 @@ public class ChatRoom extends Fragment
 			return "null TextViewChat";
 	}
 	
-	public void updateChatText(String msg)
+	public void updateChatText(String username, String msg)
 	{
+        final String formattedMessage = String.format("\n%s - %s", username, msg);
+        
 		if(textViewChat != null)
 		{
-			textViewChat.append(msg);
+			textViewChat.append(formattedMessage);
 		}
 		else
-			System.out.println("textViewChat variable is null");
-		
+			System.out.println("textViewChat variable is null");		
 	}
 		
 	public void enableButtons()
@@ -98,7 +92,7 @@ public class ChatRoom extends Fragment
         buttonSendMessage = (Button)v.findViewById(R.id.buttonSendMessage);
         textViewChat = (TextView)v.findViewById(R.id.textViewChat);
         textViewChat.setMovementMethod(new ScrollingMovementMethod());
-//        System.out.println("Chatroom tag: " + v.getTag());
+
         return v;
     }
 }

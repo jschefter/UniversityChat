@@ -1,15 +1,16 @@
 package com.universitychat.androidclient;
 
+import java.util.Vector;
 
-import com.universitychat.androidclient.ChatRoom.ChatRoomInterface;
+import com.universitychat.androidclient.fragments.ChatMemberList;
+import com.universitychat.androidclient.fragments.ChatRoom;
+import com.universitychat.androidclient.fragments.ChatRoomList;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +23,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class ChatActivity extends FragmentActivity implements ChatRoomInterface
+public class ChatActivity extends FragmentActivity
 {
+	private final String URL = "http://uc-channels.azurewebsites.net/Android.html";//"http://universitychat.azurewebsites.net/Android.html";
     private WebView webView;
     private final Handler chatWindowActivityHandler = new Handler();
 
@@ -33,16 +35,13 @@ public class ChatActivity extends FragmentActivity implements ChatRoomInterface
     private Button buttonSendMessage;
     private Button buttonExit;
     private Button tempWebView;
-    private String userName;
+    private String username;
     private String password;
-    private String userInfo[];
-    private ChatRoom chatRoomFragment;
-    private ChatMemberList chatMemberListFragment;
-    private ChatRoomList chatRoomListFragment;
-    private ViewPager pager;
-    private FragmentManager fm;
+    private String currentChannel;
+    private ViewPager viewPager;
+    private FragmentManager fragmentManager;
     private MyViewPagerAdapter pagerAdapter;
-    private String[] chatUserList;
+    private OutgoingWebEvents outgoingWebEvents;
 
     /**
      * Called when the activity is first created.
@@ -51,74 +50,77 @@ public class ChatActivity extends FragmentActivity implements ChatRoomInterface
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        outgoingWebEvents = new OutgoingWebEvents();
+        
         setContentView(R.layout.activity_chat);
         
         Bundle extras = getIntent().getExtras();
-  
+        String[] userCredentials = extras.getStringArray("user_credentials");
+        username = userCredentials[0];
+        password = userCredentials[1];
+        currentChannel = "";
         
-        userInfo = extras.getStringArray("user_info");
+        initializeWebView();
+        
         
         /** Getting a reference to the ViewPager defined the layout file */
-        pager = (ViewPager) findViewById(R.id.pager);
+        viewPager = (ViewPager) findViewById(R.id.pager);
  
         /** Getting fragment manager */
-        fm = getSupportFragmentManager();
- 
+        fragmentManager = getSupportFragmentManager();
+                
+        Vector<Fragment> fragments = new Vector<Fragment>();
+        fragments.add(Fragment.instantiate(this, ChatRoomList.class.getName()));
+        fragments.add(Fragment.instantiate(this, ChatRoom.class.getName()));
+        fragments.add(Fragment.instantiate(this, ChatMemberList.class.getName()));
+         
         /** Instantiating FragmentPagerAdapter */
-        pagerAdapter = new MyViewPagerAdapter(fm);
+        pagerAdapter = new MyViewPagerAdapter(fragmentManager, fragments);
  
         /** Setting the pagerAdapter to the pager object */
-        pager.setAdapter(pagerAdapter);
+        viewPager.setAdapter(pagerAdapter);
         
         
         setUIVariables();
-        pager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
 
-        setWebView();
+        
+        webView.loadUrl(URL);	// connect to service (start the hub).
     }
     
-    
-    
-    public void enableChatButtons()
+    private void updateChatRoomList(String[] roomList)
     {
-    	ChatRoom frag2 = (ChatRoom)pagerAdapter.getItem(1);
-
-        frag2.enableButtons();
+    	ChatRoomList chatRoomList = (ChatRoomList)pagerAdapter.getItem(0);
+    	chatRoomList.updatePublicRoomList(roomList);
     }
-	public void apendMessageToChat(String msg)
+    
+    private void enableChatButtons()
+    {
+    	ChatRoom chatRoom = (ChatRoom)pagerAdapter.getItem(1);
+        chatRoom.enableButtons();
+    }
+    
+	private void appendMessageToChat(String username, String msg)
 	{
-		ChatRoom frag2 = (ChatRoom)pagerAdapter.getItem(1);
-
-        frag2.updateChatText(msg);
-		
+		ChatRoom chatRoom = (ChatRoom)pagerAdapter.getItem(1);
+        chatRoom.updateChatText(username, msg);
 	}
 	
-	public String getMsgText()
+	private void updateChatMemberList(String[] list)
 	{
-		ChatRoom frag2 = (ChatRoom)pagerAdapter.getItem(1);
-
-        return frag2.getUserMsg();
+		ChatMemberList chatMemberList = (ChatMemberList)pagerAdapter.getItem(2);
+		chatMemberList.setChatMemberList(list);
 	}
 	
-	public void updateChatMemberList(String[] list)
-	{
-
-		ChatMemberList frag2 = (ChatMemberList)pagerAdapter.getItem(2);
-		frag2.setChatMemberList(list);
-	}
-	
-
     private void setUIVariables() 
     {
         editMessage = (EditText)findViewById(R.id.editChatMessage);
         buttonExit = (Button)findViewById(R.id.buttonExit);
     }
 
-    public void setWebView() 
+    private void initializeWebView() 
     {
-    	
         webView = (WebView)findViewById(R.id.androidWebViewTwo);
-        
 
         // set up logging of javascript console messages (for debugging purposes)
         webView.setWebChromeClient(new WebChromeClient(){
@@ -129,33 +131,9 @@ public class ChatActivity extends FragmentActivity implements ChatRoomInterface
         });
         
         webView.getSettings().setJavaScriptEnabled(true);
-        final WebAppInterface webAppInterface = new WebAppInterface(this);
-        webView.addJavascriptInterface(webAppInterface, "Android");
-        webView.loadUrl("http://universitychat.azurewebsites.net/Android.html");
-    }
-
-    
-    private void setUpChatConnection(String[] userInfo)
-    {
-    	userName = userInfo[0];
-    	//password = userInfo[1];
-    	password = "pw";
-    	webView.loadUrl("javascript:joinChat('" + userName + "')");
-    }
-    
-
-    public void sendMessage(View view)
-    {
-    	String message = getMsgText();
-    	
-        if(!message.isEmpty()) 
-        {
-            // send message to server.
-//        	String message2 = message.replace("'", "\\'");
-            String url = String.format("javascript:sendMessage('%s', '%s')", userName, message);
-            webView.loadUrl(url);
-        }
-    }
+        IncommingWebEvents incommingWebEvents = new IncommingWebEvents();
+        webView.addJavascriptInterface(incommingWebEvents, "Android");
+    }        
     
     //method only for debugging, will be removed in beta release
     public void killApp(View view)
@@ -163,50 +141,88 @@ public class ChatActivity extends FragmentActivity implements ChatRoomInterface
     	this.finish();
     }
 
-    // the methods of this class with the @JavascriptInterface attributes are called from javascript executed by the WebView
-    private class WebAppInterface 
+    public OutgoingWebEvents getOutgoingWebEvents()
     {
-        Context mContext;
-
-        WebAppInterface(Context c) 
+    	return outgoingWebEvents;
+    }
+    
+    // this is an interface for all events that fragments can call to back-end.
+    public class OutgoingWebEvents
+    {
+    	// called from UI when user clicks on a room.
+    	public void joinChannel(String channelName)
         {
-            mContext = c;
+    		// leave current channel...
+    		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+        	webView.loadUrl(leaveChannelUrl);
+    		
+    		// join desired channel...
+        	currentChannel = channelName;
+        	String joinChannelUrl = String.format("javascript:joinChannel('%s', '%s')", currentChannel, username);
+        	webView.loadUrl(joinChannelUrl);
         }
-
-        @JavascriptInterface
-        public void appendMessage(String message) 
+    	
+    	// called from UI when user clicks on "send message" button.
+        public void sendMessage(String message)
         {
-            final String formattedMessage = String.format("\n%s", message);
-
-            chatWindowActivityHandler.post(new Runnable() 
+            if(!message.isEmpty()) 
+            {
+                // send message to server.
+//            	String message2 = message.replace("'", "\\'");
+                String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, username, message);
+                webView.loadUrl(sendMessageUrl);
+            }
+        }
+    }
+    
+    // the methods of this class with the @JavascriptInterface attributes are called from javascript executed by the WebView
+    private class IncommingWebEvents 
+    {
+        @JavascriptInterface
+        public void hubStartDone()
+        {
+        	// signalR hub has been started.
+        	// this would be where add/remove channel buttons would be enabled.
+        }
+        
+        @JavascriptInterface
+        public void broadcastMessageToChat(final String channelName, final String username, final String message) 
+        {
+        	// make sure the message is for the current channel.
+        	if(channelName.equals(currentChannel)) {
+	            chatWindowActivityHandler.post(new Runnable() 
+	            {
+	                @Override
+	                public void run() 
+	                {
+	                	appendMessageToChat(username, message);
+	                }
+	            });
+        	}
+        }
+        
+        @JavascriptInterface
+        public void setChannelList(final String[] channelList)
+        {
+        	chatWindowActivityHandler.post(new Runnable() 
             {
                 @Override
                 public void run() 
                 {
-                	apendMessageToChat(formattedMessage);
+                	updateChatRoomList(channelList);
                 }
             });
         }
         
         @JavascriptInterface
-        public void setChannelUsers(String[] users)
+        public void setUserList(final String[] chatUserList)
         {
-//        	String userlist = "Connected Users:";
-
-        	chatUserList = users;
-        	updateChatMemberList(chatUserList);
-
-        }
-
-        @JavascriptInterface
-        public void pageLoadComplete() 
-        {
-            chatWindowActivityHandler.post(new Runnable() 
+        	chatWindowActivityHandler.post(new Runnable() 
             {
                 @Override
                 public void run() 
                 {
-                	setUpChatConnection(userInfo);
+                	updateChatMemberList(chatUserList);
                 }
             });
         }

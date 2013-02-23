@@ -32,7 +32,7 @@ function ChatUI($containingElement, chatDataSource) {
     }
 
     // called from data service when hub start() is complete.
-    this.EnableChat = function () {
+    this.HubStartDone = function () {
         $addChannelButton.removeAttr("disabled");
         $removeChannelButton.removeAttr("disabled");
         userName = $("#username").val();

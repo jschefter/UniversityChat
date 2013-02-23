@@ -94,6 +94,7 @@
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.css" />
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\android-ui.js" />
     <Content Include="Scripts\web-client.js" />
     <Content Include="Scripts\chat-data-source.js" />
     <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
@@ -134,8 +135,6 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\uc-channels - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\uc-channels - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\universitychat - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\universitychat - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
