@@ -1,5 +1,1 @@
-
-CREATE SCHEMA [UniversityChat] AUTHORIZATION [dbo];
-
-
-
+CREATE SCHEMA [UniversityChat] AUTHORIZATION [dbo] 
