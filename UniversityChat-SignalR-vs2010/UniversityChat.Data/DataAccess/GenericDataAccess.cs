@@ -40,9 +40,70 @@ namespace UniversityChat.Data.DataAccess
             return table;
         }
 
+        public static int ExecuteNonQueryCommand(DbCommand command)
+        {
+            DataTable table;
+            int returnedValue = -1;
+            try
+            {
+                command.Connection.Open();
+
+                returnedValue = command.ExecuteNonQuery();                
+            }
+            catch (Exception exp)
+            {
+                //TODO: LogError
+                throw exp;
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
+            return returnedValue;
+        }
+
+        public static string ExecuteStringScalarCommand(DbCommand command)
+        {
+            DataTable table;
+            string returnedValue = string.Empty;
+
+            try
+            {
+                command.Connection.Open();
+
+                returnedValue = (string)command.ExecuteScalar();
+                
+            }
+            catch (Exception exp)
+            {
+                //TODO: LogError
+                throw exp;
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
+            return returnedValue;
+        }
+
         public static DbCommand CreateCommand(string sqlStringCommand)
         {
            return CreateCommand(sqlStringCommand, null);
+        }
+
+        public static DbCommand CreateCommand()
+        {
+            string dataProviderName = UniversityChatConfiguration.DbProviderName;
+            string connectionString = UniversityChatConfiguration.DbConnectionString;
+
+            DbProviderFactory factory = DbProviderFactories.GetFactory(dataProviderName);
+
+            DbConnection conn = factory.CreateConnection();
+            conn.ConnectionString = connectionString;
+
+            DbCommand comm = conn.CreateCommand();          
+
+            return comm;
         }
 
         public static DbCommand CreateCommand(string sqlStringCommand, DbParameterCollection dbParameters)

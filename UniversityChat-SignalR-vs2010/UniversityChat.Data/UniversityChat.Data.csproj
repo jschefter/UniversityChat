@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="DataAccess\GenericDataAccess.cs" />
     <Compile Include="DataAccess\UniversityChatConfiguration.cs" />
+    <Compile Include="DataHelpers\UserDataHelper.cs" />
+    <Compile Include="DataHelpers\UserQueries.cs" />
     <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\RoomsRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

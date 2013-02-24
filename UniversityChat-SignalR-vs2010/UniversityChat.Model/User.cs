@@ -10,6 +10,7 @@ namespace UniversityChat.Model
         public decimal Id { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
+        public string NickName { get; set; }
         public int RoleId { get; set; }
         public string EmailAddress { get; set; }
         public string PasswordHash { get; set; }
