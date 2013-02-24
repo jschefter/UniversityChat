@@ -23,6 +23,7 @@
     <string name="chatroom_public">Public</string>
     <string name="chatroom_private">Private</string>
     <string name="chatmemberlist">Members</string>
+    <string name="or_txtview">OR</string>
 
 
 </resources>

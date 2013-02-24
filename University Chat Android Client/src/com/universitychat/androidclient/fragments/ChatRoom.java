@@ -1,6 +1,8 @@
 package com.universitychat.androidclient.fragments;
 
+import com.universitychat.androidclient.ChatActivity;
 import com.universitychat.androidclient.R;
+import com.universitychat.androidclient.ChatActivity.OutgoingWebEvents;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ public class ChatRoom extends Fragment
 	private EditText editMessage;
     private Button buttonSendMessage;
     private TextView textViewChat;
+    private OutgoingWebEvents outgoingWebEvents;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) 
@@ -44,9 +47,22 @@ public class ChatRoom extends Fragment
 		if(textViewChat != null)
 		{
 			textViewChat.append(formattedMessage);
+			
+			//james code to test
+			final int offset = 
+            		textViewChat.getLayout().getLineTop(textViewChat.getLineCount())  - textViewChat.getHeight();
+
+            if(offset > 0) textViewChat.scrollTo(0, offset);
+            else textViewChat.scrollTo(0, 0);
 		}
 		else
 			System.out.println("textViewChat variable is null");		
+	}
+	
+	public void clearChatTextView()
+	{
+		if(textViewChat != null)
+			textViewChat.setText("");
 	}
 		
 	public void enableButtons()
@@ -56,42 +72,34 @@ public class ChatRoom extends Fragment
 			editMessage.setEnabled(true);
 	        buttonSendMessage.setEnabled(true);
 		}
-//		else
-//		{
-//			Activity v = getActivity();
-//	        editMessage = (EditText)v.findViewById(R.id.editChatMessage);
-//	        buttonSendMessage = (Button)v.findViewById(R.id.buttonSendMessage);
-//			System.out.println("null");			
-//		}
 	}
-	
-	public void onAttach(Activity hostActivity)
+		
+	@Override
+	public void onPause()
 	{
-		super.onAttach(hostActivity);
-		
-		// This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-//        try 
-//        {
-//            mCallback = (OnHeadlineSelectedListener) hostActivity;
-//        } 
-//        catch (ClassCastException e) 
-//        {
-//            throw new ClassCastException(hostActivity.toString()
-//                    + " must implement ChatRoomInterface");
-//        }
-		
+		super.onPause();
 	}
-	
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {      
+		ChatActivity chatActivity = (ChatActivity)getActivity();
+		outgoingWebEvents = chatActivity.getOutgoingWebEvents();
+		
     	View v = inflater.inflate(R.layout.fragment_chat_window, container,false);
         editMessage = (EditText)v.findViewById(R.id.editChatMessage);
         buttonSendMessage = (Button)v.findViewById(R.id.buttonSendMessage);
         textViewChat = (TextView)v.findViewById(R.id.textViewChat);
         textViewChat.setMovementMethod(new ScrollingMovementMethod());
+        
+        buttonSendMessage.setOnClickListener(new View.OnClickListener() 
+        {
+            @Override
+            public void onClick(View v) 
+            {
+            	outgoingWebEvents.sendMessage(getUserMsg());
+            }
+        });
 
         return v;
     }

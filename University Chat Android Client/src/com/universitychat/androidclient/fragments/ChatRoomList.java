@@ -16,8 +16,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ChatRoomList extends Fragment
 {
-	private String[] publicRooms = {};
-	private String[] privateRooms = {};
+	private String[] publicRooms = {};//{"Loading..."};
+	private String[] privateRooms = {};//{"Loading..."};
 	private ListView publicList;
 	private ListView privateList;
 	private OutgoingWebEvents outgoingWebEvents;
@@ -55,8 +55,16 @@ public class ChatRoomList extends Fragment
         return v;
     }
 	
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+	}
+	
 	public void updatePublicRoomList(String[] roomList)
 	{
-		publicList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, roomList));
+		publicRooms = roomList;
+		publicList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, publicRooms));
+		System.out.println("update public room list called");
 	}
 }

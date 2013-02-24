@@ -23,7 +23,7 @@ public class SignupActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setTitle("Sign-Up for University Chat");
-        setContentView(R.layout.actvity_signup);
+        setContentView(R.layout.activity_signup);
         setUIVariables();
     }
 	

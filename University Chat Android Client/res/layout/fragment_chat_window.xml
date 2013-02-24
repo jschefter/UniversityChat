@@ -8,31 +8,36 @@
     <TextView
         android:id="@+id/textViewChat"
         android:layout_width="fill_parent"
-        android:layout_height="368dp"
+        android:layout_height="411dp"
         android:scrollHorizontally="false"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical" />
 
-    <EditText
-        android:id="@+id/editChatMessage"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:enabled="false"
-        android:hint="@string/type_msg_prompt"
-        android:singleLine="true" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/editChatMessage"
+            android:layout_width="258dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="@string/type_msg_prompt"
+            android:singleLine="true" />
 
-    <Button
-        android:id="@+id/buttonSendMessage"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:hint="@string/send_btn"
-        android:onClick="sendMessage"
-        android:text="@string/send_btn" />
+        <Button
+            android:id="@+id/buttonSendMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:hint="@string/send_btn"
+            android:text="@string/send_btn" />
+
+    </LinearLayout>
+
+    
 
     <Button
         android:id="@+id/buttonExit"
@@ -45,7 +50,7 @@
     <WebView
         android:id="@+id/androidWebView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible" >
     </WebView>

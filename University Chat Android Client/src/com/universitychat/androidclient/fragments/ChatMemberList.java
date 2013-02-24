@@ -13,7 +13,7 @@ import android.widget.ListView;
 public class ChatMemberList extends Fragment
 {
 	public ListView memberList;
-	public String[] chatMemberArray = {"Member01", "Member02", "Member03", "Member04", "Member05", "Member06", "Member07", "Member08", "Member09"};
+	public String[] chatMemberArray = {};//{"Loading..."};
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
@@ -31,10 +31,16 @@ public class ChatMemberList extends Fragment
         return v;
     }
 	
+	@Override
+	public void onPause()
+	{
+		super.onPause();	
+	}
+	
 	public void setChatMemberList(String[] newMemberList)
 	{
-		// disabled because getActivity() is returning null (and crashes the app)
 		memberList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, newMemberList));
+		System.out.println("chat member list called");
 	}
 }
 
