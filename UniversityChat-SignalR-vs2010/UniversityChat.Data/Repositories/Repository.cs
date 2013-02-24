@@ -2,7 +2,7 @@
 
 namespace UniversityChat.Data.Repositories
 {
-    public interface Repository<T>
+    public interface IRepository<T>
     {
         bool Create(T item);
 
@@ -12,7 +12,7 @@ namespace UniversityChat.Data.Repositories
 
         T GetById(decimal id);
 
-        T GetByCriteria(T item);
+        T GetByCriteria(string criteriaName, T item);
 
         bool Update(T item);
     }

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{71ABB62C-302F-4362-88BB-56B2C7D34A70}</ProjectGuid>
+    <ProjectGuid>{B2169CBD-BF3C-4689-A2D7-B5E50DC302D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UniversityChat.Data</RootNamespace>
-    <AssemblyName>UniversityChat.Data</AssemblyName>
+    <RootNamespace>UniversityChat.Tests</RootNamespace>
+    <AssemblyName>UniversityChat.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit-2.6.2\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,15 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\GenericDataAccess.cs" />
-    <Compile Include="DataAccess\UniversityChatConfiguration.cs" />
-    <Compile Include="Repositories\HistoryRepository.cs" />
-    <Compile Include="Repositories\RoomsRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Data\DataAccessFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UniversityChat.Data\UniversityChat.Data.csproj">
+      <Project>{71ABB62C-302F-4362-88BB-56B2C7D34A70}</Project>
+      <Name>UniversityChat.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UniversityChat.Model\UniversityChat.Model.csproj">
       <Project>{5EBCC7CF-0D2C-4D57-8A24-D93A655E88FA}</Project>
       <Name>UniversityChat.Model</Name>

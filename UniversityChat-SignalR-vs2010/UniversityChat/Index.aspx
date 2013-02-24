@@ -17,18 +17,20 @@
     <script src="Scripts/chat-ui.js" type="text/javascript"></script>
     <script src="Scripts/web-client.js" type="text/javascript"></script>
 
+    <script src="http://use.edgefonts.net/poiret-one.js"></script>  <!-- font: poiret-one -->
+
 </head>
 <body>
     
     <div class="container">
         <div class="header">
-            <h1><a href="/">University Chat</a></h1>
+            <h1><a href="">University Chat</a></h1>
             <div class="login-container">
                 <form action="" id="login-form">
                     <div>
                         <input type="text" size="25" id="username" name="username" 
                             placeholder="Username" /><br />
-                        <a href="">Sign Up</a>
+                        <button id="signUp">Sign Up</button>
                     </div>
                     <div>
                         <input type="password" size="25" id="password" name="password" 
@@ -37,7 +39,6 @@
                     </div>
                     <div>
                         <button id="sign-in-button" type="submit">Sign In</button><br />
-                        <button>Feedback</button>
                     </div>
                 </form>
             </div>
@@ -75,8 +76,97 @@
             
         </div>
         <div class="footer">
-            <a href="">About University Chat</a> | <a href="">Privacy & Terms</a> | <a href="">Feedback</a> | <a href="https://github.com/jschefter/UniversityChat">Github</a>
+            <a id="about" style="cursor: pointer; color: crimson;">About</a> |
+            <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
+            <a href="https://github.com/jschefter/UniversityChat" target="_blank">Github</a>
         </div>
     </div>
+    
+    <!-- Image links -->
+    <!--<div class="content">
+        <a class="welcome" id="welcome"></a>
+        <a class="feedback" id="feedback"></a>
+    </div>-->
+
+    <!-- The overlays -->
+    <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
+    <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
+    
+    <!-- Description Box -->
+    <div class="box" id="welcomeBox">
+        <a class="boxclose" id="boxclose"></a>
+        <h1>Welcome</h1>
+        <p>
+            Welcome to University Chat!
+        </p>
+    </div>
+
+    <div class="box" id="aboutBox">
+        <a class="boxclose" id="boxclose2"></a>
+        <h1>About University Chat</h1>
+        <p>
+            University Chat was developed to ...
+        </p>
+    </div>
+
+    <div class="box" id="privacyBox">
+        <a class="boxclose" id="boxclose3"></a>
+        <h1>Privacy & Terms</h1>
+        <p>
+            Privacy Page
+        </p>
+    </div>
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+        $(function () {
+            $('#welcome').click(function () {
+                $('#overlay').fadeIn('fast', function () {
+                    $('#welcomeBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#boxclose').click(function () {
+                $('#welcomeBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlay').fadeOut('fast');
+                });
+            });
+
+            // About overlay
+            $('#about').click(function () {
+                $('#overlayOrange').fadeIn('fast', function () {
+                    $('#aboutBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#boxclose2').click(function () {
+                $('#aboutBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlayOrange').fadeOut('fast');
+                });
+            });
+
+            // Privacy & Terms overlay
+            $('#privacy').click(function () {
+                $('#overlayLB').fadeIn('fast', function () {
+                    $('#privacyBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#boxclose3').click(function () {
+                $('#privacyBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlayLB').fadeOut('fast');
+                });
+            });
+
+            $('#feedback').click(function () {
+                window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
+            });
+
+            $('#signUp').click(function () {
+                var myWindow = window.open('', '', 'width=500, height=500');
+                myWindow.document.write("<p>Registration Page</p>");
+                myWindow.document.write("<p>On Progress..</p>");
+                myWindow.focus();
+            });
+        });
+    </script>
+
 </body>
 </html>

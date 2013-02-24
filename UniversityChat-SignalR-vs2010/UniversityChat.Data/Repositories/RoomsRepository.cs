@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UniversityChat.Model;
 
 namespace UniversityChat.Data.Repositories
 {
-    public class UsersRepository: IRepository<User>
+    public class RoomsRepository : IRepository<Room>
     {
-        public bool Create(User item)
+        public bool Create(Room item)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(User item)
+        public bool Delete(Room item)
         {
             throw new NotImplementedException();
         }
 
-        public IList<User> GetAll()
+        public IList<Room> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public User GetById(decimal id)
+        public Room GetById(decimal id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(User item)
+        public Room GetByCriteria(string criteriaName, Room item)
         {
             throw new NotImplementedException();
         }
 
-        public User GetByCriteria(string criteriaName, User item)
+        public bool Update(Room item)
         {
             throw new NotImplementedException();
         }

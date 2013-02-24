@@ -2,55 +2,59 @@
 using System.Data;
 using System.Data.Common;
 
-public static class GenericDataAccess
-{    
-    static GenericDataAccess()
+namespace UniversityChat.Data.DataAccess
+{
+    public static class GenericDataAccess
     {
-        //
-        // TODO: Add constructor logic here
-        //
-    }
+        static GenericDataAccess()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
 
-    // executes a command and returns the results as a DataTable object
-    public static DataTable ExecuteSelectCommand(DbCommand command)
-    {       
-        DataTable table;
-        
-        try
+        // executes a command and returns the results as a DataTable object
+        public static DataTable ExecuteSelectCommand(DbCommand command)
         {
-            command.Connection.Open();
-            
-            DbDataReader reader = command.ExecuteReader();
-            table = new DataTable();
-            table.Load(reader);
-            
-            reader.Close();
+            DataTable table;
+
+            try
+            {
+                command.Connection.Open();
+
+                DbDataReader reader = command.ExecuteReader();
+                table = new DataTable();
+                table.Load(reader);
+
+                reader.Close();
+            }
+            catch (Exception exp)
+            {
+                //TODO: LogError
+                throw exp;
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
+            return table;
         }
-        catch (Exception exp)
+
+        public static DbCommand CreateCommand()
         {
-            //TODO: LogError
-            throw exp;
+            string dataProviderName = UniversityChatConfiguration.DbProviderName;
+            string connectionString = UniversityChatConfiguration.DbConnectionString;
+
+            DbProviderFactory factory = DbProviderFactories.GetFactory(dataProviderName);
+
+            DbConnection conn = factory.CreateConnection();
+            conn.ConnectionString = connectionString;
+
+            DbCommand comm = conn.CreateCommand();
+            comm.CommandType = CommandType.Text;
+            comm.CommandText = @"SELECT * FROM Test";
+
+            return comm;
         }
-        finally
-        {            
-            command.Connection.Close();
-        }
-        return table;
-    }
-    
-    public static DbCommand CreateCommand()
-    {        
-        string dataProviderName = UniversityChatConfiguration.DbProviderName;        
-        string connectionString = UniversityChatConfiguration.DbConnectionString;
-        
-        DbProviderFactory factory = DbProviderFactories.GetFactory(dataProviderName);
-        
-        DbConnection conn = factory.CreateConnection();       
-        conn.ConnectionString = connectionString;
-        
-        DbCommand comm = conn.CreateCommand();        
-        comm.CommandType = CommandType.StoredProcedure;
-        
-        return comm;
     }
 }
