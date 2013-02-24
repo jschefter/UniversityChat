@@ -14,8 +14,8 @@ namespace UniversityChat.Tests.Data
         [Test]
         public void Validate_Database_Access()
         {
-            DbCommand dbCommand = GenericDataAccess.CreateCommand();
-            DataTable dataTable = GenericDataAccess.ExecuteSelectCommand(dbCommand);
+            DbCommand dbCommand = GenericDataAccess.CreateCommand(@"SELECT 1 FROM Test", null);
+            DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
             foreach (DataRow row in dataTable.Rows)
             {
                 var r = row;

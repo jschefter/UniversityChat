@@ -14,7 +14,7 @@ namespace UniversityChat.Data.DataAccess
         }
 
         // executes a command and returns the results as a DataTable object
-        public static DataTable ExecuteSelectCommand(DbCommand command)
+        public static DataTable ExecuteCommand(DbCommand command)
         {
             DataTable table;
 
@@ -40,7 +40,12 @@ namespace UniversityChat.Data.DataAccess
             return table;
         }
 
-        public static DbCommand CreateCommand()
+        public static DbCommand CreateCommand(string sqlStringCommand)
+        {
+           return CreateCommand(sqlStringCommand, null);
+        }
+
+        public static DbCommand CreateCommand(string sqlStringCommand, DbParameterCollection dbParameters)
         {
             string dataProviderName = UniversityChatConfiguration.DbProviderName;
             string connectionString = UniversityChatConfiguration.DbConnectionString;
@@ -49,10 +54,26 @@ namespace UniversityChat.Data.DataAccess
 
             DbConnection conn = factory.CreateConnection();
             conn.ConnectionString = connectionString;
-
+            
             DbCommand comm = conn.CreateCommand();
             comm.CommandType = CommandType.Text;
-            comm.CommandText = @"SELECT * FROM Test";
+
+            //Create the dbParameter:
+            if(dbParameters != null)
+            {
+                foreach(DbParameter param in dbParameters)
+                {
+                    DbParameter dbParameter = comm.CreateParameter();
+                    dbParameter.ParameterName = param.ParameterName;
+                    dbParameter.Value = param.Value;
+                    dbParameter.DbType = param.DbType;
+
+                    comm.Parameters.Add(dbParameter);
+                }
+            }
+            
+            //Set the command text:
+            comm.CommandText = sqlStringCommand;
 
             return comm;
         }
