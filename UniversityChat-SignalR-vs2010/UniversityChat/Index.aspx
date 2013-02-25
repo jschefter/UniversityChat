@@ -195,7 +195,7 @@
                     $('#helpBox').animate({ top: '160px' }, 500);
                 });
             });
-            $('#boxclose3').click(function () {
+            $('#boxclose4').click(function () {
                 $('#helpBox').animate({ 'top': '-200px' }, 500, function () {
                     $('#overlayLB').fadeOut('fast');
                 });
@@ -212,6 +212,11 @@
                     $('#helpBox').animate({ top: '160px' }, 500);
                 });
             });
+            $('#boxclose5').click(function () {
+                $('#publicChannelBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlayLB').fadeOut('fast');
+                });
+            });
 
             // Private channel Help Box
             $('#privateChannel').click(function () {
@@ -222,6 +227,11 @@
             $('#previous2').click(function () {
                 $('#privateChannelBox').animate({ 'top': '-200px' }, 500, function () {
                     $('#helpBox').animate({ top: '160px' }, 500);
+                });
+            });
+            $('#boxclose6').click(function () {
+                $('#privateChannelBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlayLB').fadeOut('fast');
                 });
             });
 
@@ -236,11 +246,18 @@
                     $('#helpBox').animate({ top: '160px' }, 500);
                 });
             });
+            $('#boxclose7').click(function () {
+                $('#privateChannelCommandsBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlayLB').fadeOut('fast');
+                });
+            });
 
+            // Feedback link
             $('#feedback').click(function () {
                 window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
             });
 
+            // Sign-up popup
             $('#signUp').click(function () {
                 var myWindow = window.open('', '', 'width=500, height=500');
                 myWindow.document.write("<p>Registration Page</p>");
