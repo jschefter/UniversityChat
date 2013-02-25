@@ -78,7 +78,8 @@
         <div class="footer">
             <a id="about" style="cursor: pointer; color: crimson;">About</a> |
             <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
-            <a href="https://github.com/jschefter/UniversityChat" target="_blank">Github</a>
+            <a href="https://github.com/jschefter/UniversityChat" style="color: darksalmon;" target="_blank">Github</a> |
+            <a id="help" style="cursor: pointer; color: #8fbc8f;">Help</a>
         </div>
     </div>
     
@@ -92,7 +93,7 @@
     <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
     <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
     
-    <!-- Description Box -->
+    <!-- Description Boxes -->
     <div class="box" id="welcomeBox">
         <a class="boxclose" id="boxclose"></a>
         <h1>Welcome</h1>
@@ -115,6 +116,39 @@
         <p>
             Privacy Page
         </p>
+    </div>
+    
+    <div class="box" id="helpBox">
+        <a class="boxclose" id="boxclose4"></a>
+        <h1>Help</h1>
+        <p id="publicChannel" style="cursor: pointer; color: mediumslateblue;">How to create a public channel</p>
+        <p id="privateChannel" style="cursor: pointer; color: mediumvioletred;">How to create a private channel</p>
+        <p id="privateChannelCommands" style="cursor: pointer; color: mediumturquoise;">Private channel commands</p>
+    </div>
+    
+    <div class="box" id="publicChannelBox">
+        <a class="boxclose" id="boxclose5"></a>
+        <h1>How to create a public channel</h1>
+        <p>1. Do this</p>
+        <p>2. Do that</p>
+        <p id="previous" style="cursor: pointer; color: crimson">Go to previous</p>
+    </div>
+    
+    <div class="box" id="privateChannelBox">
+        <a class="boxclose" id="boxclose6"></a>
+        <h1>How to create a private channel</h1>
+        <p>1. Do this</p>
+        <p>2. Do that</p>
+        <p id="previous2" style="cursor: pointer; color: crimson">Go to previous</p>
+    </div>
+    
+    <div class="box" id="privateChannelCommandsBox">
+        <a class="boxclose" id="boxclose7"></a>
+        <h1>Private channel commands</h1>
+        <p>Kick</p>
+        <p>Invite</p>
+        <p>Delegate</p>
+        <p id="previous3" style="cursor: pointer; color: crimson">Go to previous</p>
     </div>
     
     <!-- Scripts -->
@@ -152,6 +186,54 @@
             $('#boxclose3').click(function () {
                 $('#privacyBox').animate({ 'top': '-200px' }, 500, function () {
                     $('#overlayLB').fadeOut('fast');
+                });
+            });
+
+            // Help overlay
+            $('#help').click(function () {
+                $('#overlayLB').fadeIn('fast', function () {
+                    $('#helpBox').animate({ top: '160px' }, 500);
+                });
+            });
+            $('#boxclose3').click(function () {
+                $('#helpBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#overlayLB').fadeOut('fast');
+                });
+            });
+
+            // Public channel Help Box
+            $('#publicChannel').click(function () {
+                $('#helpBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#publicChannelBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#previous').click(function () {
+                $('#publicChannelBox').animate({ 'top': '-200px' }, 500, function() {
+                    $('#helpBox').animate({ top: '160px' }, 500);
+                });
+            });
+
+            // Private channel Help Box
+            $('#privateChannel').click(function () {
+                $('#helpBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#privateChannelBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#previous2').click(function () {
+                $('#privateChannelBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#helpBox').animate({ top: '160px' }, 500);
+                });
+            });
+
+            // Private channel commands Help Box
+            $('#privateChannelCommands').click(function () {
+                $('#helpBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#privateChannelCommandsBox').animate({ 'top': '160px' }, 500);
+                });
+            });
+            $('#previous3').click(function () {
+                $('#privateChannelCommandsBox').animate({ 'top': '-200px' }, 500, function () {
+                    $('#helpBox').animate({ top: '160px' }, 500);
                 });
             });
 
