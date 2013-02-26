@@ -70,14 +70,21 @@ namespace UniversityChat.Data.Repositories
             {
                 DbCommand dbCommand = GenericDataAccess.CreateCommand();
                 dbCommand.CommandType = CommandType.Text;
-                dbCommand.CommandText = UserQueries.DeleteUserByNickNameQuery();
-
+                dbCommand.CommandText = UserQueries.DeleteUserQuery();
+                
                 DbParameter nickNameParameter = dbCommand.CreateParameter();
                 nickNameParameter.ParameterName = "@nickName";
                 nickNameParameter.Value = item.NickName;
                 nickNameParameter.DbType = DbType.String;
 
-                dbCommand.Parameters.Add(nickNameParameter);                
+                dbCommand.Parameters.Add(nickNameParameter);
+
+                DbParameter emailParameter = dbCommand.CreateParameter();
+                emailParameter.ParameterName = "@email";
+                emailParameter.Value = item.EmailAddress;
+                emailParameter.DbType = DbType.String;
+
+                dbCommand.Parameters.Add(emailParameter);      
 
                 GenericDataAccess.ExecuteNonQueryCommand(dbCommand);
                 return true;

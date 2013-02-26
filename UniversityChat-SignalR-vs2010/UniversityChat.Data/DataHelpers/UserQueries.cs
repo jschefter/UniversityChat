@@ -16,9 +16,15 @@ namespace UniversityChat.Data.DataHelpers
             return sql;
         }
 
+        public static string DeleteUserQuery()
+        {
+            string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE NickName = @nickName OR Email = @email";
+            return sql;
+        }
+
         public static string DeleteUserByIdQuery()
         {
-            string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Roles] WHERE UserId = @id";
+            string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE UserId = @id";
             return sql;
         }
 
