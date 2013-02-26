@@ -61,12 +61,17 @@
                         
                     </div>
                 </div>
-
-                <form action="" id="chat-form">
-                    <input type="text" id="message" disabled="disabled"/>
-                    <input type="submit" id="sendmessage" value="Send" disabled="disabled" />
-                    <input type="hidden" id="displayname" />
-                </form>
+                <div id="text-containter">
+                    <form id="upload" runat="server" enctype="multipart/form-data">
+                        <input type="file" id="myFile" name="myFile" />
+                        <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" />
+                    </form>
+                    <form action="" id="chat-form">
+                        <input type="text" id="message" disabled="disabled"/>
+                        <input type="submit" id="sendmessage" value="Send" disabled="disabled" />
+                        <input type="hidden" id="displayname" />
+                    </form>
+                </div>
             </div>
             <div class="users">
                 <h4>Connected Users</h4>
@@ -77,7 +82,7 @@
         <div class="footer">
             <a id="about" style="cursor: pointer; color: crimson;">About</a> |
             <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
-            <a href="https://github.com/jschefter/UniversityChat" style="color: darksalmon;" target="_blank">Github</a> |
+            <a href="https://github.com/jschefter/universitychat" style="color: darksalmon;" target="_blank">Github</a> |
             <a id="help" style="cursor: pointer; color: #8fbc8f;">Help</a>
         </div>
     </div>
@@ -149,7 +154,7 @@
         <p>Delegate</p>
         <p id="previous3" style="cursor: pointer; color: crimson">Go to previous</p>
     </div>
-    
+
     <!-- Scripts -->
     <script type="text/javascript">
         $(function () {
