@@ -33,8 +33,12 @@ body {
 }
 
 .footer {
-    padding: 1em;
+    padding: 25px;
     text-align: center;
+}
+
+.footer a {
+    text-decoration: none;
 }
 
 .header h1 a {
