@@ -15,25 +15,25 @@ namespace UniversityChat.Tests.Repositories
         [Test]
         public void UserRepository_Validate_That_NewUser_Can_Be_Created()
         {
-            User newUser = new User();
-            newUser.FName = "Mark";
-            newUser.LName = "McDonald";
-            newUser.NickName = "mark2013";
-            newUser.EmailAddress = "mark@gmail.com";
-            newUser.RoleId = 1;
+            //User newUser = new User();
+            //newUser.FName = "Mark";
+            //newUser.LName = "McDonald";
+            //newUser.NickName = "mark2013";
+            //newUser.EmailAddress = "mark@gmail.com";
+            //newUser.RoleId = 2;
 
-            IRepository<User> userRepository = new UsersRepository();
-            userRepository.Create(newUser);
+            //IRepository<User> userRepository = new UsersRepository();
+            //userRepository.Create(newUser);
         }
 
         [Test]
         public void UserRepository_Validate_That_User_Can_Be_Deleted_ByNickName()
         {
-            User newUser = new User();
-            newUser.NickName = "mark2013";
+            //User newUser = new User();
+            //newUser.NickName = "mark2013";
             
-            IRepository<User> userRepository = new UsersRepository();
-            userRepository.Delete(newUser);
+            //IRepository<User> userRepository = new UsersRepository();
+            //userRepository.Delete(newUser);
         }
     }
 }

@@ -27,19 +27,18 @@
             <h1><a href="">University Chat</a></h1>
             <div class="login-container">
                 <form action="" id="login-form">
-                    <div>
-                        <input type="text" size="25" id="username" name="username" 
-                            placeholder="Username" /><br />
-                        <button id="signUp">Sign Up</button>
-                    </div>
-                    <div>
-                        <input type="password" size="25" id="password" name="password" 
-                            placeholder="Password" /><br />
-                        <a href="">Forgot Password?</a>
-                    </div>
-                    <div>
-                        <button id="sign-in-button" type="submit">Sign In</button><br />
-                    </div>
+                <div>
+                    <input type="text" size="25" id="username" name="username" placeholder="Username" /><br />
+                    <input type="password" size="25" id="password" name="password" placeholder="Password" /><br />
+                    <a href="">Forgot Password?</a>
+                </div>
+                <div>
+                    <button id="sign-in-button" type="submit">
+                        Sign In</button><br />
+                    <button id="signUp" onclick="return signUp_onclick()">
+                        Register</button><br />
+                        <br />
+                </div>
                 </form>
             </div>
         </div>
@@ -256,12 +255,9 @@
             $('#feedback').click(function () {
                 window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
             });
-
             // Sign-up popup
             $('#signUp').click(function () {
-                var myWindow = window.open('', '', 'width=500, height=500');
-                myWindow.document.write("<p>Registration Page</p>");
-                myWindow.document.write("<p>On Progress..</p>");
+                var myWindow = window.open('Register.aspx', '', 'width=800, height=600', 'location=no');
                 myWindow.focus();
             });
         });

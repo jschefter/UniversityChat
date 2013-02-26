@@ -100,6 +100,7 @@
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Privacy.aspx" />
+    <Content Include="Register.aspx" />
     <Content Include="Scripts\web-client.js" />
     <Content Include="Scripts\chat-data-source.js" />
     <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
@@ -147,6 +148,13 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -160,6 +168,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityChat.Data\UniversityChat.Data.csproj">
+      <Project>{71ABB62C-302F-4362-88BB-56B2C7D34A70}</Project>
+      <Name>UniversityChat.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversityChat.Model\UniversityChat.Model.csproj">
+      <Project>{5EBCC7CF-0D2C-4D57-8A24-D93A655E88FA}</Project>
+      <Name>UniversityChat.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

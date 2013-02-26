@@ -10,8 +10,9 @@
             // username is empty
             window.alert("Invalid username");
             $("#username").focus();
-
         } else {
+            // We want to verify user exists in DB, based on their info. Let's check it.
+            // How do we go from pure JS to safely/securely doing this?
             chatDataSource.StartHub();
             $("#username, #password, #sign-in-button").attr("disabled", "disabled");
         }
