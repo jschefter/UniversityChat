@@ -225,7 +225,7 @@ public class ChatActivity extends FragmentActivity
 //            	String message2 = message.replace("'", "\\'");
                 String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, username, message);
                 webView.loadUrl(sendMessageUrl);
-                appendMessageToChat(username, message);
+                //appendMessageToChat(username, message);
             }
         }
     }
@@ -236,6 +236,7 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void hubStartDone()
         {
+        	System.out.println("incomming from JS: Hub start is done");
         	// signalR hub has been started.
         	// this would be where add/remove channel buttons would be enabled.
         }
@@ -243,6 +244,8 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void broadcastMessageToChat(final String channelName, final String username, final String message) 
         {
+        	System.out.println(String.format("incomming from JS: channel: %s, user: %s, message: %s", channelName, username, message));
+        	
         	// make sure the message is for the current channel.
         	if(channelName.equals(currentChannel)) {
 	            chatWindowActivityHandler.post(new Runnable() 
@@ -259,6 +262,8 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void setChannelList(final String[] channelList)
         {
+        	System.out.println("incomming from JS: Got new channel list");
+        	
         	chatWindowActivityHandler.post(new Runnable() 
             {
                 @Override
@@ -272,6 +277,8 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void setUserList(final String[] chatUserList)
         {
+        	System.out.println("incomming from JS: Got new chat user list");
+        	
         	chatWindowActivityHandler.post(new Runnable() 
             {
                 @Override
@@ -285,6 +292,8 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void joinChatComplete() 
         {
+        	System.out.println("incomming from JS: join chat complete");
+        	
             chatWindowActivityHandler.post(new Runnable() 
             {
                 @Override

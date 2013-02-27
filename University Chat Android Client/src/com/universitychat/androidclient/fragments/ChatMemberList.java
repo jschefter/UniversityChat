@@ -40,7 +40,6 @@ public class ChatMemberList extends Fragment
 	public void setChatMemberList(String[] newMemberList)
 	{
 		memberList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, newMemberList));
-		System.out.println("chat member list called");
 	}
 }
 
