@@ -50,13 +50,20 @@ body {
 }
 
 .login-container {
-    position:absolute;
-	right:0px;
+    position: absolute;
+	right:5px;
 	top:9px;
 }
 
 .login-container div {
     display: inline-block;
+}
+
+#feedback {
+    font: bold 30px calibri;
+    position: absolute;
+    right: 0px;
+    text-decoration: none;
 }
 
 .chat-container {
@@ -136,6 +143,11 @@ body {
     position: absolute;
 	bottom: 0px;
 	width: 100%;
+}
+
+#upload {
+    position: absolute;
+	bottom: 60px;
 }
 
 #chat-form input[type="text"] {

@@ -30,17 +30,17 @@
                 <form action="" id="login-form">
                 <div>
                     <input type="text" size="25" id="username" name="username" placeholder="Username" /><br />
-                    <input type="password" size="25" id="password" name="password" placeholder="Password" /><br />
-                    <a href="">Forgot Password?</a>
+                    <a href="Register.aspx" id="signUp" target="_blank">Don't have an account?</a>
                 </div>
                 <div>
-                    <button id="sign-in-button" type="submit">
-                        Sign In</button><br />
-                    <button id="signUp" onclick="return signUp_onclick()">
-                        Register</button><br />
-                        <br />
+                    <input type="password" size="25" id="password" name="password" placeholder="Password" />
+                    <button id="sign-in-button" type="submit">Sign In</button><br />
+                    <a href="">Forgot Password?</a>
                 </div>
                 </form>
+                <div id="feedback">
+                    <a href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback</a>
+                </div>
             </div>
         </div>
         <div class="chat-container">
@@ -99,6 +99,10 @@
     <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
     
     <!-- Description Boxes -->
+    <div class="box" id="signUpBox">
+        <h1>University Chat Registration Form</h1>
+
+    </div>
     <div class="box" id="welcomeBox">
         <a class="boxclose" id="boxclose"></a>
         <h1>Welcome</h1>

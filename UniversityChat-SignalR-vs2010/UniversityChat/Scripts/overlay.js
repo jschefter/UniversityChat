@@ -96,14 +96,4 @@
             $('#overlayLB').fadeOut('fast');
         });
     });
-
-    // Feedback link
-    $('#feedback').click(function () {
-        window.open("https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform");
-    });
-    // Sign-up popup
-    $('#signUp').click(function () {
-        var myWindow = window.open('Register.aspx', '', 'width=800, height=600', 'location=no');
-        myWindow.focus();
-    });
 });
