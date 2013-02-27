@@ -78,7 +78,41 @@ namespace UniversityChat.Data.Repositories
 
         public IList<Room> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var roomsList = new List<Room>();
+                DbCommand dbCommand = GenericDataAccess.CreateCommand();
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.CommandText = RoomsQueries.SellectAllRoomsQuery();
+
+                DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
+
+                if (dataTable != null)
+                {
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        var room = new Room();
+
+                        try
+                        {
+                            room.Id = Decimal.Parse(row["RoomId"].ToString());
+                            room.RoomName = row["RoomName"].ToString();
+                            room.RoomDesc = row["RoomDesc"].ToString();
+                            room.ModeratorId = Decimal.Parse(row["ModeratorId"].ToString());
+                            roomsList.Add(room);
+                        }
+                        catch(Exception exp)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                return roomsList;
+            }
+            catch (Exception exp)
+            {
+                return null;
+            }
         }
 
         public Room GetById(decimal id)
