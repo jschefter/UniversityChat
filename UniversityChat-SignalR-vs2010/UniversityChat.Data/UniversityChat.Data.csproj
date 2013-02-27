@@ -47,7 +47,6 @@
     <Compile Include="DataHelpers\UserDataHelper.cs" />
     <Compile Include="DataHelpers\UserQueries.cs" />
     <Compile Include="Repositories\HistoryRepository.cs" />
-    <Compile Include="Repositories\RolesRepository.cs" />
     <Compile Include="Repositories\RoomsRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,8 +22,8 @@ namespace UniversityChat
             if (CheckUserName() && CheckPasswords() && CheckEmailAddress())
             {
                 // We want to create a new user with 'legal' (to this point) information
-                User newUser = new User(txtUserName.Text, txtPassword1.Text, txtFName.Text,
-                    txtLName.Text, txtEmail.Text);
+                User newUser = new User(TextUsername.Text, TextPassword.Text, TextFirstName.Text,
+                    TextLastName.Text, TextEmail.Text);
 
                 if (newUser.VerifyAll())
                 {
@@ -48,30 +48,30 @@ namespace UniversityChat
 
         protected bool CheckUserName()
         {
-            return !String.IsNullOrEmpty(txtUserName.Text) && txtUserName.Text.Length > 5;
+            return !String.IsNullOrEmpty(TextUsername.Text) && TextUsername.Text.Length > 5;
         }
 
         protected bool CheckPasswords()
         {
             // TODO: we should also do very basic client side verification of length,
             // characters, validity, etc.
-            if (txtPassword1.Text == txtPassword2.Text && !String.IsNullOrEmpty(txtPassword1.Text))
+            if (TextPassword.Text == TextConfirmPassword.Text && !String.IsNullOrEmpty(TextPassword.Text))
             {
-                lblPW1.ForeColor = System.Drawing.Color.Black;
-                lblPW2.ForeColor = System.Drawing.Color.Black;
+                UsernameLabel.ForeColor = System.Drawing.Color.Black;
+                LastNameLabel.ForeColor = System.Drawing.Color.Black;
                 return true;
             }
             else
             {
-                lblPW1.ForeColor = System.Drawing.Color.Red;
-                lblPW2.ForeColor = System.Drawing.Color.Red;
+                UsernameLabel.ForeColor = System.Drawing.Color.Red;
+                LastNameLabel.ForeColor = System.Drawing.Color.Red;
                 return false;
             }
         }
 
         protected bool CheckEmailAddress()
         {
-            string email = txtEmail.Text;
+            string email = TextEmail.Text;
             try
             {
                 var addr = new System.Net.Mail.MailAddress(email);
