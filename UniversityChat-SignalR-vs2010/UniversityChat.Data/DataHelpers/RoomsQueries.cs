@@ -20,5 +20,11 @@ namespace UniversityChat.Data.DataHelpers
             return sql;
 
         }
+
+        public static string SellectAllRoomsQuery()
+        {
+            string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Rooms]";
+            return sql;
+        }
     }
 }

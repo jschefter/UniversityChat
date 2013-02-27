@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using UniversityChat.Model;
+using System.Data.Common;
+using UniversityChat.Data.DataAccess;
+using System.Data;
 
 namespace UniversityChat
 {
     public static class ChatChannels
     {
-        private static Dictionary<string, ChatChannel> channels = new Dictionary<string, ChatChannel>();
+        private static Dictionary<string, Room> channels = new Dictionary<string, Room>();
 
         /// <summary>
         /// If a channel doesn't already exist, create it.
@@ -17,7 +21,7 @@ namespace UniversityChat
         {
             if (!channels.ContainsKey(channelName))
             {
-                channels.Add(channelName, new ChatChannel());
+                channels.Add(channelName, new Room());
             }
         }
 
@@ -28,12 +32,14 @@ namespace UniversityChat
 
         public static ICollection<string> GetChannelList()
         {
-            return channels.Keys.ToArray();
+            DbCommand dbCommand = GenericDataAccess.CreateCommand(@"SELECT 1 FROM Test", null);
+            DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
+            //return channels.Keys.ToArray();
         }
 
         public static void AddUser(string channelName, string connectionId, string userName)
         {
-            ChatChannel channel;
+            Room channel;
             if(channels.TryGetValue(channelName, out channel)) {
                 channel.AddUser(connectionId, userName);
             }
@@ -44,7 +50,7 @@ namespace UniversityChat
 
         public static string[] GetConnectedUsers(string channelName)
         {
-            ChatChannel channel;
+            Room channel;
             if(channels.TryGetValue(channelName, out channel)) {
                 return channel.GetConnectedUsers();
             }
@@ -57,7 +63,7 @@ namespace UniversityChat
         internal static string[] GetChannels(string connectionId)
         {
             List<String> connectedChannels = new List<string>();
-            foreach (KeyValuePair<string,ChatChannel> channel in channels)
+            foreach (KeyValuePair<string,Room> channel in channels)
             {
                 if (channel.Value.ContainsUser(connectionId))
                 {
@@ -70,7 +76,7 @@ namespace UniversityChat
 
         internal static string RemoveUser(string channelName, string connectionId)
         {
-            ChatChannel channel;
+            Room channel;
             if(channels.TryGetValue(channelName, out channel)) {
                 return channel.RemoveUser(connectionId);
             }

@@ -1,41 +1,71 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="UniversityChat.Register" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
-    <title></title>
+    <title>University Chat Registration Page</title>
 </head>
+
 <body>
+    <h1>University Chat Registration Form</h1>
+
     <form id="form1" runat="server">
     <div>
-        <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
-        <asp:Label ID="Label1" runat="server" Text="Username"></asp:Label>
-    </div>
-        <div>
-        <asp:TextBox ID="txtPassword1" runat="server" TextMode="Password" ></asp:TextBox>
-        <asp:Label ID="lblPW1" runat="server" Text="Password"></asp:Label>
+        <table style="width:40%;">
+            <tr>
+                <td>
+                    <asp:Label id="UsernameLabel" runat="server">Username:</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextUsername" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label id="PasswordLabel" runat="server">Password:</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextPassword" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label id="ConfirmPasswordLabel" runat="server">Confirm Password:</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextConfirmPassword" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label id="EmailLabel" runat="server">Email:</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextEmail" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label id="FirstNameLabel" runat="server">First Name:</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextFirstName" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label id="LastNameLabel" runat="server">Last Name:</asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="TextLastName" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
     </div>
     <div>
-        <asp:TextBox ID="txtPassword2" runat="server" TextMode="Password" ></asp:TextBox>
-        <asp:Label ID="lblPW2" runat="server" Text="Password (confirm)"></asp:Label>
-    </div>
-        <div>
-        <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-        <asp:Label ID="Label6" runat="server" Text="Email Address"></asp:Label>
-    </div>
-    <div>
-        <asp:TextBox ID="txtFName" runat="server"></asp:TextBox>
-        <asp:Label ID="Label2" runat="server" Text="First Name"></asp:Label>
-    </div>
-    <div>
-        <asp:TextBox ID="txtLName" runat="server"></asp:TextBox>
-        <asp:Label ID="Label4" runat="server" Text="Last Name"></asp:Label>
-    </div>
-    <div>
-        <asp:Button ID="btnSubmit" runat="server" Text="Submit" 
+        <asp:Button ID="buttonSubmit" runat="server" Text="Submit" 
             onclick="btnSubmit_Click" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
+        <asp:Button ID="buttonCancel" runat="server" Text="Cancel" 
             onclick="btnCancel_Click" />
     </div>
     </form>
