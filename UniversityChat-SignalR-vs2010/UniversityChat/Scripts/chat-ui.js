@@ -147,7 +147,9 @@ function ChatUI($containingElement, chatDataSource) {
         });
     };
 
-    
+    this.SetConnectedUserCount = function (userCount) {
+        $("#connected-users span").html(userCount);
+    };
 
     $("#chat-form").submit(function () {
         var message = $messageInput.val();

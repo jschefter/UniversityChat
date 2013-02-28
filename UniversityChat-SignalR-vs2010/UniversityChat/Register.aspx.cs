@@ -23,7 +23,7 @@ namespace UniversityChat
             {
                 // We want to create a new user with 'legal' (to this point) information
                 User newUser = new User(TextUsername.Text, TextPassword.Text, TextFirstName.Text,
-                    TextLastName.Text, TextEmail.Text);
+                    TextLastName.Text);
 
                 if (newUser.VerifyAll())
                 {

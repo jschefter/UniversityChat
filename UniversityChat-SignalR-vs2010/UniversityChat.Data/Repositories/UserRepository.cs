@@ -16,7 +16,7 @@ namespace UniversityChat.Data.Repositories
             {
                 DbCommand dbCommand = GenericDataAccess.CreateCommand();
                 dbCommand.CommandType = CommandType.Text;
-                dbCommand.CommandText = UserQueries.InserNewUserQuery();
+                dbCommand.CommandText = UserQueries.InserNewUserQuery;
 
                 DbParameter fNameParameter = dbCommand.CreateParameter();
                 fNameParameter.ParameterName = "@fName";
@@ -70,7 +70,7 @@ namespace UniversityChat.Data.Repositories
             {
                 DbCommand dbCommand = GenericDataAccess.CreateCommand();
                 dbCommand.CommandType = CommandType.Text;
-                dbCommand.CommandText = UserQueries.DeleteUserQuery();
+                dbCommand.CommandText = UserQueries.DeleteUserQuery;
                 
                 DbParameter nickNameParameter = dbCommand.CreateParameter();
                 nickNameParameter.ParameterName = "@nickName";
@@ -114,6 +114,68 @@ namespace UniversityChat.Data.Repositories
         public User GetByCriteria(string criteriaName, User item)
         {
             throw new NotImplementedException();
+        }
+
+        public User GetByName(string username)
+        {
+            try
+            {
+                User user = null;
+
+                DbCommand dbCommand = GenericDataAccess.CreateCommand();
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.CommandText = UserQueries.SelectByNickName;
+
+                DbParameter nickNameParameter = dbCommand.CreateParameter();
+                nickNameParameter.ParameterName = "@nickName";
+                nickNameParameter.Value = username;
+                nickNameParameter.DbType = DbType.String;
+                dbCommand.Parameters.Add(nickNameParameter);
+
+                DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
+
+                if (dataTable != null)
+                {
+                    DataRow userData = dataTable.Rows[0];
+                    user = new User(userData);
+                }
+                return user;
+            }
+            catch (Exception exp)
+            {
+                return null;
+            }
+        }
+
+        public User GetByUserId(Guid userId)
+        {
+            try
+            {
+                User user = null;
+
+                DbCommand dbCommand = GenericDataAccess.CreateCommand();
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.CommandText = UserQueries.SelectByUserId;
+
+                DbParameter userIdParameter = dbCommand.CreateParameter();
+                userIdParameter.ParameterName = "@id";
+                userIdParameter.Value = userId;
+                userIdParameter.DbType = DbType.Guid;
+                dbCommand.Parameters.Add(userIdParameter);
+
+                DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
+
+                if (dataTable != null)
+                {
+                    DataRow userData = dataTable.Rows[0];
+                    user = new User(userData);
+                }
+                return user;
+            }
+            catch (Exception exp)
+            {
+                return null;
+            }
         }
     }
 }

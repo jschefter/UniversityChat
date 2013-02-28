@@ -38,6 +38,7 @@
                     <a href="">Forgot Password?</a>
                 </div>
                 </form>
+                <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
                 <div id="feedback">
                     <a href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback</a>
                 </div>

@@ -23,6 +23,12 @@ function ChatDataSource() {
         });
     };
 
+    chat.client.setConnectedUserCount = function (userCount) {
+        $.each(userInterfaces, function (index, userInterface) {
+            userInterface.SetConnectedUserCount(userCount);
+        });
+    };
+
     var hubStartDone = function () {
         $.each(userInterfaces, function (index, userInterface) {
             userInterface.HubStartDone();
@@ -34,8 +40,9 @@ function ChatDataSource() {
     };
 
     // called from main script when user has submitted their login credentials.
-    this.StartHub = function () {
+    this.StartHub = function (userName) {
         $.connection.hub.start().done(function () {
+            chat.server.setUsername(userName);
             hubStartDone();
             chat.server.getChannelList();
         });
@@ -43,17 +50,17 @@ function ChatDataSource() {
 
     // called from UI when user wants to join a chat channel.
     this.JoinChannel = function (channelName, userName) {
-        chat.server.joinChannel(channelName, userName);
+        chat.server.joinChannel(channelName);
     };
 
     // called from UI when user wants to leave a chat channel.
     this.LeaveChannel = function (channelName, userName) {
-        chat.server.leaveChannel(channelName, userName);
+        chat.server.leaveChannel(channelName);
     };
 
     // called from UI when user wants to send a message to a channel.
     this.Send = function (channelName, userName, message) {
-        chat.server.send(channelName, userName, message);
+        chat.server.send(channelName, message);
     };
 
     // called from UI when user wants to create a new channel.

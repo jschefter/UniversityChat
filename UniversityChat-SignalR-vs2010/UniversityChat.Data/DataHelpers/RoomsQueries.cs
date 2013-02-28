@@ -7,24 +7,56 @@ namespace UniversityChat.Data.DataHelpers
 {
     public class RoomsQueries
     {
-        public static string InserNewRoomQueries()
+        public static string InserNewRoomQueries
         {
-            string sql = @"INSERT INTO [ucdatabase].[UniversityChat].[Rooms]
+            get
+            {
+                string sql = @"INSERT INTO [ucdatabase].[UniversityChat].[Rooms]
                         ([RoomId],[RoomName],[RoomDesc],[ClassId],[IsPrivate]
                             ,[IsActive],[ExpirationDate],[StartDate],[LastUsedDate]
                             ,[ModeratorId])
                         VALUES
-                        (NEWID(), @roomName, @roomDesc, NEWID(), 0, 1, @expirationDate,
-                        @startDate, @lastUsedDate,@userId)";
+                        (NEWID(), @roomName, @roomDesc, @classId, 0, 1, @expirationDate,
+                        @startDate, @lastUsedDate, NEWID())"; //@userId)";
 
-            return sql;
-
+                return sql;
+            }
         }
 
-        public static string SellectAllRoomsQuery()
+        public static string DeleteRoomByNameQuery
         {
-            string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Rooms]";
-            return sql;
+            get
+            {
+                string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Rooms] WHERE RoomName = @roomName";
+                return sql;
+            }
+        }
+
+        public static string SelectAllRoomsQuery
+        {
+            get
+            {
+                string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Rooms]";
+                return sql;
+            }
+        }
+
+        public static string SelectByRoomName
+        {
+            get
+            {
+                string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Rooms] WHERE [RoomName] = @roomName";
+                return sql;
+            }
+        }
+
+        public static string SelectByRoomId
+        {
+            get
+            {
+                string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Rooms] WHERE [RoomId] = @roomId";
+                return sql;
+            }
         }
     }
 }

@@ -135,8 +135,8 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="Chat\ChatChannels.cs" />
-    <Compile Include="Chat\ChatChannel.cs" />
     <Compile Include="Chat\ChatHub.cs" />
+    <Compile Include="Chat\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

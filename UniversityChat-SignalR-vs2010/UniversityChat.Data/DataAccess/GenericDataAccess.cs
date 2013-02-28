@@ -42,12 +42,10 @@ namespace UniversityChat.Data.DataAccess
 
         public static int ExecuteNonQueryCommand(DbCommand command)
         {
-            DataTable table;
             int returnedValue = -1;
             try
             {
                 command.Connection.Open();
-
                 returnedValue = command.ExecuteNonQuery();                
             }
             catch (Exception exp)

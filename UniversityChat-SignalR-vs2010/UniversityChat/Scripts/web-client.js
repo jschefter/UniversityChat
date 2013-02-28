@@ -13,7 +13,7 @@
         } else {
             // We want to verify user exists in DB, based on their info. Let's check it.
             // How do we go from pure JS to safely/securely doing this?
-            chatDataSource.StartHub();
+            chatDataSource.StartHub(username);
             $("#username, #password, #sign-in-button").attr("disabled", "disabled");
         }
         return false;

@@ -17,19 +17,19 @@
         var chatUI = new AndroidUI(chatDataSource);
 
         function joinChannel(channelName, userName) {
-            chatDataSource.JoinChannel(channelName, userName);
+            chatDataSource.JoinChannel(channelName);
         }
 
         function leaveChannel(channelName, userName) {
-            chatDataSource.LeaveChannel(channelName, userName);
+            chatDataSource.LeaveChannel(channelName);
         }
 
         function sendMessage(channelName, userName, message) {
-            chatDataSource.Send(channelName, userName, message);
+            chatDataSource.Send(channelName, message);
         }
 
 
-        chatDataSource.StartHub();
+        chatDataSource.StartHub("Fix-android-username");
 
 
 //        var chat = $.connection.chatHub;

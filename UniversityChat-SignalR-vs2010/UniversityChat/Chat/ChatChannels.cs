@@ -6,83 +6,145 @@ using UniversityChat.Model;
 using System.Data.Common;
 using UniversityChat.Data.DataAccess;
 using System.Data;
+using UniversityChat.Data.DataHelpers;
+using UniversityChat.Data.Repositories;
 
-namespace UniversityChat
+namespace UniversityChat.Chat
 {
     public static class ChatChannels
     {
-        private static Dictionary<string, Room> channels = new Dictionary<string, Room>();
+        private static RoomsRepository rooms = new RoomsRepository();
+        private static RoomUsersRepository roomUsers = new RoomUsersRepository();
 
         /// <summary>
-        /// If a channel doesn't already exist, create it.
+        /// adds a new room to the rooms repository.
         /// </summary>
-        /// <param name="channelName">the name of the channel</param>
-        public static void AddChannel(string channelName)
+        /// <param name="roomName">the name of the room to be added</param>
+        public static void AddRoom(string roomName)
         {
-            if (!channels.ContainsKey(channelName))
+            Room newRoom = new Room() { RoomName = roomName };
+            rooms.Create(newRoom);
+        }
+
+        /// <summary>
+        /// delete a room from the rooms repository.
+        /// </summary>
+        /// <param name="roomName">the name of the room to be deleted</param>
+        public static void DeleteRoom(string roomName)
+        {
+            Room existingRoom = new Room() { RoomName = roomName };
+
+            ICollection<User> usersOfRoom = GetUsersOfRoom(roomName);
+            foreach (User user in usersOfRoom)
             {
-                channels.Add(channelName, new Room());
+                RemoveUserFromRoom(roomName, user);
+                // TODO: users need to be kicked from the rooms they are in...
             }
+
+            rooms.Delete(existingRoom);
         }
 
-        public static void DeleteChannel(string channelName)
+        /// <summary>
+        /// Get the names of all existing rooms.
+        /// </summary>
+        /// <returns></returns>
+        public static ICollection<string> GetRoomList()
         {
-            channels.Remove(channelName);
-        }
-
-        public static ICollection<string> GetChannelList()
-        {
-            DbCommand dbCommand = GenericDataAccess.CreateCommand(@"SELECT 1 FROM Test", null);
-            DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
-            //return channels.Keys.ToArray();
-        }
-
-        public static void AddUser(string channelName, string connectionId, string userName)
-        {
-            Room channel;
-            if(channels.TryGetValue(channelName, out channel)) {
-                channel.AddUser(connectionId, userName);
-            }
-            else {
-                // TODO: channel doesn't exist!
-            }
-        }
-
-        public static string[] GetConnectedUsers(string channelName)
-        {
-            Room channel;
-            if(channels.TryGetValue(channelName, out channel)) {
-                return channel.GetConnectedUsers();
-            }
-            else {
-                return null;
-            }
-        }
-
-        // returns an array of the public channels
-        internal static string[] GetChannels(string connectionId)
-        {
-            List<String> connectedChannels = new List<string>();
-            foreach (KeyValuePair<string,Room> channel in channels)
+            List<string> roomNames = new List<string>();
+            IList<Room> roomList = rooms.GetAll();
+            foreach (Room room in roomList)
             {
-                if (channel.Value.ContainsUser(connectionId))
-                {
-                    connectedChannels.Add(channel.Key);
-                }
+                roomNames.Add(room.RoomName);
             }
 
-            return connectedChannels.ToArray();
+            return roomNames.ToArray();
         }
 
-        internal static string RemoveUser(string channelName, string connectionId)
+        /// <summary>
+        /// Add a user to an existing room
+        /// </summary>
+        /// <param name="roomName">the name of the room the user is being added to.</param>
+        /// <param name="user">the user being added to room</param>
+        public static void AddUserToRoom(string roomName, User user)
         {
-            Room channel;
-            if(channels.TryGetValue(channelName, out channel)) {
-                return channel.RemoveUser(connectionId);
+            // get the room's Id.
+            Guid roomId = rooms.GetGuidByName(roomName);
+
+            if (!roomId.Equals(Guid.Empty))
+            {
+                RoomUser roomUser = new RoomUser() { RoomId = roomId, UserId = user.Id };
+                roomUsers.Create(roomUser);
             }
-            else {
-                return "unknown channel";
+        }
+
+        /// <summary>
+        /// Remove a user from an existing room.
+        /// </summary>
+        /// <param name="roomName">the name of the room the user is being removed from.</param>
+        /// <param name="user">the user</param>
+        public static void RemoveUserFromRoom(string roomName, User user)
+        {
+            // get the room's Id.
+            Guid roomId = rooms.GetGuidByName(roomName);
+
+            if (!roomId.Equals(Guid.Empty))
+            {
+                RoomUser roomUser = new RoomUser() { RoomId = roomId, UserId = user.Id };
+                roomUsers.Delete(roomUser);
             }
+        }
+
+        /// <summary>
+        /// gets the users currently connected to a room.
+        /// </summary>
+        /// <param name="roomName">the name of the room that user names should be gotten for.</param>
+        /// <returns></returns>
+        public static ICollection<User> GetUsersOfRoom(string roomName)
+        {
+            // get the room's Id.
+            Guid roomId = rooms.GetGuidByName(roomName);
+
+            ICollection<RoomUser> usersInRoom = roomUsers.GetByRoomId(roomId);
+
+            List<User> users = new List<User>();
+            foreach (RoomUser roomUser in usersInRoom)
+            {
+                User user = Users.GetUserByUserId(roomUser.UserId);
+                users.Add(user);
+            }
+
+            return users;
+        }
+
+        public static string[] GetUsernamesInRoom(string roomName)
+        {
+            List<string> usernamesInRoom = new List<string>();
+
+            ICollection<User> usersInRoom = GetUsersOfRoom(roomName);
+            foreach (User user in usersInRoom)
+            {
+                usernamesInRoom.Add(user.NickName);
+            }
+
+            return usernamesInRoom.ToArray();
+        }
+
+        /// <summary>
+        /// gets the names of the rooms a particular user is connected to.
+        /// </summary>
+        /// <param name="user">the user</param>
+        /// <returns></returns>
+        internal static ICollection<string> GetRoomNamesThatUserIsConnectedTo(User user)
+        {
+            ICollection<RoomUser> roomsUserIsIn = roomUsers.GetByUserId(user.Id);
+
+            List<string> result = new List<string>();
+            foreach (RoomUser roomUser in roomsUserIsIn)
+            {
+                result.Add(rooms.GetById(roomUser.RoomId).RoomName);
+            }
+
+            return result;
         }
     }
 }

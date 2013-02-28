@@ -7,31 +7,61 @@ namespace UniversityChat.Data.DataHelpers
 {
     public class UserQueries
     {
-        public static string InserNewUserQuery()
+        public static string InserNewUserQuery
         {
-            string sql = @"INSERT INTO [ucdatabase].[UniversityChat].[Users]
+            get
+            {
+                string sql = @"INSERT INTO [ucdatabase].[UniversityChat].[Users]
                             ([UserId], [FName],[LName], [NickName],[Email],[UserRoleId])
                             VALUES (NEWID(), @fName, @lName, @nickName, @email, @roleId)";
 
-            return sql;
+                return sql;
+            }
         }
 
-        public static string DeleteUserQuery()
+        public static string DeleteUserQuery
         {
-            string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE NickName = @nickName OR Email = @email";
-            return sql;
+            get
+            {
+                string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE NickName = @nickName OR Email = @email";
+                return sql;
+            }
         }
 
-        public static string DeleteUserByIdQuery()
+        public static string DeleteUserByIdQuery
         {
-            string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE UserId = @id";
-            return sql;
+            get
+            {
+                string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE UserId = @id";
+                return sql;
+            }
         }
 
-        public static string DeleteUserByNickNameQuery()
+        public static string DeleteUserByNickNameQuery
         {
-            string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE NickName = @nickName";
-            return sql;
+            get
+            {
+                string sql = @"DELETE FROM [ucdatabase].[UniversityChat].[Users] WHERE NickName = @nickName";
+                return sql;
+            }
+        }
+
+        public static string SelectByNickName
+        {
+            get
+            {
+                string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Users] WHERE NickName = @nickName";
+                return sql;
+            }
+        }
+
+        public static string SelectByUserId
+        {
+            get
+            {
+                string sql = @"SELECT * FROM [ucdatabase].[UniversityChat].[Users] WHERE UserId = @id";
+                return sql;
+            }
         }
     }
 }

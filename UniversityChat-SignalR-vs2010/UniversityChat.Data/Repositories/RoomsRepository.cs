@@ -12,13 +12,16 @@ namespace UniversityChat.Data.Repositories
 {
     public class RoomsRepository : IRepository<Room>
     {
+        // for now, all rooms use the same class.
+        private Guid defaultClassGuid = new ClassRepository().GetDefaultClassGuid();
+
         public bool Create(Room item)
         {
             try
             {
                 DbCommand dbCommand = GenericDataAccess.CreateCommand();
                 dbCommand.CommandType = CommandType.Text;
-                dbCommand.CommandText = RoomsQueries.InserNewRoomQueries();
+                dbCommand.CommandText = RoomsQueries.InserNewRoomQueries;
 
                 DbParameter roomNameParameter = dbCommand.CreateParameter();
                 roomNameParameter.ParameterName = "@roomName";
@@ -33,6 +36,13 @@ namespace UniversityChat.Data.Repositories
                 roomDescParameter.DbType = DbType.String;
 
                 dbCommand.Parameters.Add(roomDescParameter);
+
+                DbParameter classIdParameter = dbCommand.CreateParameter();
+                classIdParameter.ParameterName = "@classId";
+                classIdParameter.Value = defaultClassGuid;
+                classIdParameter.DbType = DbType.Guid;
+
+                dbCommand.Parameters.Add(classIdParameter);
 
                 DbParameter expirationDateParameter = dbCommand.CreateParameter();
                 expirationDateParameter.ParameterName = "@expirationDate";
@@ -53,20 +63,23 @@ namespace UniversityChat.Data.Repositories
                 lastUsedDateParameter.Value = item.LastUsedDate;
                 lastUsedDateParameter.DbType = DbType.DateTime;
 
-                dbCommand.Parameters.Add(startDateParameter);
+                dbCommand.Parameters.Add(lastUsedDateParameter);
 
-                DbParameter moderatorIdParameter = dbCommand.CreateParameter();
-                moderatorIdParameter.ParameterName = "@userId";
-                moderatorIdParameter.Value = item.ModeratorId;
-                moderatorIdParameter.DbType = DbType.Decimal;
+                // TODO: since we don't have moderators right now, this is disabled...
+                //
+                //DbParameter moderatorIdParameter = dbCommand.CreateParameter();
+                //moderatorIdParameter.ParameterName = "@userId";
+                //moderatorIdParameter.Value = item.ModeratorId;
+                //moderatorIdParameter.DbType = DbType.Decimal;
 
-                dbCommand.Parameters.Add(moderatorIdParameter);
+                //dbCommand.Parameters.Add(moderatorIdParameter);
 
                 GenericDataAccess.ExecuteNonQueryCommand(dbCommand);
                 return true;
             }
             catch (Exception exp)
             {
+                // TODO this should probably not fail silently...
                 return false;
             }
         }
@@ -80,10 +93,10 @@ namespace UniversityChat.Data.Repositories
         {
             try
             {
-                var roomsList = new List<Room>();
+                List<Room> roomsList = new List<Room>();
                 DbCommand dbCommand = GenericDataAccess.CreateCommand();
                 dbCommand.CommandType = CommandType.Text;
-                dbCommand.CommandText = RoomsQueries.SellectAllRoomsQuery();
+                dbCommand.CommandText = RoomsQueries.SelectAllRoomsQuery;
 
                 DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
 
@@ -91,14 +104,14 @@ namespace UniversityChat.Data.Repositories
                 {
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        var room = new Room();
+                        Room room = new Room();
 
                         try
                         {
-                            room.Id = Decimal.Parse(row["RoomId"].ToString());
+                            room.Id = Guid.Parse(row["RoomId"].ToString());
                             room.RoomName = row["RoomName"].ToString();
                             room.RoomDesc = row["RoomDesc"].ToString();
-                            room.ModeratorId = Decimal.Parse(row["ModeratorId"].ToString());
+                            room.ModeratorId = Guid.Parse(row["ModeratorId"].ToString());
                             roomsList.Add(room);
                         }
                         catch(Exception exp)
@@ -111,7 +124,38 @@ namespace UniversityChat.Data.Repositories
             }
             catch (Exception exp)
             {
-                return null;
+                return new List<Room>(); ;
+            }
+        }
+
+        public Guid GetGuidByName(string roomName)
+        {
+            try
+            {
+                Guid roomGuid = Guid.Empty;
+
+                DbCommand dbCommand = GenericDataAccess.CreateCommand();
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.CommandText = RoomsQueries.SelectByRoomName;
+
+                DbParameter roomNameParameter = dbCommand.CreateParameter();
+                roomNameParameter.ParameterName = "@roomName";
+                roomNameParameter.Value = roomName;
+                roomNameParameter.DbType = DbType.String;
+                dbCommand.Parameters.Add(roomNameParameter);
+
+                DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
+
+                if (dataTable != null)
+                {
+                    DataRow room = dataTable.Rows[0];
+                    roomGuid = Guid.Parse(room["RoomId"].ToString());
+                }
+                return roomGuid;
+            }
+            catch (Exception exp)
+            {
+                return Guid.Empty;
             }
         }
 
@@ -128,6 +172,35 @@ namespace UniversityChat.Data.Repositories
         public bool Update(Room item)
         {
             throw new NotImplementedException();
+        }
+
+        public Room GetById(Guid roomId)
+        {
+            try
+            {
+                DbCommand dbCommand = GenericDataAccess.CreateCommand();
+                dbCommand.CommandType = CommandType.Text;
+                dbCommand.CommandText = RoomsQueries.SelectByRoomId;
+
+                DbParameter roomNameParameter = dbCommand.CreateParameter();
+                roomNameParameter.ParameterName = "@roomId";
+                roomNameParameter.Value = roomId;
+                roomNameParameter.DbType = DbType.Guid;
+                dbCommand.Parameters.Add(roomNameParameter);
+
+                DataTable dataTable = GenericDataAccess.ExecuteCommand(dbCommand);
+
+                Room room = null;
+                if (dataTable != null)
+                {
+                    room = new Room(dataTable.Rows[0]);
+                }
+                return room;
+            }
+            catch (Exception exp)
+            {
+                return null;
+            }
         }
     }
 }

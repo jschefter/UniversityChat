@@ -5,15 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using UniversityChat.Chat;
 
 namespace UniversityChat
 {
     public partial class Index : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
+        protected int userCount = Users.CountOfConnectedUsers;
 
         protected void btnUploadClick(object sender, EventArgs e) {
             HttpPostedFile file = Request.Files["myFile"];
