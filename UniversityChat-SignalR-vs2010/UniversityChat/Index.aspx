@@ -24,26 +24,26 @@
 <body>
     
     <div class="container">
-        <div class="header">
-            <h1><a href="">University Chat</a></h1>
+        <header class="header">
+            <h1 id="pageHeader"><a href="index.html">University Chat</a></h1>
             <div class="login-container">
-                <form action="" id="login-form">
-                <div>
-                    <input type="text" size="25" id="username" name="username" placeholder="Username" /><br />
-                    <a href="Register.aspx" id="signUp" target="_blank">Don't have an account?</a>
-                </div>
-                <div>
-                    <input type="password" size="25" id="password" name="password" placeholder="Password" />
-                    <button id="sign-in-button" type="submit">Sign In</button><br />
-                    <a href="">Forgot Password?</a>
-                </div>
+                <form action="" id="Form1">
+                    <div>
+                        <input type="text" size="20" id="Text1" name="username" placeholder="Username" /><br />
+                        <a href="Register.aspx" id="A1" target="_blank">Sign Up</a>
+                    </div>
+                    <div>
+                        <input type="password" size="20" id="password1" name="password" placeholder="Password" /><br />
+                        <a href="">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <button id="Button1" type="submit">Sign In</button><br />
+                        <a id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback</a>
+                    </div>
                 </form>
                 <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
-                <div id="feedback">
-                    <a href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback</a>
-                </div>
             </div>
-        </div>
+        </header>
         <div class="chat-container">
             <div class="channels">
                 <h4>Public Channels</h4>
@@ -81,19 +81,13 @@
             </div>
             
         </div>
-        <div class="footer">
+        <footer class="footer">
             <a id="about" style="cursor: pointer; color: crimson;">About</a> |
             <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
             <a href="https://github.com/jschefter/universitychat" style="color: darksalmon;" target="_blank">Github</a> |
             <a id="help" style="cursor: pointer; color: #8fbc8f;">Help</a>
-        </div>
+        </footer>
     </div>
-    
-    <!-- Image links -->
-    <!--<div class="content">
-        <a class="welcome" id="welcome"></a>
-        <a class="feedback" id="feedback"></a>
-    </div>-->
 
     <!-- The overlays -->
     <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
