@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityChat", "UniversityChat\UniversityChat.csproj", "{FB353BFC-2364-47D3-8B05-EE16F634D2C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityChat.Model", "UniversityChat.Model\UniversityChat.Model.csproj", "{5EBCC7CF-0D2C-4D57-8A24-D93A655E88FA}"
