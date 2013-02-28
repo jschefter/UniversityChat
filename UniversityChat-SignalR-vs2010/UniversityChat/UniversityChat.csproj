@@ -108,6 +108,7 @@
     <Content Include="Privacy.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Scripts\android-ui.js" />
+    <Content Include="Scripts\overlay.js" />
     <Content Include="Scripts\web-client.js" />
     <Content Include="Scripts\chat-data-source.js" />
     <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
