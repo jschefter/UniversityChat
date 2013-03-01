@@ -25,23 +25,28 @@
     
     <div class="container">
         <header class="header">
-            <h1 id="pageHeader"><a href="index.html">University Chat</a></h1>
+            <h1 id="pageHeader"><a href="index.aspx">University Chat</a></h1>
+            <div id="connected-users"><span><%=userCount %></span>&nbsp;Students Connected</div>
             <div class="login-container">
-                <form action="" id="Form1">
+                <form action="" id="login-form">
                     <div>
-                        <input type="text" size="20" id="Text1" name="username" placeholder="Username" /><br />
+                        <input type="text" size="20" id="username" name="username" placeholder="Username" /><br />
+                        <!-- temp disabled for 'beta'
                         <a href="Register.aspx" id="A1" target="_blank">Sign Up</a>
+                        -->
                     </div>
+                    <!-- temp disabled for 'beta'
                     <div>
-                        <input type="password" size="20" id="password1" name="password" placeholder="Password" /><br />
+                        <input type="password" size="20" id="password" name="password" placeholder="Password" /><br />
                         <a href="">Forgot Password?</a>
                     </div>
+                    -->
                     <div>
-                        <button id="Button1" type="submit">Sign In</button><br />
-                        <a id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback</a>
+                        <button id="sign-in-button" type="submit">Connect</button><br />
+                        
                     </div>
                 </form>
-                <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
+                <div class="feedback-container"><a id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Give us your Feedback</a></div>
             </div>
         </header>
         <div class="chat-container">
@@ -50,7 +55,9 @@
                 <ul class="channel-list">
                 </ul>
                 <button class="add-channel" disabled="disabled">Create a Channel</button>
+                <!-- temp disabled for 'beta'
                 <button class="remove-channel" disabled="disabled">Remove a Channel</button>
+                -->
             </div>
             <div class="active-chat">
                 <h4>Click on a public channel to the left to join a chat room</h4>
@@ -65,8 +72,8 @@
                 </div>
                 <div id="text-containter">
                     <form id="upload" runat="server" enctype="multipart/form-data">
-                        <input type="file" id="myFile" name="myFile" />
-                        <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" />
+                        <input type="file" id="myFile" name="myFile" disabled="disabled" alt="File upload not yet implemented"/>
+                        <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" disabled="disabled" alt="File upload not yet implemented"/>
                     </form>
                     <form action="" id="chat-form">
                         <input type="text" id="message" disabled="disabled"/>

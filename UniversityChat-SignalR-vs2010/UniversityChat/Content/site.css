@@ -16,8 +16,7 @@ body {
 }
 
 .container {
-    width: 80%;
-    margin: auto;
+    margin: 10px auto;
     border: 2px solid black;
     border-radius: 5px;
     text-align: left;
@@ -43,6 +42,10 @@ body {
     text-decoration: none;
 }
 
+.header h1 {
+    display: inline-block;
+}
+
 .header h1 a {
     color: White;
     font-size: 50px;
@@ -56,14 +59,36 @@ body {
     text-decoration: none;
 }
 
+#connected-users {
+    margin-left:10px;
+    display: inline-block;
+    color: White;
+}
+
 .login-container {
     position: absolute;
-	right:5px;
-	top:9px;
+    right: 0px;
+    top: 0px;
+    height: 54px;
+    margin: 10px;
 }
 
 .login-container div {
     display: inline-block;
+    vertical-align: top;
+}
+
+.feedback-container {
+    font-size: 20px;
+    vertical-align: bottom;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.feedback-container a, .feedback-container a:hover, .feedback-container a:visited {
+    color:White;
+	text-decoration: none;
 }
 
 .chat-container {
@@ -91,6 +116,7 @@ body {
     position: absolute;
     top: 20px;
     bottom: 60px;
+    width: 100%
 }
 
 .channels button {
@@ -99,7 +125,7 @@ body {
 }
 
 .channels .add-channel {
-    bottom: 30px;
+    bottom: 0px;
 }
 
 .channels .remove-channel {
@@ -111,9 +137,27 @@ body {
     padding-left: 5px;
 }
 
+.channels li:hover, .users li:hover {
+    cursor:pointer;
+}
+
+.channels li:before {
+    content: "";
+    background-image: url('/Content/south-street/images/ui-icons_cd0a0a_256x240.png');
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+	background-position-y: -159px;
+}
+
 .channel-list .active-channel {
     color: White;
-    background-color: LawnGreen;
+    background-color: #119638;
+}
+
+.channel-list .active-channel:before {
+    background-image: url('/Content/south-street/images/ui-icons_eeeeee_256x240.png');
+    background-position-y: -159px;
 }
 
 .chat-container .active-chat {
