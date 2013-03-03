@@ -61,7 +61,6 @@ namespace UniversityChat.Data.Repositories
                 //TODO: Log Exception and then handle it.
                 return false;
             }
-
         }
 
         public bool Delete(User item)

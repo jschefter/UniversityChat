@@ -27,17 +27,17 @@
         <header class="header">
             <h1 id="pageHeader"><a href="index.html">University Chat</a></h1>
             <div class="login-container">
-                <form action="" id="Form1">
+                <form action="" id="login-form">
                     <div>
-                        <input type="text" size="20" id="Text1" name="username" placeholder="Username" /><br />
+                        <input type="text" size="20" id="username" name="username" placeholder="Username" /><br />
                         <a href="Register.aspx" id="A1" target="_blank">Sign Up</a>
                     </div>
                     <div>
-                        <input type="password" size="20" id="password1" name="password" placeholder="Password" /><br />
+                        <input type="password" size="20" id="password" name="password" placeholder="Password" /><br />
                         <a href="">Forgot Password?</a>
                     </div>
                     <div>
-                        <button id="Button1" type="submit">Sign In</button><br />
+                        <button id="sign-in-button" type="submit">Sign In</button><br />
                         <a id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback</a>
                     </div>
                 </form>

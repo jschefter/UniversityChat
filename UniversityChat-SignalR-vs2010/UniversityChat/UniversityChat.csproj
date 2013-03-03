@@ -105,6 +105,7 @@
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.css" />
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Log.aspx" />
     <Content Include="Privacy.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Scripts\android-ui.js" />
@@ -140,6 +141,13 @@
     <Compile Include="Chat\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Log.aspx.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Log.aspx.designer.cs">
+      <DependentUpon>Log.aspx</DependentUpon>
     </Compile>
     <Compile Include="Privacy.aspx.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>

@@ -43,12 +43,14 @@
     <Compile Include="DataAccess\GenericDataAccess.cs" />
     <Compile Include="DataAccess\UniversityChatConfiguration.cs" />
     <Compile Include="DataHelpers\ClassQueries.cs" />
+    <Compile Include="DataHelpers\LogQueries.cs" />
     <Compile Include="DataHelpers\RoomUsersQueries.cs" />
     <Compile Include="DataHelpers\RoleQueries.cs" />
     <Compile Include="DataHelpers\RoomsQueries.cs" />
     <Compile Include="DataHelpers\UserDataHelper.cs" />
     <Compile Include="DataHelpers\UserQueries.cs" />
     <Compile Include="Repositories\ClassRepository.cs" />
+    <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\RoomUsersRepository.cs" />
     <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\RoomsRepository.cs" />
