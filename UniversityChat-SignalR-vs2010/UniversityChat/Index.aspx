@@ -25,7 +25,7 @@
     
     <div class="container">
         <header class="header">
-            <h1 id="pageHeader"><a href="index.html">University Chat</a></h1>
+            <h1 id="pageHeader"><a href="index.aspx">University Chat</a></h1>
             <div class="login-container">
                 <form action="" id="login-form">
                     <div>
