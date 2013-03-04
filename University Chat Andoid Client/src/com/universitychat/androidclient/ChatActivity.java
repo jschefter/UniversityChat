@@ -6,6 +6,7 @@ import com.universitychat.androidclient.fragments.ChatMemberList;
 import com.universitychat.androidclient.fragments.ChatRoom;
 import com.universitychat.androidclient.fragments.ChatRoomList;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -25,16 +26,11 @@ import android.widget.TextView;
 
 public class ChatActivity extends FragmentActivity
 {
-	private final String URL = "http://uc-channels.azurewebsites.net/Android.html";//"http://universitychat.azurewebsites.net/Android.html";
+	private final String URL = "http://universitychat.azurewebsites.net/Android.html";
     private WebView webView;
     private final Handler chatWindowActivityHandler = new Handler();
 
 
-    private TextView textViewChat;
-    private EditText editMessage;
-    private Button buttonSendMessage;
-    private Button buttonExit;
-    private Button tempWebView;
     private String username;
     private String password;
     private String currentChannel;
@@ -98,7 +94,7 @@ public class ChatActivity extends FragmentActivity
         viewPager.setAdapter(pagerAdapter);
         
         viewPager.setCurrentItem(ROOMLIST_FRAGMENT);
-        setUIVariables();
+        
         webView.loadUrl(URL);	// connect to service (start the hub).
     }
     
@@ -147,27 +143,12 @@ public class ChatActivity extends FragmentActivity
 		ChatMemberList chatMemberList = (ChatMemberList)pagerAdapter.getItem(MEMBERLIST_FRAGMENT);
 		chatMemberList.setChatMemberList(list);
 	}
-	
-    private void setUIVariables() 
-    {
-        editMessage = (EditText)findViewById(R.id.editChatMessage);
-        buttonExit = (Button)findViewById(R.id.buttonExit);
-    }
 
     private void initializeWebView() 
     {
         webView = (WebView)findViewById(R.id.androidWebViewTwo);
-
-        // set up logging of javascript console messages (for debugging purposes)
-        webView.setWebChromeClient(new WebChromeClient(){
-            public boolean onConsoleMessage(ConsoleMessage cm) {
-                Log.d("MyApplication", cm.message() + " -- from line " + cm.lineNumber() + " of " + cm.sourceId());
-                return true;
-            }
-        });
-        
+        final IncommingWebEvents incommingWebEvents = new IncommingWebEvents(this);
         webView.getSettings().setJavaScriptEnabled(true);
-        IncommingWebEvents incommingWebEvents = new IncommingWebEvents();
         webView.addJavascriptInterface(incommingWebEvents, "Android");
     }        
     
@@ -195,11 +176,15 @@ public class ChatActivity extends FragmentActivity
     	public void joinChannel(String channelName)
         {
     		///---Need to verify user doesnt rejoin current channel, need a method get get current channel
-    		
-    		
-    		// leave current channel...
-    		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
-        	webView.loadUrl(leaveChannelUrl);
+    		if(currentChannel.equals(channelName)) {
+    			return;
+    		}
+    		    		
+    		// leave current channel if in one.
+    		if(!currentChannel.isEmpty()) {
+	    		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+	        	webView.loadUrl(leaveChannelUrl);
+    		}
         	
         	//clear chat history
         	clearChatHistory();
@@ -222,18 +207,36 @@ public class ChatActivity extends FragmentActivity
             if(!message.isEmpty()) 
             {
                 // send message to server.
+            	//System.out.println(String.format("Sending message to channel: %s, %s", message, currentChannel));
 //            	String message2 = message.replace("'", "\\'");
                 String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, username, message);
                 webView.loadUrl(sendMessageUrl);
                 //appendMessageToChat(username, message);
             }
         }
+        
+        public void startHub() {
+        	String startHubUrl = String.format("javascript:startHub('%s')", username);
+            webView.loadUrl(startHubUrl);
+        }
     }
     
     // the methods of this class with the @JavascriptInterface attributes are called from javascript executed by the WebView
     private class IncommingWebEvents 
     {
-        @JavascriptInterface
+    	Context chatActivityContext;
+    	
+    	public IncommingWebEvents(Context c) {
+    		chatActivityContext = c;
+    	}
+    	
+    	@JavascriptInterface
+        public void pageLoadComplete()
+        {
+    		outgoingWebEvents.startHub();
+        }
+    	
+    	@JavascriptInterface
         public void hubStartDone()
         {
         	System.out.println("incomming from JS: Hub start is done");

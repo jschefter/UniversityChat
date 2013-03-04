@@ -156,7 +156,7 @@ function ChatUI($containingElement, chatDataSource) {
         if (message.length > 0) {
             var activeTab = $chatTabs.tabs("option", "active");
             var channelName = $chatTabs.find(".tabs li:nth-child(" + (activeTab + 1) + ") a").html();
-            chatDataSource.Send(channelName, userName, message);
+            chatDataSource.Send(channelName, message);
         }
         $messageInput.val("").focus();
         return false;

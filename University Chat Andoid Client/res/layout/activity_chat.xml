@@ -3,18 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
+    
+    <WebView
+        android:id="@+id/androidWebViewTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:visibility="invisible" >
+    </WebView>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-    />
-    
-    <WebView
-        android:id="@+id/androidWebViewTwo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible" >
-    </WebView>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

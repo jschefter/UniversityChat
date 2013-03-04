@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
  
-public class MyViewPagerAdapter extends FragmentPagerAdapter{
- 
+public class MyViewPagerAdapter extends FragmentPagerAdapter
+{ 
     private Vector<Fragment> pageFragments;
  
     /** Constructor of the class */

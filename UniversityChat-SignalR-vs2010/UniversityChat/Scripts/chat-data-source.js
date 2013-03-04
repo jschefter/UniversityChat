@@ -59,7 +59,7 @@ function ChatDataSource() {
     };
 
     // called from UI when user wants to send a message to a channel.
-    this.Send = function (channelName, userName, message) {
+    this.Send = function (channelName, message) {
         chat.server.send(channelName, message);
     };
 

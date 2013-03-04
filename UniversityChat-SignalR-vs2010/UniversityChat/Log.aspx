@@ -18,7 +18,8 @@
         
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
             ConnectionString="<%$ ConnectionStrings:ucdatabaseConnectionString2 %>" 
-            SelectCommand="SELECT * FROM [ucdatabase].[UniversityChat].[Log] ORDER BY [LogTime]">
+            
+            SelectCommand="SELECT * FROM [ucdatabase].[UniversityChat].[Log] ORDER BY [LogNumber]">
         </asp:SqlDataSource>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
             DataKeyNames="LogNumber" DataSourceID="SqlDataSource1">
