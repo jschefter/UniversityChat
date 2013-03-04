@@ -171,6 +171,17 @@ public class ChatActivity extends FragmentActivity
     // this is an interface for all events that fragments can call to back-end.
     public class OutgoingWebEvents
     {
+    	public void createChannel(String channelName) 
+    	{
+    		String createChannelUrl = String.format("javascript:createChannel('%s')", channelName);
+        	webView.loadUrl(createChannelUrl);
+    	}
+    	
+    	public void deleteChannel(String channelName) 
+    	{
+    		String deleteChannelUrl = String.format("javascript:deleteChannel('%s')", channelName);
+        	webView.loadUrl(deleteChannelUrl);
+    	}
     	
     	// called from UI when user clicks on a room.
     	public void joinChannel(String channelName)

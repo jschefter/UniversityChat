@@ -16,6 +16,18 @@
         var chatDataSource = new ChatDataSource();
         var chatUI = new AndroidUI(chatDataSource);
 
+        function createChannel(channelName) {
+            if (channelName !== null && channelName !== "") {
+                chatDataSource.CreateChannel(channelName);
+            }
+        }
+
+        function deleteChannel(channelName) {
+            if (channelName !== null && channelName !== "") {
+                chatDataSource.DeleteChannel(channelName);
+            }
+        }
+
         function joinChannel(channelName, userName) {
             chatDataSource.JoinChannel(channelName);
         }
