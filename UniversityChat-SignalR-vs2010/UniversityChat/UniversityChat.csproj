@@ -104,6 +104,7 @@
     <Content Include="Content\south-street\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.css" />
     <Content Include="Content\south-street\jquery-ui-1.10.0.custom.min.css" />
+    <Content Include="ForgetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Log.aspx" />
     <Content Include="Privacy.aspx" />
@@ -139,6 +140,13 @@
     <Compile Include="Chat\ChatChannels.cs" />
     <Compile Include="Chat\ChatHub.cs" />
     <Compile Include="Chat\Users.cs" />
+    <Compile Include="ForgetPassword.aspx.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPassword.aspx.designer.cs">
+      <DependentUpon>ForgetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

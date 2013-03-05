@@ -34,7 +34,7 @@
                     </div>
                     <div>
                         <input type="password" size="20" id="password" name="password" placeholder="Password" /><br />
-                        <a href="">Forgot Password?</a>
+                        <a href="ForgetPassword.aspx" target="_blank">Forgot Password?</a>
                     </div>
                     <div>
                         <button id="sign-in-button" type="submit">Sign In</button><br />
