@@ -56,9 +56,13 @@ function ChatUI($containingElement, chatDataSource) {
         var $contentDiv = $chatTabs.find(".content #" + channelName);
         $contentDiv.append("<div><strong>" + getTimeStamp() + " - " + encodedName + "</strong>:&nbsp;&nbsp;" + encodedMsg + "</div>");
 
-        $contentDiv.animate({
-            scrollTop: $contentDiv.find("div:last-child").offset().top
-        }, 250);
+        var lastChildDiv = $contentDiv.find("div:last-child");
+        var lastChildDivTop = lastChildDiv.offset().top;
+
+        var scrollTopValue = $contentDiv.height() + lastChildDivTop;       
+
+        var currentScrollValue = $contentDiv.scrollTop() + scrollTopValue;        
+        $contentDiv.scrollTop(currentScrollValue);
     };
 
     // called from data service when an updated user list is received from server.
