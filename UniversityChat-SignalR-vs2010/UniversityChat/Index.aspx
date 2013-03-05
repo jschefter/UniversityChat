@@ -39,7 +39,7 @@
                     <div>
                         <button id="sign-in-button" type="submit">Sign In</button><br />
                         <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform"
-                           target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Corn Bread Recipe" title="corn bread recipe" /></span></a>
+                           target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
                     </div>
                 </form>
                 <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
