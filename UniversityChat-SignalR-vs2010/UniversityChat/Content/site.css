@@ -251,9 +251,43 @@ a.boxclose {
     width:153px;
     height:150px;
     position:absolute;
-    top:0px;
-    left:0px;
-    background:#fff url(/content/overlay/clickme.png) no-repeat top left;
-    z-index:1;
-    cursor:pointer;
+    top: 0px;
+    left: 0px;
+    background: #fff url(/content/overlay/clickme.png) no-repeat top left;
+    z-index: 1;
+    cursor: pointer;
+}
+
+a.feedback  {
+    display: block;
+    text-decoration: none;
+    outline:none;
+    background-color: #FFF5EC;
+    text-align: center;
+}
+  
+.feedback{
+    position: relative;
+    z-index: 100;
+}
+  
+.feedback:hover{
+    background-color: transparent;
+}
+  
+.feedback span{
+    position: absolute;
+    right: 1px;
+    visibility: hidden;
+    text-decoration: none;
+}
+  
+.feedback span img{
+    border: none;
+}
+  
+.feedback:hover span{
+    visibility: visible;
+    top: 0;
+    right: 1px; 
 }
