@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     var chatDataSource = new ChatDataSource();
-    var chatUI = new ChatUI($(".chat-container"), chatDataSource);
+    var chatUI = new WebClientChatUI($(".chat-container"), chatDataSource);
 
     $("#login-form").submit(function () {
         // TODO: validate username & password here before starting hub...

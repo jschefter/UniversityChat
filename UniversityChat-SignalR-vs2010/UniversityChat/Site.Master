@@ -1,0 +1,128 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="UniversityChat.Site" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <link href="Content/site.css" rel="stylesheet" type="text/css" />
+    <link href="Content/south-street/jquery-ui-1.10.0.custom.min.css" rel="stylesheet" type="text/css" />
+    
+    <script src="Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
+    
+    <script src="Scripts/overlay.js" type="text/javascript"></script>
+    <script src="http://use.edgefonts.net/poiret-one.js"></script>  <!-- font: poiret-one -->
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><asp:HyperLink Text="University Chat" runat="server" NavigateUrl="~/Index.aspx"></asp:HyperLink></h1>
+            <div class="login-container">
+
+                <form action="" id="login-form">
+                    <div>
+                        <input type="text" size="20" id="username" name="username" placeholder="Username" /><br />
+                        <a href="Register.aspx">Sign Up</a>
+                    </div>
+                    <div>
+                        <input type="password" size="20" id="password" name="password" placeholder="Password" /><br />
+                        <a href="">Forgot Password?</a>
+                    </div>
+                    <div>
+                        <button id="sign-in-button" type="submit">Sign In</button><br />
+                        <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform"
+                           target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
+                    </div>
+                </form>
+                <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
+            </div>
+        </header>
+        <form id="ContentForm" runat="server">
+            <div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
+        
+        <footer class="footer">
+            <a id="about" style="cursor: pointer; color: crimson;">About</a> |
+            <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
+            <a href="https://github.com/jschefter/universitychat" style="color: darksalmon;" target="_blank">Github</a> |
+            <a id="help" style="cursor: pointer; color: #8fbc8f;">Help</a>
+        </footer>
+    </div>
+
+    <!-- The overlays -->
+    <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
+    <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
+    
+    <!-- Description Boxes -->
+    <div class="menu" id="boxMenu">
+        <h1 id="aboutOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">About</h1>
+        <h1 id="privacyOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">Privacy & Terms</h1>
+        <h1 id="helpOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">Help</h1>
+    </div>
+
+    <div class="box" id="signUpBox">
+        <h1>University Chat Registration Form</h1>
+    </div>
+    <div class="box" id="welcomeBox">
+        <a class="boxclose" id="boxclose"></a>
+        <h1>Welcome</h1>
+        <p>
+            Welcome to University Chat!
+        </p>
+    </div>
+
+    <div class="box" id="aboutBox">
+        <a class="boxclose" id="boxclose2"></a>
+        <h1>About University Chat</h1>
+        <p>
+            University Chat was developed to ...
+        </p>
+    </div>
+
+    <div class="box" id="privacyBox">
+        <a class="boxclose" id="boxclose3"></a>
+        <h1>Privacy & Terms</h1>
+        <p>
+            Privacy Page
+        </p>
+    </div>
+    
+    <div class="box" id="helpBox">
+        <a class="boxclose" id="boxclose4"></a>
+        <h1>Help</h1>
+        <p id="publicChannel" style="cursor: pointer; color: mediumslateblue;">How to create a public channel</p>
+        <p id="privateChannel" style="cursor: pointer; color: mediumvioletred;">How to create a private channel</p>
+        <p id="privateChannelCommands" style="cursor: pointer; color: mediumturquoise;">Private channel commands</p>
+    </div>
+    
+    <div class="box" id="publicChannelBox">
+        <a class="boxclose" id="boxclose5"></a>
+        <h1>How to create a public channel</h1>
+        <p>1. Do this</p>
+        <p>2. Do that</p>
+        <p id="previous" style="cursor: pointer; color: crimson">Go to previous</p>
+    </div>
+    
+    <div class="box" id="privateChannelBox">
+        <a class="boxclose" id="boxclose6"></a>
+        <h1>How to create a private channel</h1>
+        <p>1. Do this</p>
+        <p>2. Do that</p>
+        <p id="previous2" style="cursor: pointer; color: crimson">Go to previous</p>
+    </div>
+    
+    <div class="box" id="privateChannelCommandsBox">
+        <a class="boxclose" id="boxclose7"></a>
+        <h1>Private channel commands</h1>
+        <p>Kick</p>
+        <p>Invite</p>
+        <p>Delegate</p>
+        <p id="previous3" style="cursor: pointer; color: crimson">Go to previous</p>
+    </div>
+</body>
+</html>
