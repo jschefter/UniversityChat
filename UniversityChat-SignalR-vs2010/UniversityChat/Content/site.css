@@ -178,7 +178,7 @@ body {
 
 .box {
     position:fixed;
-    top:-200px;
+    top:200px;
     left:30%;
     right:30%;
     background-color:#fff;
@@ -191,6 +191,37 @@ body {
     -moz-box-shadow: 0 1px 5px #333;
     -webkit-box-shadow: 0 1px 5px #333;
     z-index:101;
+    visibility: hidden;
+}
+
+.menu {
+    position:fixed;
+    top:200px;
+    left:15%;
+    background-color:#fff;
+    color:#7F7F7F;
+    padding:20px;
+    border:2px solid #ccc;
+    -moz-border-radius: 20px;
+    -webkit-border-radius:20px;
+    -khtml-border-radius:20px;
+    -moz-box-shadow: 0 1px 5px #333;
+    -webkit-box-shadow: 0 1px 5px #333;
+    z-index:100;
+    visibility: hidden;
+}
+
+.menu h1 {
+    border-bottom: 1px dashed #7F7F7F;
+    margin:-20px -20px 0px -20px;
+    padding:20px;
+    background-color:#FFEFEF;
+    color:#0000ff;
+    -moz-border-radius:20px 20px 0px 0px;
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-top-right-radius: 20px;
+    -khtml-border-top-left-radius: 20px;
+    -khtml-border-top-right-radius: 20px;
 }
 
 a.boxclose {

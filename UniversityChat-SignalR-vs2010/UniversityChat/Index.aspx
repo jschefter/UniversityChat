@@ -94,6 +94,12 @@
     <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
     
     <!-- Description Boxes -->
+    <div class="menu" id="boxMenu">
+        <h1 id="aboutOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">About</h1>
+        <h1 id="privacyOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">Privacy & Terms</h1>
+        <h1 id="helpOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">Help</h1>
+    </div>
+
     <div class="box" id="signUpBox">
         <h1>University Chat Registration Form</h1>
 
