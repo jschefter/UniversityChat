@@ -1,4 +1,4 @@
-﻿<%@ Page Title="University Chat" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="UniversityChat.NewIndex" %>
+﻿<%@ Page Title="University Chat" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="UniversityChat.Index" %>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="head" runat="server">
     <script src="Scripts/jquery.signalR-1.0.1.min.js" type="text/javascript"></script>

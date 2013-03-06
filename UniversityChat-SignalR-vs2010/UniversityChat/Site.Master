@@ -19,38 +19,41 @@
     <div class="container">
         <header class="header">
             <h1><asp:HyperLink Text="University Chat" runat="server" NavigateUrl="~/Index.aspx"></asp:HyperLink></h1>
+            <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
             <div class="login-container">
 
                 <form action="" id="login-form">
                     <div>
                         <input type="text" size="20" id="username" name="username" placeholder="Username" /><br />
-                        <a href="Register.aspx">Sign Up</a>
+                        <!--<a href="Register.aspx">Sign Up</a>-->
                     </div>
+                    <!--
                     <div>
                         <input type="password" size="20" id="password" name="password" placeholder="Password" /><br />
-                        <a href="">Forgot Password?</a>
+                        <asp:HyperLink Text="Forgot Password?" runat="server" NavigateUrl="~/ForgetPassword.aspx"></asp:HyperLink>
                     </div>
+                    -->
                     <div>
                         <button id="sign-in-button" type="submit">Sign In</button><br />
-                        <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform"
-                           target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
+                    </div>
+                    <div class="feedback-container">
+                        <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
                     </div>
                 </form>
-                <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
             </div>
         </header>
         <form id="ContentForm" runat="server">
-            <div>
+            <div class="mainContent">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </form>
         
         <footer class="footer">
-            <a id="about" style="cursor: pointer; color: crimson;">About</a> |
-            <a id="privacy" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
-            <a href="https://github.com/jschefter/universitychat" style="color: darksalmon;" target="_blank">Github</a> |
-            <a id="help" style="cursor: pointer; color: #8fbc8f;">Help</a>
+            <a id="about"title="Learn about University Chat" style="cursor: pointer; color: crimson;">About</a> |
+            <a id="privacy" title="View Privacy and Usage Terms" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
+            <a href="https://github.com/jschefter/universitychat" title="View our project source on GitHub" style="color: darksalmon;" target="_blank">Github</a> |
+            <a id="help" title="Get help for University Chat" style="cursor: pointer; color: #8fbc8f;">Help</a>
         </footer>
     </div>
 

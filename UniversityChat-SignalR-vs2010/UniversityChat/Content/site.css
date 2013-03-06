@@ -17,7 +17,7 @@ body {
 
 .container {
     width: 80%;
-    margin: auto;
+    margin: 10px auto;
     border: 2px solid black;
     border-radius: 5px;
     text-align: left;
@@ -34,6 +34,10 @@ body {
     padding: 10px;
 }
 
+.mainContent {
+    min-height: 400px;
+}
+
 .footer {
     padding: 25px;
     text-align: center;
@@ -43,17 +47,21 @@ body {
     text-decoration: none;
 }
 
-.header h1 a {
-    color: White;
+.header h1 {
+    display: inline-block;
     font-size: 50px;
     font-family: poiret-one;
-    text-decoration: none;
     text-shadow: #333 3px 3px 5px;
 }
 
 .header a {
-    color: #333;
+    color:White;
     text-decoration: none;
+}
+
+.header #connected-users {
+    margin-left:10px;
+    display: inline-block;
 }
 
 .login-container {
@@ -64,6 +72,12 @@ body {
 
 .login-container div {
     display: inline-block;
+    vertical-align: top;
+}
+
+#connected-users {
+    display: inline-block;
+    color: White;
 }
 
 .chat-container {
@@ -258,17 +272,17 @@ a.boxclose {
     cursor: pointer;
 }
 
+.login-container .feedback-container {
+    display: block;
+    position: relative;
+}
+
 a.feedback  {
     display: block;
     text-decoration: none;
     outline:none;
-    background-color: #FFF5EC;
-    text-align: center;
-}
-  
-.feedback{
-    position: relative;
-    z-index: 100;
+    font-size: 16pt;
+    text-align: right;
 }
   
 .feedback:hover{
@@ -280,6 +294,9 @@ a.feedback  {
     right: 1px;
     visibility: hidden;
     text-decoration: none;
+    z-index: 100;
+    border: 1px solid black;
+    background-color: White;
 }
   
 .feedback span img{
