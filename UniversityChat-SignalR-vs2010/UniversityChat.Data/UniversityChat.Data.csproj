@@ -43,6 +43,7 @@
     <Compile Include="DataAccess\GenericDataAccess.cs" />
     <Compile Include="DataAccess\UniversityChatConfiguration.cs" />
     <Compile Include="DataHelpers\ClassQueries.cs" />
+    <Compile Include="DataHelpers\HistoryLogQueries.cs" />
     <Compile Include="DataHelpers\LogQueries.cs" />
     <Compile Include="DataHelpers\RoomUsersQueries.cs" />
     <Compile Include="DataHelpers\RoleQueries.cs" />
