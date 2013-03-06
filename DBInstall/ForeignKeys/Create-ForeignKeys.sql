@@ -21,11 +21,11 @@ ALTER TABLE [UniversityChat].[RoomUsers]
 	REFERENCES [UniversityChat].[Rooms](RoomId)
 	
 ALTER TABLE [UniversityChat].[History]  
-	ADD CONSTRAINT FK_History_Sessions
-	FOREIGN KEY([SessionId])
-	REFERENCES [UniversityChat].[Sessions](SessionId)
+	ADD CONSTRAINT FK_History_Rooms
+	FOREIGN KEY([RoomId])
+	REFERENCES [UniversityChat].[Rooms](RoomId)
 
 ALTER TABLE [UniversityChat].[History]  
 	ADD CONSTRAINT FK_History_Users
-	FOREIGN KEY([SenderId])
+	FOREIGN KEY([UserId])
 	REFERENCES [UniversityChat].[Users](UserId)
