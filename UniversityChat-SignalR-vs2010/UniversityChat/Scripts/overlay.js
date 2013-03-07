@@ -135,6 +135,9 @@
 
     // About option
     $('#aboutOption').click(function () {
+        $('#publicChannelBox').css('visibility', 'hidden');
+        $('#privateChannelBox').css('visibility', 'hidden');
+        $('#privateChannelCommandsBox').css('visibility', 'hidden');
         $('#helpBox').css('visibility', 'hidden');
         $('#privacyBox').css('visibility', 'hidden');
         $('#aboutBox').css('visibility', 'visible');
@@ -142,6 +145,9 @@
 
     // Privacy option
     $('#privacyOption').click(function () {
+        $('#publicChannelBox').css('visibility', 'hidden');
+        $('#privateChannelBox').css('visibility', 'hidden');
+        $('#privateChannelCommandsBox').css('visibility', 'hidden');
         $('#aboutBox').css('visibility', 'hidden');
         $('#helpBox').css('visibility', 'hidden');
         $('#privacyBox').css('visibility', 'visible');
@@ -149,6 +155,9 @@
 
     // Help option
     $('#helpOption').click(function () {
+        $('#publicChannelBox').css('visibility', 'hidden');
+        $('#privateChannelBox').css('visibility', 'hidden');
+        $('#privateChannelCommandsBox').css('visibility', 'hidden');
         $('#aboutBox').css('visibility', 'hidden');
         $('#privacyBox').css('visibility', 'hidden');
         $('#helpBox').css('visibility', 'visible');
