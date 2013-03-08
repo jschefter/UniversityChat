@@ -102,6 +102,7 @@
         });
     });
     $('#boxclose6').click(function () {
+        $('#boxMenu').fadeOut('fast');
         $('#privateChannelBox').fadeOut('fast', function () {
             $('#privateChannelBox').hide(); ;
             $('#privateChannelBox').css('top', '200px');
@@ -125,6 +126,7 @@
         });
     });
     $('#boxclose7').click(function () {
+        $('#boxMenu').fadeOut('fast');
         $('#privateChannelCommandsBox').fadeOut('fast', function () {
             $('#privateChannelCommandsBox').hide();
             $('#privateChannelCommandsBox').css('top', '200px');
