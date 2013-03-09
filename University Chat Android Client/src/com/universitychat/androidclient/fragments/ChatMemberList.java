@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class ChatMemberList extends Fragment
 {
 	public ListView memberList;
-	public String[] chatMemberArray = {};//{"Loading..."};
+	private String[] chatMemberArray = {};//{"Loading..."};
 	private TextView numUsers;
 	
 	@Override
@@ -27,10 +27,10 @@ public class ChatMemberList extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	View v = inflater.inflate(R.layout.fragment_chat_member_list, container,false);
-    	memberList = (ListView)v.findViewById(R.id.list);
-    	memberList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, chatMemberArray));
+    	memberList = (ListView) v.findViewById(R.id.member_list);
     	numUsers = (TextView) v.findViewById(R.id.textView_num_users);
-        
+    	
+    	memberList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, chatMemberArray));
         return v;
     }
 	
@@ -42,9 +42,14 @@ public class ChatMemberList extends Fragment
 	
 	public void setChatMemberList(String[] newMemberList)
 	{
-		memberList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, newMemberList));
+		System.out.println("setChatMemberList called");
+		for(int i = 0; i < newMemberList.length; i++)
+			System.out.println(newMemberList[i]);
+		
+		chatMemberArray = newMemberList;
+		memberList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, chatMemberArray));
+		//memberList.invalidate();
 		numUsers.setText(Integer.toString(newMemberList.length));
-		//numUsers.setText("11");
 	}
 }
 

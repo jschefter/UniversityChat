@@ -4,6 +4,7 @@ import com.universitychat.androidclient.ChatActivity;
 import com.universitychat.androidclient.R;
 import com.universitychat.androidclient.ChatActivity.OutgoingWebEvents;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -61,6 +62,8 @@ public class ChatRoomList extends Fragment
 				// user clicked on a channel.
 				String roomName = (String)publicList.getAdapter().getItem(position);
 				outgoingWebEvents.joinChannel(roomName);
+				//ChatActivity parenActivity = (ChatActivity)getActivity();
+				ChatRoom.setChatRoomName(publicRooms[position]);
 			}
 		});
     	

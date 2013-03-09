@@ -6,6 +6,12 @@
               android:layout_height="fill_parent" >
 
     <TextView
+        android:id="@+id/textView_chat_room_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+
+    <TextView
         android:id="@+id/textViewChat"
         android:layout_width="fill_parent"
         android:layout_height="630dp"
@@ -39,15 +45,6 @@
             android:text="@string/send_btn" />
 
     </LinearLayout>
-
-    
-
-    <Button
-        android:id="@+id/buttonExit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="killApp"
-        android:text="@string/exit_btn" />
     
 
     <WebView

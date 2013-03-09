@@ -2,35 +2,41 @@ package com.universitychat.androidclient;
 
 import java.util.Vector;
 
-import com.universitychat.androidclient.fragments.ChatMemberList;
-import com.universitychat.androidclient.fragments.ChatRoom;
-import com.universitychat.androidclient.fragments.ChatRoomList;
-
+//import android.R;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.universitychat.androidclient.fragments.ChatMemberList;
+import com.universitychat.androidclient.fragments.ChatRoom;
+import com.universitychat.androidclient.fragments.ChatRoomList;
 
 
 public class ChatActivity extends FragmentActivity
 {
-	private final String URL = "http://universitychat.azurewebsites.net/Android.html";
-    private WebView webView;
     private final Handler chatWindowActivityHandler = new Handler();
-
-
+    private final String DEFAULT_HOST = "http://universitychat.azurewebsites.net/Android.html";
+    private final String FEEDBACK_URL = "https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform";
+    private final int ROOMLIST_FRAGMENT = 0;
+    private final int CHATROOM_FRAGMENT = 1;
+    private final int MEMBERLIST_FRAGMENT = 2;
+    private WebView webView;
     private String username;
     private String password;
     private String currentChannel;
@@ -38,9 +44,9 @@ public class ChatActivity extends FragmentActivity
     private FragmentManager fragmentManager;
     private MyViewPagerAdapter pagerAdapter;
     private OutgoingWebEvents outgoingWebEvents;
-    private final int ROOMLIST_FRAGMENT = 0;
-    private final int CHATROOM_FRAGMENT = 1;
-    private final int MEMBERLIST_FRAGMENT = 2;
+    private String URL;
+    private AlertDialog.Builder builder;
+	private AlertDialog dialog;
 
     /**
      * Called when the activity is first created.
@@ -55,12 +61,15 @@ public class ChatActivity extends FragmentActivity
         
         Bundle extras = getIntent().getExtras();
         String[] userCredentials = extras.getStringArray("user_credentials");
+        URL = extras.getString("newHostURL");
         username = userCredentials[0];
         password = userCredentials[1];
         currentChannel = "";
         
-        initializeWebView();
+        if(URL == null) //new host not provided by user, connect to default host
+        	URL = DEFAULT_HOST;
         
+        initializeWebView();
         
         /** Getting a reference to the ViewPager defined the layout file */
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -84,7 +93,6 @@ public class ChatActivity extends FragmentActivity
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoomList.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoom.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatMemberList.class.getName()));
-        	
         }
          
         /** Instantiating FragmentPagerAdapter */
@@ -98,6 +106,127 @@ public class ChatActivity extends FragmentActivity
         
         webView.loadUrl(URL);	// connect to service (start the hub).
     }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_chat, menu);
+		return true;
+	}
+    
+  //Handle event handling for individual menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+ 
+        switch (item.getItemId())
+        {
+        	case R.id.menu_chat_about:
+        		builder = new AlertDialog.Builder(this);
+        		builder.setTitle(R.string.about_title);
+        		builder.setMessage(R.string.about_content);
+        		builder.setPositiveButton(R.string.prompt_close, new DialogInterface.OnClickListener() {
+        	           public void onClick(DialogInterface dialog, int id) {
+        	               dialog.cancel();
+        	           }});
+        	       
+        		dialog = builder.create();
+        		
+        		dialog.show();
+        		return true;
+        		
+        	case R.id.menu_create_channel:
+        		builder = new AlertDialog.Builder(this);
+        		LayoutInflater layInf =LayoutInflater.from(this);
+                View view = layInf.inflate(R.layout.edit_text, null);
+                final TextView editText = (TextView) view.findViewById(R.id.editText_change_host);
+                
+                builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+     	           public void onClick(DialogInterface dialog, int id) {
+     	               outgoingWebEvents.createChannel(editText.getText().toString());
+     	           }});
+     	       
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+      	           public void onClick(DialogInterface dialog, int id) {
+      	               dialog.cancel();
+      	           }});
+      	       
+                builder.setView(view);
+        		builder.setTitle(R.string.menu_change_host);
+        		builder.setCancelable(true);
+        		dialog = builder.create();
+        		dialog.setCancelable(true); //cancelable by back button
+        		dialog.setCanceledOnTouchOutside(false); //non-cancelable by click outside
+        		dialog.show();
+        		return true;
+ 
+        	//Temporary for debug
+        	case R.id.menu_remove_channel:
+        		builder = new AlertDialog.Builder(this);
+        		LayoutInflater layInf2 =LayoutInflater.from(this);
+                View view2 = layInf2.inflate(R.layout.edit_text, null);
+                final TextView editText2 = (TextView) view2.findViewById(R.id.editText_change_host);
+                
+                builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+     	           public void onClick(DialogInterface dialog, int id) {
+     	               outgoingWebEvents.deleteChannel(editText2.getText().toString());
+     	           }});
+     	       
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+      	           public void onClick(DialogInterface dialog, int id) {
+      	               dialog.cancel();
+      	           }});
+      	       
+                builder.setView(view2);
+        		builder.setTitle(R.string.menu_change_host);
+        		builder.setCancelable(true);
+        		dialog = builder.create();
+        		dialog.setCancelable(true); //cancelable by back button
+        		dialog.setCanceledOnTouchOutside(false); //non-cancelable by click outside
+        		dialog.show();
+        		return true;
+        		
+        	case R.id.menu_feedback:
+        		builder = new AlertDialog.Builder(this);
+        		builder.setTitle(R.string.menu_feedback);
+        		builder.setMessage(R.string.prompt_feedback_redirection);
+        		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        	           public void onClick(DialogInterface dialog, int id) {
+        	        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FEEDBACK_URL));
+        	        		startActivity(browserIntent);
+        	           }});
+        		
+        		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+     	           public void onClick(DialogInterface dialog, int id) {
+     	               dialog.cancel();
+     	           }});
+        	       
+        		dialog = builder.create();
+        		dialog.setCancelable(true); //cancelable by back button
+        		dialog.setCanceledOnTouchOutside(false); //non-cancelable by click outside
+        		dialog.show();
+        		
+        		return true;
+        	
+        	case R.id.menu_sign_out:
+        		Toast.makeText(getApplicationContext(), "To be implemented when user feature is ready.", Toast.LENGTH_SHORT).show();
+        		return true;
+        		
+        	//Temporary for debug	
+        	case R.id.menu_kill_app:
+        		// leave current channel...
+        		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+            	webView.loadUrl(leaveChannelUrl);
+            	
+            	//destroy this activity
+            	this.finish();
+        		return true;
+        		
+        	default:
+        		return super.onOptionsItemSelected(item);
+        }
+    } 
     
     private void jumpToChat()
     {
@@ -158,17 +287,6 @@ public class ChatActivity extends FragmentActivity
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(incommingWebEvents, "Android");
     }        
-    
-    //method only for debugging, will be removed in beta release
-    public void killApp(View view)
-    {
-    	// leave current channel...
-		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
-    	webView.loadUrl(leaveChannelUrl);
-    	
-    	//destroy this activity
-    	this.finish();
-    }
 
     public OutgoingWebEvents getOutgoingWebEvents()
     {

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 public class ChatRoom extends Fragment
@@ -20,6 +21,7 @@ public class ChatRoom extends Fragment
 	private EditText editMessage;
     private Button buttonSendMessage;
     private TextView textViewChat;
+    private static TextView textChatRoomName;
     private OutgoingWebEvents outgoingWebEvents;
 
 	@Override
@@ -48,7 +50,6 @@ public class ChatRoom extends Fragment
 		{
 			textViewChat.append(formattedMessage);
 			
-			//james code to test
 			final int offset = 
             		textViewChat.getLayout().getLineTop(textViewChat.getLineCount())  - textViewChat.getHeight();
 
@@ -57,6 +58,12 @@ public class ChatRoom extends Fragment
 		}
 		else
 			System.out.println("textViewChat variable is null");		
+	}
+	
+	protected static void setChatRoomName(String chatRoomName)
+	{
+		textChatRoomName.setText(chatRoomName);
+		
 	}
 	
 	public void clearChatTextView()
@@ -90,6 +97,7 @@ public class ChatRoom extends Fragment
         editMessage = (EditText)v.findViewById(R.id.editChatMessage);
         buttonSendMessage = (Button)v.findViewById(R.id.buttonSendMessage);
         textViewChat = (TextView)v.findViewById(R.id.textViewChat);
+        textChatRoomName = (TextView)v.findViewById(R.id.textView_chat_room_header);
         textViewChat.setMovementMethod(new ScrollingMovementMethod());
         
         buttonSendMessage.setOnClickListener(new View.OnClickListener() 
