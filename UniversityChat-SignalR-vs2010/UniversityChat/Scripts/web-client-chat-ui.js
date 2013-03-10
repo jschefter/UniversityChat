@@ -35,7 +35,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
     this.HubStartDone = function () {
         $addChannelButton.removeAttr("disabled");
         $removeChannelButton.removeAttr("disabled");
-        userName = $("#username").val();
+        userName = $(".username").html();
     };
 
     function getTimeStamp() {
@@ -155,7 +155,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
         $("#connected-users span").html(userCount);
     };
 
-    $("#ContentForm").submit(function (event) {
+    $("#PageForm").submit(function (event) {
         event.stopPropagation();
 
         var message = $messageInput.val();
@@ -170,7 +170,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
     });
 
     $addChannelButton.click(function (event) {
-        console.log(event);
+        //console.log(event);
 
         var channelName = window.prompt("Name of channel to create");
 
@@ -183,6 +183,8 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 chatDataSource.CreateChannel(channelName);
             }
         }
+
+        return false;
     });
 
     $removeChannelButton.click(function () {

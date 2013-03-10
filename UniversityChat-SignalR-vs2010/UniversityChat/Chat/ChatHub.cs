@@ -25,7 +25,7 @@ namespace UniversityChat.Chat
         public override Task OnDisconnected()
         {
             Guid connectionIdGuid = Guid.Parse(Context.ConnectionId);
-            User user = Users.GetUserByConnectionId(connectionIdGuid);
+            User user = Users.GetConnectedUserByConnectionId(connectionIdGuid);
             ICollection<string> channelsUserWasIn = ChatChannels.GetRoomNamesThatUserIsConnectedTo(user);
 
             foreach (string channelName in channelsUserWasIn)
@@ -54,7 +54,7 @@ namespace UniversityChat.Chat
         public void SetUsername(string userName)
         {
             Guid connectionIdGuid = Guid.Parse(Context.ConnectionId);
-            Users.AddUser(connectionIdGuid, userName);
+            Users.AddConnectedUser(connectionIdGuid, userName);
             Clients.All.setConnectedUserCount(Users.CountOfConnectedUsers);
 
             logSetUsername(Context, userName);
@@ -62,7 +62,7 @@ namespace UniversityChat.Chat
 
         public void JoinChannel(string channelName)
         {
-            User user = Users.GetUserByConnectionId(Guid.Parse(Context.ConnectionId));
+            User user = Users.GetConnectedUserByConnectionId(Guid.Parse(Context.ConnectionId));
             ChatChannels.AddUserToRoom(channelName, user);
             Groups.Add(Context.ConnectionId, channelName);
 
@@ -76,7 +76,7 @@ namespace UniversityChat.Chat
         public void LeaveChannel(string channelName)
         {
             Guid connectionIdGuid = Guid.Parse(Context.ConnectionId);
-            User user = Users.GetUserByConnectionId(connectionIdGuid);
+            User user = Users.GetConnectedUserByConnectionId(connectionIdGuid);
 
             ChatChannels.RemoveUserFromRoom(channelName, user);
             Groups.Remove(Context.ConnectionId, channelName);
@@ -90,7 +90,7 @@ namespace UniversityChat.Chat
         public void Send(string channelName, string message)
         {
             Guid connectionIdGuid = Guid.Parse(Context.ConnectionId);
-            User user = Users.GetUserByConnectionId(connectionIdGuid);
+            User user = Users.GetConnectedUserByConnectionId(connectionIdGuid);
             Clients.Group(channelName).broadcastMessageToChat(channelName, user.NickName, message);
 
             logSendMessage(Context, user, channelName, message);

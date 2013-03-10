@@ -10,6 +10,7 @@
 </asp:Content>
 
 <asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Label runat="server" ID="UserName" CssClass="username"></asp:Label>
     <div class="chat-container">
         
         <div class="active-chat">
@@ -28,10 +29,9 @@
                         <input type="file" id="myFile" name="myFile" />
                         <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" />
                     </form>--%>
-                    <div action="" id="chat-input">
+                    <div id="chat-input">
                         <input type="text" id="message" disabled="disabled"  />
                         <input type="submit" id="sendmessage" value="Send" disabled="disabled" />
-                        <input type="hidden" id="displayname" />
                     </div>
                 </div>
             </div>

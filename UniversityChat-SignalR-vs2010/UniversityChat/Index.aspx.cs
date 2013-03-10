@@ -11,7 +11,15 @@ namespace UniversityChat
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Request.IsAuthenticated)
+            {
+                UserName.Visible = true;
+                UserName.Text = Page.User.Identity.Name;
+            }
+            else
+            {
+                UserName.Visible = false;
+            }
         }
     }
 }

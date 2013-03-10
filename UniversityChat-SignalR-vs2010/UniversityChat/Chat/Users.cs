@@ -12,21 +12,14 @@ namespace UniversityChat.Chat
         private static UsersRepository usersRepository = new UsersRepository();
         private static Dictionary<Guid, string> connectedUsers = new Dictionary<Guid, string>();    // this maps connectionId to username for currently connected users.
 
-        internal static void AddUser(Guid connectionId, string userName)
+        internal static void AddConnectedUser(Guid connectionId, string userName)
         {
-            User newUser = new User(userName, "bogus-password");
-
-            usersRepository.Create(newUser);
             connectedUsers.Add(connectionId, userName);
         }
 
         internal static void RemoveUser(Guid connectionId)
         {
             string userName = GetUserName(connectionId);
-
-            User existingUser = new User(userName, "bogus-password");
-            usersRepository.Delete(existingUser);
-
             connectedUsers.Remove(connectionId);
         }
         
@@ -37,7 +30,7 @@ namespace UniversityChat.Chat
             return username;
         }
 
-        internal static User GetUserByConnectionId(Guid guid)
+        internal static User GetConnectedUserByConnectionId(Guid guid)
         {
             string userName = GetUserName(guid);
             User user = usersRepository.GetByName(userName);
@@ -57,6 +50,23 @@ namespace UniversityChat.Chat
             {
                 return connectedUsers.Count;
             }
+        }
+
+        internal static bool AuthenticateUser(User user)
+        {
+            bool authentic = false;
+
+            if (user.AuthenticateUser(usersRepository.GetByName(user.NickName)))
+            {
+                return true;
+            }
+
+            return authentic;
+        }
+
+        internal static bool CreateUser(User newUser)
+        {
+            return usersRepository.Create(newUser);
         }
     }
 }

@@ -12,42 +12,31 @@
     <script src="Scripts/overlay.js" type="text/javascript"></script>
     <script src="http://use.edgefonts.net/poiret-one.js"></script>  <!-- font: poiret-one -->
 
-    <asp:ContentPlaceHolder id="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder id="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <div class="container">
+    <form runat="server" id="PageForm">
         <header class="header">
             <h1><asp:HyperLink Text="University Chat" runat="server" NavigateUrl="~/Index.aspx"></asp:HyperLink></h1>
-            <div id="connected-users"># of Connected users: <span><%=userCount %></span></div>
-            <div class="login-container">
-
-                <form action="" id="login-form">
-                    <div>
-                        <input type="text" size="20" id="username" name="username" placeholder="Username" /><br />
-                        <!--<a href="Register.aspx">Sign Up</a>-->
-                    </div>
-                    <!--
-                    <div>
-                        <input type="password" size="20" id="password" name="password" placeholder="Password" /><br />
-                        <asp:HyperLink Text="Forgot Password?" runat="server" NavigateUrl="~/ForgetPassword.aspx"></asp:HyperLink>
-                    </div>
-                    -->
-                    <div>
-                        <button id="sign-in-button" type="submit">Sign In</button><br />
-                    </div>
-                    <div class="feedback-container">
-                        <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
-                    </div>
-                </form>
+            <div id="connected-users"># of Chatting users: <span><%=userCount %></span></div>
+            <asp:LoginView ID="LoginView" runat="server">
+                <LoggedInTemplate>
+                    <asp:LoginName ID="LoginName" runat="server" />
+                    <asp:HyperLink runat="server" ID="LinkToLogout" NavigateUrl="~/Logout.aspx" Text="Logout"></asp:HyperLink>
+                </LoggedInTemplate>
+                <AnonymousTemplate>
+                    <asp:HyperLink runat="server" ID="LinkToLogin" NavigateUrl="~/Login.aspx" Text="Login"></asp:HyperLink>
+                </AnonymousTemplate>
+            </asp:LoginView>
+            <div class="feedback-container">
+                <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
             </div>
         </header>
-        <form id="ContentForm" runat="server">
-            <div class="mainContent">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-        </form>
+        
+        <div class="mainContent">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
         
         <footer class="footer">
             <a id="about"title="Learn about University Chat" style="cursor: pointer; color: crimson;">About</a> |
@@ -55,8 +44,9 @@
             <a href="https://github.com/jschefter/universitychat" title="View our project source on GitHub" style="color: darksalmon;" target="_blank">Github</a> |
             <a id="help" title="Get help for University Chat" style="cursor: pointer; color: #8fbc8f;">Help</a>
         </footer>
+    </form>
     </div>
-
+    
     <!-- The overlays -->
     <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
     <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>

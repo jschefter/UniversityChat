@@ -22,14 +22,14 @@ namespace UniversityChat.Model
         }
 
         public User(string USER_NAME, string PASSWORD, 
-            string FIRST_NAME = "firstName", string LAST_NAME = "lastName" 
+            string FIRST_NAME = "firstName", string LAST_NAME = "lastName", string EMAIL = null
             )
         {
             NickName = USER_NAME;
             RoleId = (int)Roles.User;
             FName = FIRST_NAME;
             LName = LAST_NAME;
-            EmailAddress = Guid.NewGuid().ToString();
+            EmailAddress = (EMAIL != null) ? EMAIL : Guid.NewGuid().ToString();
             PasswordHash = RetrievePasswordHash(PASSWORD);
             Id = Guid.Empty;
         }
@@ -45,12 +45,35 @@ namespace UniversityChat.Model
         string RetrievePasswordHash(string PASSWORD)
         {
             // TODO: THIS, also get the salt value from DB
-            return null;
+            return PASSWORD;
         }
 
         public bool VerifyAll()
         {
             // this should probably return an index for the user ID
+            return true;
+        }
+
+        public bool AuthenticateUser(User otherUser)
+        {
+            if (otherUser == null)
+            {
+                // didn't find a record in DB
+                return false;
+            }
+
+            if (!this.NickName.Equals(otherUser.NickName))
+            {
+                return false;
+            }
+
+            // we don't store passwords right now...
+            //if (this.PasswordHash != otherUser.PasswordHash)
+            //{
+            //    return false;
+            //}
+
+            // got through all checks, users have same login info...
             return true;
         }
     }

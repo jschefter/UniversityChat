@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+.username {
+    display: none;
+}
+
 body, div, p, h1, h4, ul {
     margin: 0px;
     padding: 0px;
@@ -17,7 +21,7 @@ body {
 
 .container {
     width: 80%;
-    margin: auto;
+    margin: 10px auto;
     border: 2px solid black;
     border-radius: 5px;
     text-align: left;

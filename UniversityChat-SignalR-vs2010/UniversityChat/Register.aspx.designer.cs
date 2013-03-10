@@ -13,6 +13,15 @@ namespace UniversityChat {
     public partial class Register {
         
         /// <summary>
+        /// PanelRegisterUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelRegisterUser;
+        
+        /// <summary>
         /// UsernameLabel control.
         /// </summary>
         /// <remarks>
@@ -121,21 +130,66 @@ namespace UniversityChat {
         protected global::System.Web.UI.WebControls.TextBox TextLastName;
         
         /// <summary>
-        /// buttonSubmit control.
+        /// InvalidMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonSubmit;
+        protected global::System.Web.UI.WebControls.Label InvalidMessage;
         
         /// <summary>
-        /// buttonCancel control.
+        /// UserExistsMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonCancel;
+        protected global::System.Web.UI.WebControls.Label UserExistsMessage;
+        
+        /// <summary>
+        /// PanelUserRegistered control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelUserRegistered;
+        
+        /// <summary>
+        /// Username control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Username;
+        
+        /// <summary>
+        /// LinkToIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink LinkToIndex;
+        
+        /// <summary>
+        /// PanelUserAuthenticated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelUserAuthenticated;
+        
+        /// <summary>
+        /// HyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
     }
 }
