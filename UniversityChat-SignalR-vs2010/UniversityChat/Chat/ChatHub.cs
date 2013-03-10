@@ -98,7 +98,7 @@ namespace UniversityChat.Chat
             History historyItem = new History() { ConnectionId = connectionIdGuid, RoomId = roomId, LogDateTimeStamp = DateTime.Now, UserId = user.Id, Text = message};
             history.Create(historyItem);
 
-            logSendMessage(Context, user, channelName, message);
+            logSendMessage(Context, user, channelName);
         }
 
         public void GetChannelList()
@@ -176,13 +176,11 @@ namespace UniversityChat.Chat
         }
 
 
-        private void logSendMessage(HubCallerContext Context, User user, string channelName, string message)
+        private void logSendMessage(HubCallerContext Context, User user, string channelName)
         {
             StringBuilder logMessage = new StringBuilder();
             logMessage.Append("sent message to channel: ");
             logMessage.Append(channelName);
-            logMessage.Append(", ");
-            logMessage.Append(message);
 
             logEvent(Guid.Parse(Context.ConnectionId), user.Id, logMessage.ToString());
         }
