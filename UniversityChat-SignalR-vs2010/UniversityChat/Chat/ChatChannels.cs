@@ -146,5 +146,10 @@ namespace UniversityChat.Chat
 
             return result;
         }
+
+        internal static Guid GetRoomByName(string channelName)
+        {
+            return rooms.GetGuidByName(channelName);
+        }
     }
 }

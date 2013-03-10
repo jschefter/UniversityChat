@@ -14,6 +14,7 @@ namespace UniversityChat.Chat
     public class ChatHub : Hub
     {
         private LogRepository log = new LogRepository();
+        private HistoryRepository history = new HistoryRepository();
 
         public override Task OnConnected()
         {
@@ -92,6 +93,10 @@ namespace UniversityChat.Chat
             Guid connectionIdGuid = Guid.Parse(Context.ConnectionId);
             User user = Users.GetConnectedUserByConnectionId(connectionIdGuid);
             Clients.Group(channelName).broadcastMessageToChat(channelName, user.NickName, message);
+
+            Guid roomId = ChatChannels.GetRoomByName(channelName);
+            History historyItem = new History() { ConnectionId = connectionIdGuid, RoomId = roomId, LogDateTimeStamp = DateTime.Now, UserId = user.Id, Text = message};
+            history.Create(historyItem);
 
             logSendMessage(Context, user, channelName, message);
         }
