@@ -7,6 +7,12 @@
     <script src="Scripts/chat-data-source.js" type="text/javascript"></script>
     <script src="Scripts/web-client-chat-ui.js" type="text/javascript"></script>
     <script src="Scripts/web-client.js" type="text/javascript"></script>
+<style type="text/css">
+   #message
+   {
+      width: 327px;
+   }
+</style>
 </asp:Content>
 
 <asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">

@@ -81,6 +81,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Android.html" />
+    <Content Include="AndroidLatest\unknownsources.jpg" />
     <Content Include="Content\overlay\cancel.png" />
     <Content Include="Content\overlay\clickme.png" />
     <Content Include="Content\overlay\feedback.jpg" />
@@ -132,6 +133,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="AndroidInfo.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -204,11 +206,19 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="AndroidInfo.aspx.cs">
+      <DependentUpon>AndroidInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AndroidInfo.aspx.designer.cs">
+      <DependentUpon>AndroidInfo.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AndroidLatest\University Chat.apk" />
     <None Include="Properties\PublishProfiles\uc-channels - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\uc-channels - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\universitychat - FTP.pubxml" />

@@ -136,6 +136,8 @@ namespace UniversityChat.Chat
         /// <returns></returns>
         internal static ICollection<string> GetRoomNamesThatUserIsConnectedTo(User user)
         {
+           if (user.Id == null) return null;
+
             ICollection<RoomUser> roomsUserIsIn = roomUsers.GetByUserId(user.Id);
 
             List<string> result = new List<string>();

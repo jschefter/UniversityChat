@@ -23,14 +23,15 @@
             <asp:LoginView ID="LoginView" runat="server">
                 <LoggedInTemplate>
                     <asp:LoginName ID="LoginName" runat="server" />
-                    <asp:HyperLink runat="server" ID="LinkToLogout" NavigateUrl="~/Logout.aspx" Text="Logout"></asp:HyperLink>
+                    <asp:LinkButton  runat="server" ID="LinkToLogout" OnClick="LinkToLogout_Click" 
+                       Text="Logout" CausesValidation="False"></asp:LinkButton >
                 </LoggedInTemplate>
                 <AnonymousTemplate>
-                    <asp:HyperLink runat="server" ID="LinkToLogin" NavigateUrl="~/Login.aspx" Text="Login"></asp:HyperLink>
+                    <asp:Button runat="server" ID="LinkToLogin" OnClick="LinkToLogin_Click" Text="Login"></asp:Button>
                 </AnonymousTemplate>
             </asp:LoginView>
             <div class="feedback-container">
-                <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
+                <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Is something broken? Or a feature missing? We would love feedback!<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
             </div>
         </header>
         
@@ -42,6 +43,7 @@
             <a id="about"title="Learn about University Chat" style="cursor: pointer; color: crimson;">About</a> |
             <a id="privacy" title="View Privacy and Usage Terms" style="cursor: pointer; color: teal;">Privacy & Terms</a> |
             <a href="https://github.com/jschefter/universitychat" title="View our project source on GitHub" style="color: darksalmon;" target="_blank">Github</a> |
+            <a href="AndroidInfo.aspx" title="Android Guide and Info" style="color: crimson;" target="_blank">Android Info</a> | 
             <a id="help" title="Get help for University Chat" style="cursor: pointer; color: #8fbc8f;">Help</a>
         </footer>
     </form>
