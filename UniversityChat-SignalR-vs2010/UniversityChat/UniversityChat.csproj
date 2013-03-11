@@ -83,6 +83,7 @@
     <Content Include="Android.html" />
     <Content Include="AndroidLatest\unknownsources.jpg" />
     <Content Include="AndroidLogin.aspx" />
+    <Content Include="Content\overlay\arrow.png" />
     <Content Include="Content\overlay\cancel.png" />
     <Content Include="Content\overlay\clickme.png" />
     <Content Include="Content\overlay\feedback.jpg" />

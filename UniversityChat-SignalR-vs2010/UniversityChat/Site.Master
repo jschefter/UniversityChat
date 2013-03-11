@@ -48,7 +48,7 @@
         </footer>
     </form>
     </div>
-    
+
     <!-- The overlays -->
     <div class="overlay" id="overlayOrange" style="display:none; background-color: #f4a460;"></div>
     <div class="overlay" id="overlayLB" style="display:none; background-color: #8fbc8f;" ></div>
@@ -58,6 +58,10 @@
         <h1 id="aboutOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">About</h1>
         <h1 id="privacyOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">Privacy & Terms</h1>
         <h1 id="helpOption" style="cursor: pointer;" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#FFEFEF'">Help</h1>
+    </div>
+    
+    <div class="arrow" id="arrowBox">
+        <img id="arrow" src="Content/overlay/arrow.png" alt="Current Option" width="50" height="50"/>
     </div>
 
     <div class="box" id="signUpBox">
