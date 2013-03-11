@@ -82,6 +82,7 @@
     <Content Include="About.aspx" />
     <Content Include="Android.html" />
     <Content Include="AndroidLatest\unknownsources.jpg" />
+    <Content Include="AndroidLogin.aspx" />
     <Content Include="Content\overlay\cancel.png" />
     <Content Include="Content\overlay\clickme.png" />
     <Content Include="Content\overlay\feedback.jpg" />
@@ -142,6 +143,13 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AndroidLogin.aspx.cs">
+      <DependentUpon>AndroidLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AndroidLogin.aspx.designer.cs">
+      <DependentUpon>AndroidLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Chat\ChatChannels.cs" />
     <Compile Include="Chat\ChatHub.cs" />
@@ -221,6 +229,8 @@
     <None Include="AndroidLatest\University Chat.apk" />
     <None Include="Properties\PublishProfiles\uc-channels - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\uc-channels - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ucbeta - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ucbeta - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\universitychat - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\universitychat - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.min.map" />

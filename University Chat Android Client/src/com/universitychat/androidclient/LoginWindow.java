@@ -1,6 +1,14 @@
 package com.universitychat.androidclient;
 
 //import android.R;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Random;
 
 //import android.R;
@@ -10,6 +18,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -139,11 +148,76 @@ public class LoginWindow extends Activity
             	break;
         }
 		
-		userCredentials = new String[]{userName, password};
+		userCredentials = new String[]{ userName, password };
+		new AuthenticationTask().execute(userName, password);
+	}
+	
+	private void startChat()
+	{
 		Intent chatWindowIntent = new Intent(this, ChatActivity.class);
 		chatWindowIntent.putExtra("user_credentials",userCredentials);
 		chatWindowIntent.putExtra("newHostURL", newHostURL);
 		startActivity(chatWindowIntent);
 		this.finish();
+	}
+
+	// attempts to authenticate user credentials with the university chat backend.
+	private class AuthenticationTask extends AsyncTask<String, Void, Boolean> {
+
+		protected Boolean doInBackground(String... credentials) {
+			
+			try {
+				String query = "username=" + URLEncoder.encode(credentials[0], "UTF-8") + "&password=" + URLEncoder.encode(credentials[1], "UTF-8");
+				URL url = new URL(Constants.DEFAULT_LOGIN);
+				HttpURLConnection connection = null;
+				InputStream inputStream = null;
+				
+				connection = (HttpURLConnection) url.openConnection();
+				connection.setDoOutput(true);
+				connection.setDoInput(true);
+				connection.setInstanceFollowRedirects(false);
+				connection.setRequestMethod("POST");
+				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+				connection.setRequestProperty("charset", "utf-8");
+				connection.setRequestProperty("Content-Length", "" + Integer.toString(query.getBytes().length));
+				connection.setUseCaches (false);
+				
+				DataOutputStream writer = new DataOutputStream(connection.getOutputStream());
+				writer.writeBytes(query);
+				writer.flush();
+				writer.close();
+				
+				inputStream = connection.getInputStream();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+				String line;
+				StringBuilder sb = new StringBuilder();
+				while((line = reader.readLine()) != null) {
+					sb.append(line);
+				}
+				reader.close();
+				connection.disconnect();
+				
+				String result = sb.toString();
+				System.out.println(result);
+				return result.equals("Authenticated")? true : false;
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			return false;
+		}
+		
+		protected void onPostExecute(Boolean result)
+		{
+			if(result) {
+				// user is authenticated.
+				startChat();
+			}
+			else {
+				// user authentication failed.
+			}
+		}
 	}
 }

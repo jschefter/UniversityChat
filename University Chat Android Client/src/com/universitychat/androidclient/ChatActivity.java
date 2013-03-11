@@ -31,8 +31,6 @@ import com.universitychat.androidclient.fragments.ChatRoomList;
 public class ChatActivity extends FragmentActivity
 {
     private final Handler chatWindowActivityHandler = new Handler();
-    private final String DEFAULT_HOST = "http://universitychat.azurewebsites.net/Android.html";
-    private final String FEEDBACK_URL = "https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform";
     private final int ROOMLIST_FRAGMENT = 0;
     private final int CHATROOM_FRAGMENT = 1;
     private final int MEMBERLIST_FRAGMENT = 2;
@@ -67,7 +65,7 @@ public class ChatActivity extends FragmentActivity
         currentChannel = "";
         
         if(URL == null) //new host not provided by user, connect to default host
-        	URL = DEFAULT_HOST;
+        	URL = Constants.DEFAULT_HOST;
         
         initializeWebView();
         
@@ -193,7 +191,7 @@ public class ChatActivity extends FragmentActivity
         		builder.setMessage(R.string.prompt_feedback_redirection);
         		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
         	           public void onClick(DialogInterface dialog, int id) {
-        	        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(FEEDBACK_URL));
+        	        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_URL));
         	        		startActivity(browserIntent);
         	           }});
         		
