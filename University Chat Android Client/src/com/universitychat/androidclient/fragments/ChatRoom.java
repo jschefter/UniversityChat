@@ -40,6 +40,7 @@ public class ChatRoom extends Fragment
         	currentChatRoomName = savedInstanceState.getString("currentChatRoomName");
         	setChatRoomName(currentChatRoomName);
         }
+        
     }
 	
 	@Override

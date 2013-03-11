@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -109,6 +110,7 @@ public class ChatActivity extends FragmentActivity
         viewPager.setCurrentItem(ROOMLIST_FRAGMENT);
         
         //webView.loadUrl(URL);	// connect to service (start the hub).
+        
     }
     
     @Override
@@ -157,7 +159,7 @@ public class ChatActivity extends FragmentActivity
       	           }});
       	       
                 builder.setView(view);
-        		builder.setTitle(R.string.menu_change_host);
+        		builder.setTitle(R.string.menu_create_channel);
         		builder.setCancelable(true);
         		dialog = builder.create();
         		dialog.setCancelable(true); //cancelable by back button
@@ -183,7 +185,7 @@ public class ChatActivity extends FragmentActivity
       	           }});
       	       
                 builder.setView(view2);
-        		builder.setTitle(R.string.menu_change_host);
+        		builder.setTitle(R.string.menu_remove_channel);
         		builder.setCancelable(true);
         		dialog = builder.create();
         		dialog.setCancelable(true); //cancelable by back button
@@ -214,14 +216,27 @@ public class ChatActivity extends FragmentActivity
         		return true;
         	
         	case R.id.menu_sign_out:
-        		Toast.makeText(getApplicationContext(), "To be implemented when user feature is ready.", Toast.LENGTH_SHORT).show();
+        		SharedPreferences sharedPref = getSharedPreferences(Constants.LOG_IN_PREF,Context.MODE_PRIVATE);
+        		SharedPreferences.Editor editor = sharedPref.edit();
+        		editor.putString("username", ""); //clear stored info
+				editor.putString("password", ""); //clear stored info
+				editor.putString("savedlogin", "no");
+				
+				// leave current channel...
+        		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+            	webView.loadUrl(leaveChannelUrl);
+				
+            	//Launch Login Window and destroy this activity
+				Intent LoginWindowIntent = new Intent(this, LoginWindow.class);
+				startActivity(LoginWindowIntent);
+				this.finish(); 
         		return true;
         		
         	//Temporary for debug	
         	case R.id.menu_kill_app:
         		// leave current channel...
-        		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
-            	webView.loadUrl(leaveChannelUrl);
+        		String leaveChannelUrl2 = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+            	webView.loadUrl(leaveChannelUrl2);
             	
             	//destroy this activity
             	this.finish();
