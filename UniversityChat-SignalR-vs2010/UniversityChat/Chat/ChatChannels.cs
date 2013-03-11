@@ -57,6 +57,7 @@ namespace UniversityChat.Chat
                 roomNames.Add(room.RoomName);
             }
 
+            roomNames.Sort();
             return roomNames.ToArray();
         }
 
@@ -126,6 +127,7 @@ namespace UniversityChat.Chat
                 usernamesInRoom.Add(user.NickName);
             }
 
+            usernamesInRoom.Sort();
             return usernamesInRoom.ToArray();
         }
 
