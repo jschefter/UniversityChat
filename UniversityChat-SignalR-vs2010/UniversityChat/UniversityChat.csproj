@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\AjaxControlToolkit.7.0123\lib\40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\AjaxControlToolkit.7.0123\lib\40\SanitizerProviders\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.0.1\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -62,6 +68,9 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="SanitizerProviders">
+      <HintPath>..\packages\AjaxControlToolkit.7.0123\lib\40\SanitizerProviders\SanitizerProviders.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -81,7 +90,12 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Android.html" />
+    <Content Include="AndroidLatest\channels.jpg" />
+    <Content Include="AndroidLatest\chat.jpg" />
+    <Content Include="AndroidLatest\main.jpg" />
+    <Content Include="AndroidLatest\menu.jpg" />
     <Content Include="AndroidLatest\unknownsources.jpg" />
+    <Content Include="AndroidLatest\users.jpg" />
     <Content Include="AndroidLogin.aspx" />
     <Content Include="Content\overlay\cancel.png" />
     <Content Include="Content\overlay\clickme.png" />

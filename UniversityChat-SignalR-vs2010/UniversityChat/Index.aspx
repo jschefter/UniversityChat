@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="University Chat" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="UniversityChat.Index" %>
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="head" runat="server">
     <script src="Scripts/jquery.signalR-1.0.1.min.js" type="text/javascript"></script>
@@ -7,48 +8,37 @@
     <script src="Scripts/chat-data-source.js" type="text/javascript"></script>
     <script src="Scripts/web-client-chat-ui.js" type="text/javascript"></script>
     <script src="Scripts/web-client.js" type="text/javascript"></script>
-<style type="text/css">
-   #message
-   {
-      width: 327px;
-   }
-</style>
 </asp:Content>
 
 <asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label runat="server" ID="UserName" CssClass="username"></asp:Label>
-    <div class="chat-container">
+    <div class="chat-container chat-disabled">
         
         <div class="active-chat">
                 <h4>Click on a public channel to the left to join a chat room</h4>
 
                 <div id="chat-tabs">
-                    <ul class="tabs">
-                        
-                    </ul>
-                    <div class="content">
-                        
-                    </div>
+                    <ul class="tabs"></ul>
+                    <div class="content"></div>
                 </div>
-                <div id="text-containter">
-                    <%--<form id="upload" runat="server" enctype="multipart/form-data">
-                        <input type="file" id="myFile" name="myFile" />
-                        <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" />
-                    </form>--%>
-                    <div id="chat-input">
-                        <input type="text" id="message" disabled="disabled"  />
-                        <input type="submit" id="sendmessage" value="Send" disabled="disabled" />
+                
+                <div id="chat-input">
+                    <div><a id="show-upload">Upload a File</a><a id="hide-upload">Close Upload</a></div>
+                    <div id="upload-ui">
+                        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="Server" />
+                        <ajaxToolkit:AjaxFileUpload ID="AjaxFileUpload1" runat="server"  />
                     </div>
+                    <input type="text" id="message" disabled="disabled" placeholder="Type your message here and press Enter" />
+                    <input type="submit" id="sendmessage" value="Send" />
+                    
                 </div>
+                
             </div>
         <div class="channels">
             <h4>Public Channels</h4>
             <ul class="channel-list">
             </ul>
             <button class="add-channel" disabled="disabled">Create a Channel</button>
-            <!--
-            <button class="remove-channel" disabled="disabled">Remove a Channel</button>
-            -->
         </div>
         <div class="users">
             <h4>Channel Users</h4>

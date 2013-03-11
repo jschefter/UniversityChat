@@ -20,18 +20,20 @@
         <header class="header">
             <h1><asp:HyperLink Text="University Chat" runat="server" NavigateUrl="~/Index.aspx"></asp:HyperLink></h1>
             <div id="connected-users"># of Chatting users: <span><%=userCount %></span></div>
-            <asp:LoginView ID="LoginView" runat="server">
-                <LoggedInTemplate>
-                    <asp:LoginName ID="LoginName" runat="server" />
-                    <asp:LinkButton  runat="server" ID="LinkToLogout" OnClick="LinkToLogout_Click" 
-                       Text="Logout" CausesValidation="False"></asp:LinkButton >
-                </LoggedInTemplate>
-                <AnonymousTemplate>
-                    <asp:Button runat="server" ID="LinkToLogin" OnClick="LinkToLogin_Click" Text="Login"></asp:Button>
-                </AnonymousTemplate>
-            </asp:LoginView>
-            <div class="feedback-container">
-                <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" target="_blank">Is something broken? Or a feature missing? We would love feedback!<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Give us your feedback!" /></span></a>
+            <div class="login-container">
+                <asp:LoginView ID="LoginView" runat="server">
+                    <LoggedInTemplate>
+                        <asp:LoginName ID="LoginName" runat="server" />
+                        <asp:LinkButton  runat="server" ID="LinkToLogout" OnClick="LinkToLogout_Click" 
+                           Text="Logout" CausesValidation="False"></asp:LinkButton >
+                    </LoggedInTemplate>
+                    <AnonymousTemplate>
+                        <asp:Button runat="server" ID="LinkToLogin" OnClick="LinkToLogin_Click" Text="Login"></asp:Button>
+                    </AnonymousTemplate>
+                </asp:LoginView>
+                <p>
+                    <a class="feedback" id="feedback" href="https://docs.google.com/forms/d/1pav-_eoF8V522xKQuj0tjt-dTFSGxPsFZ9ct_ZE9ylg/viewform" title="Is something broken? Or a feature missing? We would love feedback!" target="_blank">Feedback<span><img src="/Content/overlay/feedback.jpg" alt="Feedback" title="Is something broken? Or a feature missing? We would love feedback!" /></span></a>
+                </p>
             </div>
         </header>
         

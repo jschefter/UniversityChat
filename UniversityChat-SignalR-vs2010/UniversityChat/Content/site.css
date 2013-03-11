@@ -7,11 +7,6 @@
     display: none;
 }
 
-body, div, p, h1, h4, ul {
-    margin: 0px;
-    padding: 0px;
-}
-
 body {
     font-family: Calibri;
     width: 100%;
@@ -47,6 +42,11 @@ body {
     text-decoration: none;
 }
 
+
+.header h1 {
+    display: inline-block;
+}
+
 .header h1 a {
     color: White;
     font-size: 50px;
@@ -60,10 +60,16 @@ body {
     text-decoration: none;
 }
 
+.header #connected-users {
+    display: inline-block;
+    color: White;
+}
+
 .login-container {
-    position: absolute;
-	right:5px;
-	top:9px;
+    float: right;
+    width: 200px;
+    text-align: right;
+	
 }
 
 .login-container div {
@@ -82,6 +88,23 @@ body {
     border: 1px solid black;
 }
 
+.chat-container .active-chat h4 {
+    display: none;
+}
+
+.chat-container.chat-disabled .active-chat h4 {
+    color: Gray;
+    display: block;
+}
+
+.chat-container.chat-disabled .users h4 {
+    color: Gray;
+}
+
+#show-upload, #hide-upload {
+	display: none;
+}
+
 .chat-container .channels {
     width: 20%;
     left: 0px;
@@ -95,6 +118,7 @@ body {
     position: absolute;
     top: 20px;
     bottom: 60px;
+    width: 100%;
 }
 
 .channels button {
@@ -103,7 +127,7 @@ body {
 }
 
 .channels .add-channel {
-    bottom: 30px;
+    bottom: 0px;
 }
 
 .channels .remove-channel {
@@ -115,9 +139,27 @@ body {
     padding-left: 5px;
 }
 
+.channels li:hover, .users li:hover {
+    cursor:pointer;
+}
+
+.channels li:before {
+    content: "";
+    background-image: url('/Content/south-street/images/ui-icons_cd0a0a_256x240.png');
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+	background-position-y: -159px;
+}
+
 .channel-list .active-channel {
     color: White;
-    background-color: LawnGreen;
+    background-color: #119638;
+}
+
+.channel-list .active-channel:before {
+    background-image: url('/Content/south-street/images/ui-icons_eeeeee_256x240.png');
+    background-position-y: -159px;
 }
 
 .chat-container .active-chat {
@@ -125,6 +167,10 @@ body {
     left: 20%;
     top: 0px;
     bottom: 0px;
+}
+
+.chat-container .active-chat h4 {
+    color: Gray;
 }
 
 .chat-container .users {
@@ -136,30 +182,37 @@ body {
     border-right: none;
 }
 
+#chat-tabs {
+    height: 390px;
+}
+
 #chat-tabs .content > div {
     overflow-y: scroll;
     background-color: white;
     padding: 5px;
-    height: 300px;
 }
 
-#chat-form {
+#chat-input {
     position: absolute;
-	bottom: 0px;
+	bottom: 10px;
 	width: 100%;
+	border-top:1px solid black;
 }
 
-#upload {
+#chat-input input[type="text"] {
+    position:absolute;
+    left: 0px;
+    right: 0px;
+    padding: 5px;
+}
+
+#upload-ui {
+    display: none;
     position: absolute;
-	bottom: 60px;
+    width: 100%;
+    background-color: white;
+    bottom: 40px;
 }
-
-#chat-form input[type="text"] {
-    vertical-align: middle;
-    width: 80%;
-    padding: 20px 10px;
-}
-
 .user-lists > ul {
 	display: none;
 }
@@ -263,11 +316,11 @@ a.boxclose {
 }
 
 a.feedback  {
+    color:White;
+    font-size: 18pt;
     display: block;
     text-decoration: none;
     outline:none;
-    background-color: #FFF5EC;
-    text-align: center;
 }
   
 .feedback{
@@ -286,8 +339,8 @@ a.feedback  {
     text-decoration: none;
 }
   
-.feedback span img{
-    border: none;
+.feedback span img {
+    border: 1px solid black;
 }
   
 .feedback:hover span{

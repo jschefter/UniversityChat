@@ -9,13 +9,16 @@ function WebClientChatUI($containingElement, chatDataSource) {
     var $addChannelButton = $containingElement.find(".add-channel");
     var $removeChannelButton = $containingElement.find(".remove-channel");
     var $messageInput = $containingElement.find("#message");
-    var $sendMessageButton = $containingElement.find("#sendmessage")
+    var $sendMessageButton = $containingElement.find("#sendmessage");
+    var $showUpload = $containingElement.find("#show-upload");
+    var $hideUpload = $containingElement.find("#hide-upload");
     var username = "invalid";
 
     var init = function (self) {
         chatDataSource.RegisterUserInterface(self);
 
         $chatTabs.tabs({
+            heightStyle: "fill",
             activate: function (event, ui) {
                 // show the user list for the activated tab.
                 var newTab = ui.newTab.find("a").html();
@@ -29,6 +32,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
             }
         });
         $chatTabs.hide();
+        $showUpload.show();
     }
 
     // called from data service when hub start() is complete.
@@ -111,7 +115,6 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 // joining a channel...
                 $this.addClass("active-channel");
 
-                $(".active-chat h4").hide();
                 $chatTabs.show();
                 $chatTabs.find(".tabs").append('<li class="' + channelName + '"><a href="#' + channelName + '">' + channelName + '</a></li>');
                 $chatTabs.find(".content").append('<div id="' + channelName + '"></div>');
@@ -119,6 +122,9 @@ function WebClientChatUI($containingElement, chatDataSource) {
 
                 $userLists.append("<ul class='" + channelName + "' />");
 
+                $containingElement.removeClass("chat-disabled");
+                $showUpload.removeAttr("disabled");
+                $hideUpload.removeAttr("disabled");
                 $messageInput.removeAttr("disabled");
                 $sendMessageButton.removeAttr("disabled");
 
@@ -140,8 +146,10 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 // if no channels left, lock up UI.
                 var lastChannel = ($chatTabs.find(".tabs li").length === 0) ? true : false;
                 if (lastChannel) {
-                    $(".active-chat h4").show();
+                    $containingElement.addClass("chat-disabled");
                     $chatTabs.hide();
+                    $showUpload.attr("disabled", "disabled");
+                    $hideUpload.attr("disabled", "disabled");
                     $messageInput.attr("disabled", "disabled");
                     $sendMessageButton.attr("disabled", "disabled");
                 }
@@ -193,6 +201,22 @@ function WebClientChatUI($containingElement, chatDataSource) {
         if (channelName !== null && channelName !== "") {
             chatDataSource.DeleteChannel(channelName);
         }
+    });
+
+    $showUpload.click(function () {
+        $containingElement.find("#upload-ui").show();
+        $hideUpload.show();
+        $showUpload.hide();
+
+        return false;
+    });
+
+    $hideUpload.click(function () {
+        $containingElement.find("#upload-ui").hide();
+        $hideUpload.hide();
+        $showUpload.show();
+        
+        return false;
     });
 
     init(this);
