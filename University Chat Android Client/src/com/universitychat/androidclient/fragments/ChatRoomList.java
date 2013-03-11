@@ -22,6 +22,7 @@ public class ChatRoomList extends Fragment
 	private String[] privateRooms = {};//{"Loading..."};
 	private ListView publicList;
 	private ListView privateList;
+	private int oldListPosition;
 	
 	private OutgoingWebEvents outgoingWebEvents;
 	
@@ -29,6 +30,15 @@ public class ChatRoomList extends Fragment
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        
+        if (savedInstanceState == null)
+        	oldListPosition = -1;
+        else
+        {
+        	publicRooms = savedInstanceState.getStringArray("publicRooms");
+            privateRooms = savedInstanceState.getStringArray("privateRooms");
+            oldListPosition = savedInstanceState.getInt("oldListPosition");
+        }
     }
 
 	@Override
@@ -54,16 +64,26 @@ public class ChatRoomList extends Fragment
     	publicList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, publicRooms));
     	privateList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, privateRooms));
     	
+//    	if(oldListPosition > -1)
+//    		publicList.getChildAt(0).setBackgroundColor(Color.BLUE);
+    	
+    	
     	publicList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				// user clicked on a channel.
+				// user clicked on a channel, join room and set room name
 				String roomName = (String)publicList.getAdapter().getItem(position);
 				outgoingWebEvents.joinChannel(roomName);
-				//ChatActivity parenActivity = (ChatActivity)getActivity();
-				ChatRoom.setChatRoomName(publicRooms[position]);
+				ChatRoom.setChatRoomName(roomName);
+				
+				//Support for selected item background highlighting
+				if(oldListPosition > -1)
+					parent.getChildAt(oldListPosition).setBackgroundColor(Color.BLACK);
+				
+				oldListPosition = position;
+				parent.getChildAt(position).setBackgroundColor(Color.GRAY);
 			}
 		});
     	
@@ -71,16 +91,35 @@ public class ChatRoomList extends Fragment
     }
 	
 	@Override
+    public void onSaveInstanceState(Bundle outState) 
+	{
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("publicRooms", publicRooms);
+        outState.putStringArray("privateRooms", privateRooms);
+        outState.putInt("oldListPosition;", oldListPosition);
+    }
+	
+	@Override
 	public void onPause()
 	{
+		System.out.println("on pause chatroom called");
 		super.onPause();
 	}
 	
 	public void updatePublicRoomList(String[] roomList)
 	{
+		System.out.println("Room List Size: " + roomList.length);
+		for(int i = 0; i < roomList.length; i++)
+			System.out.println(roomList[i]);
 		publicRooms = roomList;
 		publicList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, publicRooms));
 		
 		System.out.println("update public room list called");
+	}
+	
+	public void updatePrivateRoomList(String[] roomList)
+	{
+		privateRooms = roomList;
+		privateList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, publicRooms));
 	}
 }

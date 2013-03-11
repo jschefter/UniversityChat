@@ -73,21 +73,20 @@
             android:layout_marginTop="0dp"
             android:onClick="loginAttempt"
             android:text="@string/loginAnon_btn" />
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="350dp"
-            android:onClick="loginAttempt"
-            android:text="@string/login_btn" />
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/chkbx_user_save_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="@string/prompt_remember_user" />
 
     <TextView
         android:id="@+id/textView_signuplink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="400dp"
         android:clickable="true"
         android:gravity="center_horizontal"
         android:onClick="startSignUpActivity"

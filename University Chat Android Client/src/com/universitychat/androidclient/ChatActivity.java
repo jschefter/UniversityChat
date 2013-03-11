@@ -82,15 +82,21 @@ public class ChatActivity extends FragmentActivity
         
         if(savedInstanceState == null) //create new fragments to use
         {
+        	//initializeWebView();
 	        fragments.add(Fragment.instantiate(this, ChatRoomList.class.getName()));
 	        fragments.add(Fragment.instantiate(this, ChatRoom.class.getName()));
 	        fragments.add(Fragment.instantiate(this, ChatMemberList.class.getName()));
+	        //webView.loadUrl(URL);	// connect to service (start the hub).
+	        webView.loadUrl(URL);
         }
         else //or retrieve stored fragments
         {
+        	
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoomList.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoom.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatMemberList.class.getName()));
+        	//webView.loadUrl(URL);
+        	//webView.restoreState(savedInstanceState);
         }
          
         /** Instantiating FragmentPagerAdapter */
@@ -102,7 +108,7 @@ public class ChatActivity extends FragmentActivity
         
         viewPager.setCurrentItem(ROOMLIST_FRAGMENT);
         
-        webView.loadUrl(URL);	// connect to service (start the hub).
+        //webView.loadUrl(URL);	// connect to service (start the hub).
     }
     
     @Override
@@ -236,16 +242,20 @@ public class ChatActivity extends FragmentActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) 
     {
+    	
         super.onSaveInstanceState(outState);
         getSupportFragmentManager().putFragment(outState, ChatRoomList.class.getName(), pagerAdapter.getItem(ROOMLIST_FRAGMENT));
         getSupportFragmentManager().putFragment(outState, ChatRoom.class.getName(), pagerAdapter.getItem(CHATROOM_FRAGMENT));
         getSupportFragmentManager().putFragment(outState, ChatMemberList.class.getName(), pagerAdapter.getItem(MEMBERLIST_FRAGMENT));
+        //webView.saveState(outState);
+        
     }
     
     @Override   
     protected void onRestoreInstanceState(Bundle savedInstanceState) 
     {
       super.onRestoreInstanceState(savedInstanceState);
+      //webView.restoreState(savedInstanceState);
     }
     
     private void updateChatRoomList(String[] roomList)

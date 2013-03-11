@@ -14,21 +14,38 @@ import android.widget.TextView;
 public class ChatMemberList extends Fragment
 {
 	public ListView memberList;
-	private String[] chatMemberArray = {};//{"Loading..."};
+	private String[] chatMemberArray = {"one", "two","one", "two","one", "two","one", "two","one", "two"};//{"Loading..."};
 	private TextView numUsers;
+	private String storedNumUsers;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        System.out.println("member list oncreate called");
+        
+        if (savedInstanceState != null)
+        	chatMemberArray = savedInstanceState.getStringArray("chatMemberArray");
+    }
+	
+	@Override
+    public void onSaveInstanceState(Bundle outState) 
+	{
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("chatMemberArray", chatMemberArray);
+//        outState.putString("storedNumUsers", numUsers.getText().toString());
     }
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
+		System.out.println("member list oncreateview called");
     	View v = inflater.inflate(R.layout.fragment_chat_member_list, container,false);
-    	memberList = (ListView) v.findViewById(R.id.member_list);
     	numUsers = (TextView) v.findViewById(R.id.textView_num_users);
+    	memberList = (ListView) v.findViewById(R.id.member_list);
+    	
+    	if(chatMemberArray.length > 0)
+    		numUsers.setText(Integer.toString(chatMemberArray.length));
     	
     	memberList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, chatMemberArray));
         return v;
@@ -48,7 +65,6 @@ public class ChatMemberList extends Fragment
 		
 		chatMemberArray = newMemberList;
 		memberList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, chatMemberArray));
-		//memberList.invalidate();
 		numUsers.setText(Integer.toString(newMemberList.length));
 	}
 }

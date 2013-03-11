@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class LoginWindow extends Activity
 	private EditText passwordText;
 	private Button loginButton;
 	private Button loginAnonymousButton;
+	private CheckBox saveUserChkbx;
 	private TextView signUpLink;
 	private AlertDialog.Builder builder;
 	private AlertDialog dialog;
@@ -51,8 +53,7 @@ public class LoginWindow extends Activity
 		TextView tv = (TextView) findViewById(R.id.uchatheader);
 		tv.setTypeface(orbitron);
 		newHostURL = null;	
-	}
-	
+	}	
 	
 	private void setUIVariables() 
     {
@@ -61,6 +62,7 @@ public class LoginWindow extends Activity
         loginButton = (Button)findViewById(R.id.btn_login);
         loginAnonymousButton = (Button)findViewById(R.id.btn_loginAnonymous);
         signUpLink = (TextView)findViewById(R.id.textView_signuplink);
+        saveUserChkbx = (CheckBox)findViewById(R.id.chkbx_user_save_login);
     }
 
 	@Override
@@ -126,7 +128,6 @@ public class LoginWindow extends Activity
 	{
 		Intent signUpIntent = new Intent(this, SignupActivity.class);
 		startActivity(signUpIntent);
-		
 	}
 	
 	public void loginAttempt(View view)

@@ -33,7 +33,6 @@
             android:layout_weight="0.42"
             android:text="@string/num_users"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </LinearLayout>
 
     <ListView

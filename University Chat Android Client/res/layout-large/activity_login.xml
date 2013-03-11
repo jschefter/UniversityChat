@@ -42,15 +42,29 @@
         android:paddingRight="10dp"
         android:typeface="sans" />
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="10dp"
-        android:onClick="loginAttempt"
-        android:text="@string/login_btn" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/Button01"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:onClick="loginAttempt"
+            android:text="@string/login_btn" />
+
+        <CheckBox
+            android:id="@+id/chkbx_user_save_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text="@string/prompt_remember_user" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView1"

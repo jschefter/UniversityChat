@@ -23,11 +23,32 @@ public class ChatRoom extends Fragment
     private TextView textViewChat;
     private static TextView textChatRoomName;
     private OutgoingWebEvents outgoingWebEvents;
+    private String chatText;
+    private static String currentChatRoomName;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        
+        if(savedInstanceState == null)
+        	currentChatRoomName = null;
+        else
+        {
+        	enableButtons();
+        	chatText = savedInstanceState.getString("chatText");
+        	currentChatRoomName = savedInstanceState.getString("currentChatRoomName");
+        	setChatRoomName(currentChatRoomName);
+        }
+    }
+	
+	@Override
+    public void onSaveInstanceState(Bundle outState) 
+	{
+        super.onSaveInstanceState(outState);
+        chatText = textViewChat.getText().toString();
+        outState.putString("chatText", chatText);
+        outState.putString("currentChatRoomName", currentChatRoomName);
     }
 	
 	public String getUserMsg()
@@ -62,6 +83,7 @@ public class ChatRoom extends Fragment
 	
 	protected static void setChatRoomName(String chatRoomName)
 	{
+		currentChatRoomName = chatRoomName;
 		textChatRoomName.setText(chatRoomName);
 		
 	}
@@ -99,6 +121,12 @@ public class ChatRoom extends Fragment
         textViewChat = (TextView)v.findViewById(R.id.textViewChat);
         textChatRoomName = (TextView)v.findViewById(R.id.textView_chat_room_header);
         textViewChat.setMovementMethod(new ScrollingMovementMethod());
+        
+        if(currentChatRoomName != null) //if there exists a current chat room session
+        {
+        	enableButtons();
+        	textViewChat.append(chatText);
+        }
         
         buttonSendMessage.setOnClickListener(new View.OnClickListener() 
         {

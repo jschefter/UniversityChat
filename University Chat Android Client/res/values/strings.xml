@@ -38,6 +38,7 @@
     <string name="menu_remove_channel">Remove Channel</string>
     <string name="menu_kill_app">Kill App</string>
     <string name="prompt_feedback_redirection">Warning! You will be re-directed to your mobile web browser which will boot you from University Chat.</string>
+    <string name="prompt_remember_user">Keep me logged in</string>
 
 
 </resources>
