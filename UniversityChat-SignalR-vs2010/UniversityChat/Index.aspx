@@ -8,6 +8,11 @@
     <script src="Scripts/chat-data-source.js" type="text/javascript"></script>
     <script src="Scripts/web-client-chat-ui.js" type="text/javascript"></script>
     <script src="Scripts/web-client.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        #chat-tabs .ui-tabs-nav li a { padding: 0.125em 0em 0.125em 0.5em; }
+        #chat-tabs .tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+    </style>
 </asp:Content>
 
 <asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">

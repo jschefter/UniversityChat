@@ -31,6 +31,12 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 });
             }
         });
+        // close icon: removing the tab on click
+        $chatTabs.delegate("span.ui-icon-close", "click", function () {
+            var channelId = $(this).closest("li").attr("aria-controls");
+            $channelList.find("li[channel='"+ channelId + "']").click();
+        });
+
         $chatTabs.hide();
         $showUpload.show();
     }
@@ -99,7 +105,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
         var channelHtml = [];
         $.each(channelList, function (index, channelname) {
             var elementClass = (previouslyJoined[channelname]) ? 'class="active-channel"' : "";
-            var element = "<li " + elementClass + ">" + channelname + "</li>";
+            var element = "<li " + elementClass + " channel='" + channelname + "'>" + channelname + "</li>";
             channelHtml.push(element);
         });
 
@@ -116,7 +122,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 $this.addClass("active-channel");
 
                 $chatTabs.show();
-                $chatTabs.find(".tabs").append('<li class="' + channelName + '"><a href="#' + channelName + '">' + channelName + '</a></li>');
+                $chatTabs.find(".tabs").append('<li class="' + channelName + '"><a href="#' + channelName + '">' + channelName + '</a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>');
                 $chatTabs.find(".content").append('<div id="' + channelName + '"></div>');
                 $chatTabs.tabs("refresh");
 
