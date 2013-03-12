@@ -100,12 +100,12 @@ namespace UniversityChat
                 #region Getting the date range for the logs
 
                 // Date Range
-                string dateFrom = datepickerFrom.Value + " 12:00:00 AM";
-                string dateTo = datepickerTo.Value + " 11:59:59 AM";
+                string dateFrom = datepickerFrom.Text + " 12:00:00 AM";
+                string dateTo = datepickerTo.Text + " 11:59:59 AM";
 
                 SqlCommand command;
                 string sqlString;
-                if (datepickerFrom.Value == "" || datepickerTo.Value == "")
+                if (string.IsNullOrEmpty(dateFrom) || string.IsNullOrEmpty(dateFrom))
                 {
                     if (classId == "")
                         sqlString = string.Format("SELECT [LogDateTimeStamp], [UserId], [Text] FROM [ucdatabase].[UniversityChat].[History] ORDER BY [LogDateTimeStamp];");

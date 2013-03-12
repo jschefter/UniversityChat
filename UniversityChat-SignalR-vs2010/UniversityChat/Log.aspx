@@ -1,50 +1,51 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Log.aspx.cs" Inherits="UniversityChat.Log" %>
+﻿<%@ Page Title="University Chat Logs" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Log.aspx.cs" Inherits="UniversityChat.Log" %>
 <%@ Import Namespace="UniversityChat" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-    <title>University Chat Logs</title>
-    <link href="Content/south-street/jquery-ui-1.10.0.custom.min.css" rel="stylesheet" type="text/css" />
-    <script src="Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="Scripts/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
-
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         th, td {
             padding: 2px 4px;
+            border: none;
+        }
+        
+        table {
+            border-spacing: 0px;
+        }
+        
+        tr.myRow {
+            border: none;
+        }
+        
+        tr.myRow:nth-child(even) {
+            background-color: LightGray;
         }
     </style>
 
-    <script language="javascript">
-        $(document).ready(function () {
-            $("tr.myRow:even").css("color", "red");
-            $("tr.myRow:odd").css("color", "blue");
+    <script type="text/javascript">
+        $(document).ready(function () {        
+            $(".datepickerFrom").datepicker();
+            $(".datepickerTo").datepicker();
         });
-        $(function () {
-            $("#datepickerFrom").datepicker();
-            $("#datepickerTo").datepicker();
-        });
-      </script>
-</head>
-<body>
+    </script>
+</asp:Content>
+
+<asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
         <h1>University Chat Logs</h1>
         
-        <form id="Form2" runat="server">
             <asp:Label ID="Label1" runat="server">Class name:</asp:Label>
             <asp:DropDownList id="roomName" runat="server"/> <br />
             
             <p>
-                From: <input runat="server" type="text" id="datepickerFrom" /> <br />
+                From: <asp:TextBox ID="datepickerFrom" runat="server" CssClass="datepickerFrom"></asp:Textbox>
             </p>
             <p>
-                To: <input runat="server" type="text" id="datepickerTo" /> <br />
+                To: <asp:TextBox ID="datepickerTo" runat="server" CssClass="datepickerTo"></asp:TextBox>
             </p>
             <p>
                 <asp:Button runat="server" OnClick="buttonSubmitForm_Click" Text="Submit"/>
             </p>
-        </form>
+        
         <br />
         <asp:Label runat="server" ID="ClassName"></asp:Label>
     </div>
@@ -57,7 +58,7 @@
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
-            <tr id="myRow">
+            <tr class="myRow">
                 <td>
                     <%#((ChatLog)Container.DataItem).LogTime%>
                 </td>
@@ -73,5 +74,4 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
-</body>
-</html>
+</asp:Content>
