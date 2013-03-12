@@ -12,7 +12,7 @@ BEGIN
 		[LName] [varchar](50) NULL,
 		[NickName] [varchar](50) NOT NULL,
 		[Email] [varchar](50) NOT NULL,
-		[Passowrd] [nvarchar](256) NOT NULL,
+		[Password] [nvarchar](256) NOT NULL,
 		[UserRoleId] [int] NOT NULL
 	) 
 

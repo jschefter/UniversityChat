@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using UniversityChat.Chat;
+using System.Web.Security;
 //using System.Web.Security;
 
 namespace UniversityChat
@@ -19,7 +20,7 @@ namespace UniversityChat
 
         protected void LinkToLogin_Click(object sender, EventArgs e)
         {
-           Response.Redirect("~/Login.aspx");
+            FormsAuthentication.RedirectToLoginPage();
         }
 
         protected void LinkToLogout_Click(object sender, EventArgs e)

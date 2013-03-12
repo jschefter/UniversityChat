@@ -17,7 +17,8 @@ namespace UniversityChat.Model
             FName = userData["FName"].ToString();
             LName = userData["LName"].ToString();
             EmailAddress = userData["Email"].ToString();
-            PasswordHash = RetrievePasswordHash("bogus password");
+            Password = userData["Password"].ToString();
+            PasswordHash = RetrievePasswordHash(Password);
             Id = Guid.Parse(userData["UserId"].ToString());
         }
 
@@ -30,6 +31,7 @@ namespace UniversityChat.Model
             FName = FIRST_NAME;
             LName = LAST_NAME;
             EmailAddress = (EMAIL != null) ? EMAIL : Guid.NewGuid().ToString();
+            Password = PASSWORD;
             PasswordHash = RetrievePasswordHash(PASSWORD);
             Id = Guid.Empty;
         }
@@ -68,11 +70,10 @@ namespace UniversityChat.Model
                 return false;
             }
 
-            // we don't store passwords right now...
-            //if (this.PasswordHash != otherUser.PasswordHash)
-            //{
-            //    return false;
-            //}
+            if (!RetrievePasswordHash(this.PasswordHash).Equals(RetrievePasswordHash(otherUser.PasswordHash)))
+            {
+                return false;
+            }
 
             // got through all checks, users have same login info...
             return true;

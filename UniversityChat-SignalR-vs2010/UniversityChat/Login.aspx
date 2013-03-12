@@ -20,6 +20,6 @@
         </div>
     </asp:Panel>
     <asp:Panel runat="server" ID="AuthPanel" Visible="false">
-        <p>You are already logged in. <asp:HyperLink runat="server" ID="LinkToIndex" NavigateUrl="~/Index.aspx" Text="Return to main page"></asp:HyperLink>.</p>
+        <p>Login successful. <asp:HyperLink runat="server" ID="LinkToIndex" NavigateUrl="~/Index.aspx" Text="Return to main page"></asp:HyperLink>.</p>
     </asp:Panel>
 </asp:Content>

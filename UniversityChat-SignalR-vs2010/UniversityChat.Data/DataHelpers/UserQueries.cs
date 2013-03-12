@@ -13,7 +13,7 @@ namespace UniversityChat.Data.DataHelpers
             {
                 string sql = @"INSERT INTO [ucdatabase].[UniversityChat].[Users]
                             ([UserId], [FName],[LName], [NickName],[Email], [Password], [UserRoleId])
-                            VALUES (NEWID(), @fName, @lName, @nickName, @email, @password @roleId)";
+                            VALUES (NEWID(), @fName, @lName, @nickName, @email, @password, @roleId)";
 
                 return sql;
             }
