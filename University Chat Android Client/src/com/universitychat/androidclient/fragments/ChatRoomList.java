@@ -86,6 +86,11 @@ public class ChatRoomList extends Fragment
 				parent.getChildAt(position).setBackgroundColor(Color.GRAY);
 			}
 		});
+    	if(oldListPosition > -1)
+    	{
+    		publicList.setItemChecked(oldListPosition, true);
+    		//publicList.getItemAtPosition(oldListPosition).setBackgroundColor(Color.GRAY);
+    	}
     	
         return v;
     }

@@ -15,40 +15,18 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editTextUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="@string/singup_name_hint"
-        android:inputType="textPersonName"
+        android:hint="@string/signup_username_hint"
         android:typeface="normal" >
 
         <requestFocus />
     </EditText>
-
-    <EditText
-        android:id="@+id/editTextUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:hint="@string/signup_username_hint"
-        android:typeface="normal" />
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:hint="@string/signup_email_hint"
-        android:inputType="textEmailAddress"
-        android:typeface="normal" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -72,14 +50,65 @@
         android:inputType="textPassword"
         android:typeface="normal" />
 
-    <Button
-        android:id="@+id/btn_signup_confirm"
-        android:layout_width="130dp"
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:onClick="confirmCredidentials"
-        android:text="@string/signup_btn_confirm" />
+        android:ems="10"
+        android:hint="@string/signup_email_hint"
+        android:inputType="textEmailAddress"
+        android:typeface="normal" />
+
+    <EditText
+        android:id="@+id/editTextFName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="00dp"
+        android:ems="10"
+        android:hint="@string/singup_fname_hint"
+        android:inputType="textPersonName"
+        android:typeface="normal" />
+
+    <EditText
+        android:id="@+id/editTextLName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="@string/signup_lname_hint"
+        android:inputType="textPersonName"
+        android:typeface="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btn_signup_confirm"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="confirmCredidentials"
+            android:text="@string/signup_btn_confirm" />
+
+        <Button
+            android:id="@+id/btn_signup_reset"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="480dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="resetForm"
+            android:text="@string/btn_reset" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class ChatMemberList extends Fragment
 {
 	public ListView memberList;
-	private String[] chatMemberArray = {"one", "two","one", "two","one", "two","one", "two","one", "two"};//{"Loading..."};
+	private String[] chatMemberArray = {};//{"Loading..."};
 	private TextView numUsers;
 	private String storedNumUsers;
 	

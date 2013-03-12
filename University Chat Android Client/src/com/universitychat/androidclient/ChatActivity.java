@@ -116,6 +116,16 @@ public class ChatActivity extends FragmentActivity
     }
     
     @Override
+    public void onBackPressed() 
+    {
+    	int currentFragment = viewPager.getCurrentItem();
+    	//move view to previous fragment, if at 0 then do nothing
+    	if( currentFragment >= 0)
+    		viewPager.setCurrentItem(currentFragment - 1);
+        return;
+    }
+    
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.

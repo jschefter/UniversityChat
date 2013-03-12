@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 public class SignupActivity extends Activity
 {
-	private EditText editName;
+	private EditText editFName;
+	private EditText editLName;
 	private EditText editUserName;
 	private EditText editEmail;
 	private EditText editPassword;
@@ -31,7 +32,8 @@ public class SignupActivity extends Activity
 	
 	public void setUIVariables()
 	{
-		editName = (EditText)findViewById(R.id.editTextName);
+		editFName = (EditText)findViewById(R.id.editTextFName);
+		editLName = (EditText)findViewById(R.id.editTextLName);
 		editUserName = (EditText)findViewById(R.id.editTextUserName);
 		editEmail = (EditText)findViewById(R.id.editTextEmail);
 		editVerifyPassword = (EditText)findViewById(R.id.editTextVPassword);
@@ -39,10 +41,21 @@ public class SignupActivity extends Activity
 		buttonConfirm = (Button)findViewById(R.id.btn_signup_confirm);	
 	}
 	
+	public void resetForm(View v)
+	{
+		editFName.setText("");
+		editLName.setText("");
+		editUserName.setText("");
+		editEmail.setText("");
+		editVerifyPassword.setText("");
+		editPassword.setText("");
+	}
+	
 	public void confirmCredidentials(View v)
 	{
-		if(editName.getText().toString().equals("") || editUserName.getText().toString().equals("") || 
-				editEmail.getText().toString().equals("") || editPassword.getText().toString().equals("") 
+		if(editFName.getText().toString().equals("") || editLName.getText().toString().equals("") || 
+				editUserName.getText().toString().equals("") || editEmail.getText().toString().equals("") 
+				|| editPassword.getText().toString().equals("") 
 				|| editVerifyPassword.getText().toString().equals(""))
 		{
 			Toast.makeText(getApplicationContext(), INCOMPLETE_DATA, Toast.LENGTH_LONG).show();

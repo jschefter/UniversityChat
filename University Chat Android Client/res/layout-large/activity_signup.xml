@@ -23,7 +23,10 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="@string/signup_username_hint"
-        android:typeface="normal" />
+        android:typeface="normal" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -68,10 +71,7 @@
         android:ems="10"
         android:hint="@string/singup_fname_hint"
         android:inputType="textPersonName"
-        android:typeface="normal" >
-
-        <requestFocus />
-    </EditText>
+        android:typeface="normal" />
 
     <EditText
         android:id="@+id/editTextLName"
@@ -103,6 +103,7 @@
             android:id="@+id/btn_signup_reset"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="160dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|center_horizontal"
             android:onClick="resetForm"
