@@ -40,6 +40,7 @@ namespace UniversityChat.Model
         public string NickName { get; set; }
         public int RoleId { get; set; }
         public string EmailAddress { get; set; }
+        public string Password { get; set; }
         private string PasswordHash { get; set; }
 
         string RetrievePasswordHash(string PASSWORD)

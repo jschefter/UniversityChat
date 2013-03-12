@@ -46,6 +46,13 @@ namespace UniversityChat.Data.Repositories
 
                 dbCommand.Parameters.Add(emailParameter);
 
+                DbParameter passwordParameter = dbCommand.CreateParameter();
+                passwordParameter.ParameterName = "@password";
+                passwordParameter.Value = item.Password;
+                passwordParameter.DbType = DbType.String;
+
+                dbCommand.Parameters.Add(passwordParameter);
+
                 DbParameter roleIdParameter = dbCommand.CreateParameter();
                 roleIdParameter.ParameterName = "@roleId";
                 roleIdParameter.Value = item.RoleId;
