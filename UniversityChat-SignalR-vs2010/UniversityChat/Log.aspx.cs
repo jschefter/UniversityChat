@@ -45,7 +45,7 @@ namespace UniversityChat
                     SqlDataReader roomReader = roomCommand.ExecuteReader();
 
                     int count = 1;
-                    roomName.Items.Insert(0, new ListItem("Select Class"));
+                    roomName.Items.Insert(0, new ListItem("All"));
 
                     while (roomReader.Read())
                     {
@@ -73,7 +73,7 @@ namespace UniversityChat
 
                 // Get the id of the room
                 string classId = "";
-                if (roomName.Text != "")
+                if (roomName.SelectedIndex != 0)
                 {
                     SqlCommand roomCommand;
                     string sqlRoomString =
@@ -156,7 +156,7 @@ namespace UniversityChat
             LogRepeater.DataSource = chatLogs;
             LogRepeater.DataBind();
 
-            if (roomName.Text == "")
+            if (roomName.SelectedIndex == 0)
                 ClassName.Text = "Class Name: All";
             else
                 ClassName.Text = "Class Name: " + roomName.Text;
