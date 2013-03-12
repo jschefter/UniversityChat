@@ -44,6 +44,7 @@ public class LoginWindow extends Activity
 	private TextView signUpLink;
 	private AlertDialog.Builder builder;
 	private AlertDialog dialog;
+	private String newLoginURL;
 	private String newHostURL; //user supplied host
 	private int loginFlag; //determines whether login or loginanonymous button pressed
 	
@@ -57,6 +58,8 @@ public class LoginWindow extends Activity
 		TextView tv = (TextView) findViewById(R.id.uchatheader);
 		tv.setTypeface(orbitron);
 		loginFlag = -1;
+		newHostURL = null;
+		newLoginURL = null;
 		
 		//clear stored pref data
 //		SharedPreferences sharedPref = getSharedPreferences(Constants.LOG_IN_PREF,Context.MODE_PRIVATE);
@@ -68,7 +71,8 @@ public class LoginWindow extends Activity
 		
 		//check if user set host
 		SharedPreferences sharedPref1 = getSharedPreferences(Constants.HOST_PREF,Context.MODE_PRIVATE);
-		newHostURL = sharedPref1.getString("host","");
+		newLoginURL = sharedPref1.getString("loginURL","");
+		System.out.println("loginURL after shared pref get: " + newLoginURL);
 		
 		//check if user opted to save log in info and use it if valid
 		SharedPreferences sharedPref2 = getSharedPreferences(Constants.LOG_IN_PREF,Context.MODE_PRIVATE);
@@ -143,17 +147,19 @@ public class LoginWindow extends Activity
                 final TextView editText = (TextView) view.findViewById(R.id.editText_change_host);
                 
                 //set the textbox to be that of the current host whether default or set by user
-                if(newHostURL.equals(""))
-                	editText.setText(Constants.DEFAULT_HOST);
+                if(newLoginURL.equals(""))
+                	editText.setText(Constants.DEFAULT_LOGIN);
                 else
-                	editText.setText(newHostURL);
+                	editText.setText(newLoginURL);
+                
+                
                 
                 builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
      	           public void onClick(DialogInterface dialog, int id) {
-     	               newHostURL = editText.getText().toString();
+     	               newLoginURL = editText.getText().toString();
      	               SharedPreferences sharedPref = getSharedPreferences(Constants.HOST_PREF,Context.MODE_PRIVATE);
      	               SharedPreferences.Editor editor = sharedPref.edit();
-     	               editor.putString("host", newHostURL); //clear stored info
+     	               editor.putString("loginURL", newLoginURL); //clear stored info
      	               editor.commit();
      	           }});
      	       
@@ -161,10 +167,12 @@ public class LoginWindow extends Activity
        	           public void onClick(DialogInterface dialog, int id) {
 						SharedPreferences sharedPref = getSharedPreferences(Constants.HOST_PREF,Context.MODE_PRIVATE);
 						SharedPreferences.Editor editor = sharedPref.edit();
-						editor.putString("host", Constants.DEFAULT_HOST); //clear stored info
-						newHostURL = null;
+						editor.putString("loginURL", Constants.DEFAULT_LOGIN); //clear stored info
+						newLoginURL = null;
 						editor.commit();
 						dialog.cancel();
+						Toast.makeText(getApplicationContext(), "loginURL set to default", Toast.LENGTH_LONG).show();
+						
        	           }});
                 
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -233,12 +241,14 @@ public class LoginWindow extends Activity
 			
 			try {
 				String query = "username=" + URLEncoder.encode(credentials[0], "UTF-8") + "&password=" + URLEncoder.encode(credentials[1], "UTF-8");
-				URL url;
+				 URL url = new URL(Constants.DEFAULT_LOGIN);
 				
-				if(newHostURL != null) //user has supplied host URL
-					url = new URL(newHostURL);
+				if(!newLoginURL.equals("")) //user has supplied host URL
+					url = new URL(newLoginURL);
 				else
-					url = new URL(Constants.DEFAULT_HOST); //use default URL
+					url = new URL(Constants.DEFAULT_LOGIN); //use default URL
+			
+				System.out.println("Login Host: " + url.toString());
 				
 				HttpURLConnection connection = null;
 				InputStream inputStream = null;
@@ -292,8 +302,8 @@ public class LoginWindow extends Activity
 					editor.putString("username", userCredentials[0]);
 					editor.putString("password", userCredentials[1]); //pw in plain text need to fix
 					editor.putString("savedlogin", "yes");
-					System.out.println("Before Commit UN: " + userCredentials[0]);
-					System.out.println("Before Commit PW: " + userCredentials[1]);
+//					System.out.println("Before Commit UN: " + userCredentials[0]);
+//					System.out.println("Before Commit PW: " + userCredentials[1]);
 					editor.commit();
 				}
 				else //log in not saved

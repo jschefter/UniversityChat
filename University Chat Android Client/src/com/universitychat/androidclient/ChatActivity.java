@@ -60,12 +60,12 @@ public class ChatActivity extends FragmentActivity
         
         Bundle extras = getIntent().getExtras();
         String[] userCredentials = extras.getStringArray("user_credentials");
-        URL = extras.getString("newHostURL");
+        //URL = extras.getString("newHostURL");
         username = userCredentials[0];
         password = userCredentials[1];
         currentChannel = "";
         
-        if(URL == null) //new host not provided by user, connect to default host
+        //if(URL == null) //new host not provided by user, connect to default host
         	URL = Constants.DEFAULT_HOST;
         
         initializeWebView();
@@ -218,9 +218,16 @@ public class ChatActivity extends FragmentActivity
         	case R.id.menu_sign_out:
         		SharedPreferences sharedPref = getSharedPreferences(Constants.LOG_IN_PREF,Context.MODE_PRIVATE);
         		SharedPreferences.Editor editor = sharedPref.edit();
+        		System.out.println("B4--UN: " + sharedPref.getString("username", ""));
+        		System.out.println("B4--PW: " + sharedPref.getString("password", ""));
+        		System.out.println("B4--SL: " + sharedPref.getString("savedlogin", ""));
         		editor.putString("username", ""); //clear stored info
 				editor.putString("password", ""); //clear stored info
 				editor.putString("savedlogin", "no");
+				editor.commit();
+				System.out.println("AF--UN: " + sharedPref.getString("username", ""));
+        		System.out.println("AF--PW: " + sharedPref.getString("password", ""));
+        		System.out.println("AF--SL: " + sharedPref.getString("savedlogin", ""));
 				
 				// leave current channel...
         		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
