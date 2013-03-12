@@ -133,6 +133,7 @@
     <Content Include="Scripts\jquery.signalR-1.0.1.js" />
     <Content Include="Scripts\jquery.signalR-1.0.1.min.js" />
     <Content Include="Scripts\overlay.js" />
+    <Content Include="Scripts\upload.php" />
     <Content Include="Scripts\web-client.js" />
     <Content Include="Scripts\chat-data-source.js" />
     <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />

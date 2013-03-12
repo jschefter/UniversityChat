@@ -33,7 +33,7 @@
         
         <form id="Form2" runat="server">
             <asp:Label ID="Label1" runat="server">Class name:</asp:Label>
-            <asp:TextBox runat="server" ID="roomName" placeholder="CSSxxx"></asp:TextBox> <br />
+            <asp:DropDownList id="roomName" runat="server"/> <br />
             
             <p>
                 From: <input runat="server" type="text" id="datepickerFrom" /> <br />

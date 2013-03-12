@@ -28,7 +28,36 @@ namespace UniversityChat
 
     public partial class Log : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e) { }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                string connectionSource =
+                    ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
+                SqlConnection connection = new SqlConnection(connectionSource);
+
+                using (connection)
+                {
+                    connection.Open();
+                    SqlCommand roomCommand;
+                    string sqlRoomString = string.Format("SELECT [RoomName] FROM [ucdatabase].[UniversityChat].[Rooms];");
+                    roomCommand = new SqlCommand(sqlRoomString, connection);
+                    SqlDataReader roomReader = roomCommand.ExecuteReader();
+
+                    int count = 1;
+                    roomName.Items.Insert(0, new ListItem("Select Class"));
+
+                    while (roomReader.Read())
+                    {
+                        // LogDateTimeStamp, UserId, Text
+                        roomName.Items.Insert(count, new ListItem(roomReader[0].ToString()));
+                        count++;
+                    }
+                    roomReader.Close();
+                }
+                connection.Close();
+            }
+        }
 
         protected void buttonSubmitForm_Click(object sender, EventArgs e)
         {
