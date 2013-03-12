@@ -105,7 +105,7 @@ namespace UniversityChat
 
                 SqlCommand command;
                 string sqlString;
-                if (string.IsNullOrEmpty(dateFrom) || string.IsNullOrEmpty(dateFrom))
+                if (string.IsNullOrEmpty(datepickerFrom.Text) || string.IsNullOrEmpty(datepickerTo.Text))
                 {
                     if (classId == "")
                         sqlString = string.Format("SELECT [LogDateTimeStamp], [UserId], [Text] FROM [ucdatabase].[UniversityChat].[History] ORDER BY [LogDateTimeStamp];");
