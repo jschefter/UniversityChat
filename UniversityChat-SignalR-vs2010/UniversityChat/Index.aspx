@@ -25,8 +25,8 @@
                 <div id="chat-input">
                     <div><a id="show-upload">Upload a File</a><a id="hide-upload">Close Upload</a></div>
                     <div id="upload-ui">
-                        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="Server" />
-                        <ajaxToolkit:AjaxFileUpload ID="AjaxFileUpload1" runat="server"  />
+                        <asp:ToolkitScriptManager id="ToolkitScriptManager1" runat="Server" />
+                        <ajaxToolkit:AjaxFileUpload id="AjaxUpload1" OnUploadComplete="ajaxUpload1_OnUploadComplete" runat="server"  />
                     </div>
                     <input type="text" id="message" disabled="disabled" placeholder="Type your message here and press Enter" />
                     <input type="submit" id="sendmessage" value="Send" />
