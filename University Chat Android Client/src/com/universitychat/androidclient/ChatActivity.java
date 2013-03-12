@@ -39,6 +39,7 @@ public class ChatActivity extends FragmentActivity
     private String username;
     private String password;
     private String currentChannel;
+    private String newHost;
     private ViewPager viewPager;
     private FragmentManager fragmentManager;
     private MyViewPagerAdapter pagerAdapter;
@@ -60,13 +61,15 @@ public class ChatActivity extends FragmentActivity
         
         Bundle extras = getIntent().getExtras();
         String[] userCredentials = extras.getStringArray("user_credentials");
-        //URL = extras.getString("newHostURL");
+        newHost = extras.getString("newHost");
         username = userCredentials[0];
         password = userCredentials[1];
         currentChannel = "";
         
-        //if(URL == null) //new host not provided by user, connect to default host
-        	URL = Constants.DEFAULT_HOST;
+        if(newHost.equals("") || newHost == null) //new host not provided by user, connect to default host
+        	URL = (Constants.DEFAULT_HOST + Constants.DEFAULT_HOST_EXT);
+        else
+        	URL = (newHost + Constants.DEFAULT_HOST_EXT);
         
         initializeWebView();
         
@@ -102,7 +105,6 @@ public class ChatActivity extends FragmentActivity
          
         /** Instantiating FragmentPagerAdapter */
         pagerAdapter = new MyViewPagerAdapter(fragmentManager, fragments);
- 
         
         /** Setting the pagerAdapter to the pager object */
         viewPager.setAdapter(pagerAdapter);
