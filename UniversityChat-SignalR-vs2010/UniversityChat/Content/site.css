@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+button, input[type=submit] {
+    padding: 2px 4px;
+}
+
 .username {
     display: none;
 }
@@ -349,4 +353,26 @@ a.feedback  {
     visibility: visible;
     top: 0px;
     right: 1px; 
+}
+
+.login-box, .register-box {
+    margin-left: 10px;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+.login-box p, .register-box p {
+    line-height: 1.5em;
+}
+
+.login-box span.label {
+    display: inline-block;
+	width: 100px;
+}
+
+.register-box span.label {
+    display: inline-block;
+	width: 150px;
 }

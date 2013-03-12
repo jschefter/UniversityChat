@@ -65,7 +65,7 @@ namespace UniversityChat
             }
             else
             {
-                label.CssClass += "invalid";
+                label.CssClass += " invalid";
                 return false;
             }
         }
