@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:tag="unique_tag1"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/textView_chat_room_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textViewChat"
+        android:layout_width="fill_parent"
+        android:layout_height="361dp"
+        android:layout_weight="39.54"
+        android:scrollHorizontally="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editChatMessage"
+            android:layout_width="258dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.97"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="@string/type_msg_prompt"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/buttonSendMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:hint="@string/send_btn"
+            android:onClick="sendMessage"
+            android:text="@string/send_btn" />
+
+    </LinearLayout>
+    
+
+    <WebView
+        android:id="@+id/androidWebView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="invisible" >
+    </WebView>
+
+</LinearLayout>
