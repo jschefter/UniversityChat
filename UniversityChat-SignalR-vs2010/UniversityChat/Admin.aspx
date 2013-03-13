@@ -1,27 +1,20 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="UniversityChat.Admin" %>
+﻿<%@ Page Title="University Chat Admin Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="UniversityChat.Admin" %>
+<%@ Import Namespace="UniversityChat" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Admin Page</title>
-</head>
-<body>
-    <h1>Admin Page</h1>
-    <form id="form1" runat="server">
+<asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
-        <asp:DropDownList id="roomName" runat="server"/>
-        <asp:Button runat="server" Text="Remove Channel" OnClick="RemoveChannel_Click"/> <br/>
-    </div>
-    
-    <div>
+        <h1>Admin Page</h1>
+        <br />
+        
         <h3>Class Settings</h3>
+        <asp:DropDownList id="roomName" runat="server"/>
+        <asp:Button ID="Button2" runat="server" Text="Remove Channel" OnClick="RemoveChannel_Click"/> <br /> <br />
+
+        <h3>User Settings</h3>
         <asp:DropDownList id="userName" runat="server"/>
-        <asp:Button runat="server" Text="Delete User" OnClick="RemoveUser_Click"/> <br/>
+        <asp:Button ID="Button1" runat="server" Text="Delete User" OnClick="RemoveUser_Click"/> <br /> <br />
+        
+        <asp:Label ID="resultLabel" runat="server"></asp:Label>
     </div>
-    </form>
-    
-    <br />
-    <asp:Label ID="resultLabel" runat="server"></asp:Label>
-</body>
-</html>
+</asp:Content>
+

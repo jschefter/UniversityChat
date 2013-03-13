@@ -88,9 +88,9 @@ namespace UniversityChat
             using (connection)
             {
                 connection.Open();
-
+                
                 #region Remove Constraints
-
+                /*
                 // Remove room users constraint
                 SqlCommand removeRoomUsersConstraintCommand;
                 string sqlRemoveRoomUsersConstraintString = string.Format("ALTER TABLE [ucdatabase].[UniversityChat].[RoomUsers] DROP CONSTRAINT FK_UserRooms_Users;");
@@ -104,7 +104,7 @@ namespace UniversityChat
                 removeHistoryConstraintCommand = new SqlCommand(sqlRemoveHistoryConstraintString, connection);
                 SqlDataReader removeHistoryConstraintReader = removeHistoryConstraintCommand.ExecuteReader();
                 removeHistoryConstraintReader.Close();
-
+                */
                 #endregion
 
                 #region Delete user
@@ -119,7 +119,7 @@ namespace UniversityChat
                 #endregion
 
                 #region Add Constraints
-
+                /*
                 // Add room users constraint
                 SqlCommand addRoomUsersConstraintCommand;
                 string sqlAddRoomUsersConstraintString = string.Format("ALTER TABLE [ucdatabase].[UniversityChat].[RoomUsers] ADD CONSTRAINT FK_UserRooms_Users FOREIGN KEY([UserId]) REFERENCES [UniversityChat].[Users](UserId);");
@@ -133,7 +133,7 @@ namespace UniversityChat
                 addHistoryConstraintCommand = new SqlCommand(sqlAddHistoryConstraintString, connection);
                 SqlDataReader addHistoryConstraintReader = addHistoryConstraintCommand.ExecuteReader();
                 addHistoryConstraintReader.Close();
-
+                */
                 #endregion
             }
             connection.Close();
