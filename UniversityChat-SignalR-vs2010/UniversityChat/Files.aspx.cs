@@ -41,7 +41,7 @@ namespace UniversityChat
             {
                 connection.Open();
                 SqlCommand fileCommand;
-                string sqlFileString = string.Format("SELECT * FROM [ucdatabase].[UniversityChat].[File];");
+                string sqlFileString = string.Format("SELECT [FileId], [UploadDate], [FileName], [MimeType] FROM [ucdatabase].[UniversityChat].[File];");
                 fileCommand = new SqlCommand(sqlFileString, connection);
                 SqlDataReader fileReader = fileCommand.ExecuteReader();
 
@@ -50,7 +50,7 @@ namespace UniversityChat
                     // LogDateTimeStamp, FileName, FileType, Binary Data
                     files.Add(new UploadedFile(fileReader[0].ToString(), fileReader[1].ToString(),
                                                fileReader[2].ToString(), fileReader[3].ToString(),
-                                               (byte[]) fileReader[4]));
+                                               null));
                 }
                 fileReader.Close();
             }
