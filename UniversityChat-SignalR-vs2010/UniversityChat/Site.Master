@@ -81,48 +81,137 @@
         <a class="boxclose" id="boxclose2"></a>
         <h1>About University Chat</h1>
         <p>
-            University Chat was developed to ...
+            University Chat was developed by students, for students. We hope that our software can be used in the classroom
+            to aid in student learning and the education process. The primary purpose of this software is to allow for students to 
+            communicate with each other and ask questions, without disturbing a class that is in progress. This software, 
+            as well as the Android counterpart is open source and is freely available on 
+             <a href="https://github.com/jschefter/UniversityChat">github</a>.
         </p>
     </div>
 
     <div class="box" id="privacyBox">
         <a class="boxclose" id="boxclose3"></a>
-        <h1>Privacy & Terms</h1>
-        <p>
-            Privacy Page
-        </p>
+<h2>
+	Web Site Terms and Conditions of Use
+</h2>
+<h3>
+	1. Terms
+</h3>
+<p>
+	By accessing this web site, you are agreeing to be bound by these 
+	web site Terms and Conditions of Use, all applicable laws and regulations, 
+	and agree that you are responsible for compliance with any applicable local 
+	laws. If you do not agree with any of these terms, you are prohibited from 
+	using or accessing this site. The materials contained in this web site are 
+	protected by applicable copyright and trade mark law.
+</p>
+
+<h3>
+	2. Use License
+</h3>
+<p>Software is free to be used in any lawful manner desired by the individual.</p>
+<h3>
+	3. Disclaimer
+</h3>
+<ol type="a">
+	<li>
+		The materials on UniversityChat's web site are provided "as is". UniversityChat makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, UniversityChat does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.
+	</li>
+</ol>
+<h3>
+	4. Limitations
+</h3>
+<p>
+	In no event shall UniversityChat or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on UniversityChat's Internet site, even if UniversityChat or a UniversityChat authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+</p>	
+<h3>
+	5. Revisions and Errata
+</h3>
+<p>
+	The materials appearing on UniversityChat's web site could include technical, typographical, or photographic errors. UniversityChat does not warrant that any of the materials on its web site are accurate, complete, or current. UniversityChat may make changes to the materials contained on its web site at any time without notice. UniversityChat does not, however, make any commitment to update the materials.
+</p>
+<h3>
+	6. Links
+</h3>
+<p>
+	UniversityChat has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by UniversityChat of the site. Use of any such linked web site is at the user's own risk.
+</p>
+<h3>
+	7. Site Terms of Use Modifications
+</h3>
+<p>
+	UniversityChat may revise these terms of use for its web site at any time without notice. By using this web site you are agreeing to be bound by the then current version of these Terms and Conditions of Use.
+</p>
+<h3>
+	8. Governing Law
+</h3>
+<p>
+	Any claim relating to UniversityChat's web site shall be governed by the laws of the State of Washington without regard to its conflict of law provisions.
+</p>
+<p>
+	General Terms and Conditions applicable to Use of a Web Site.
+</p>
+<h2>
+	Privacy Policy
+</h2>
+<p>
+	Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.
+</p>
+<ul>
+	<li>
+		We will collect and use of personal information solely with the objective of fulfilling those purposes specified by us and for other compatible purposes, unless we obtain the consent of the individual concerned or as required by law.		
+	</li>
+	<li>
+		We will only retain personal information as long as necessary for the fulfillment of those purposes. 
+	</li>
+	<li>
+		We will collect personal information by lawful and fair means and, where appropriate, with the knowledge or consent of the individual concerned. 
+	</li>
+	<li>
+		Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date. 
+	</li>
+	<li>
+		We will protect personal information by reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.
+	</li>
+</ul>
+<p>
+	We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained. 
+</p>		
     </div>
     
     <div class="box" id="helpBox">
         <a class="boxclose" id="boxclose4"></a>
         <h1>Help</h1>
-        <p id="publicChannel" style="cursor: pointer; color: mediumslateblue;">How to create a public channel</p>
-        <p id="privateChannel" style="cursor: pointer; color: mediumvioletred;">How to create a private channel</p>
-        <p id="privateChannelCommands" style="cursor: pointer; color: mediumturquoise;">Private channel commands</p>
+        <p id="publicChannel" style="cursor: pointer; color: mediumslateblue;">How to register</p>
+        <p id="privateChannel" style="cursor: pointer; color: mediumvioletred;">How to join a chat room</p>
+        <p id="privateChannelCommands" style="cursor: pointer; color: mediumturquoise;">How to leave a chat room</p>
     </div>
     
     <div class="box" id="publicChannelBox">
         <a class="boxclose" id="boxclose5"></a>
-        <h1>How to create a public channel</h1>
-        <p>1. Do this</p>
-        <p>2. Do that</p>
+        <h1>How to register</h1>
+        <p>1. Click the 'Login' button in the upper right corner</p>
+        <p>2. Click the 'Register for an account' link</p>
+        <p>3. Enter desired information and click the 'Create Account' button</p>
+        <p>4. Click the provided link to login</p>
         <p id="previous" style="cursor: pointer; color: crimson">Go to previous</p>
     </div>
     
     <div class="box" id="privateChannelBox">
         <a class="boxclose" id="boxclose6"></a>
-        <h1>How to create a private channel</h1>
-        <p>1. Do this</p>
-        <p>2. Do that</p>
+        <h1>How to join a chat room</h1>
+        <p>1. Ensure that you are logged in or set as an anonymous user</p>
+        <p>2. In the left-most column, click on the chat channel you wish to join</p>
+         <p>3. The chat channel should now be visible in the center of website, with the other open channels appearing as additional tabs</p>
         <p id="previous2" style="cursor: pointer; color: crimson">Go to previous</p>
     </div>
     
     <div class="box" id="privateChannelCommandsBox">
         <a class="boxclose" id="boxclose7"></a>
-        <h1>Private channel commands</h1>
-        <p>Kick</p>
-        <p>Invite</p>
-        <p>Delegate</p>
+        <h1>How to leave a chat room</h1>
+        <p>1. Ensure that you are logged in as a user or anonymous, and currently in at least one chat rooms</p>
+        <p>2. In the left-most column, click on the chat channel you wish to leave</p>
+        <p>2. Alternatively, click the small X icon in the right of chartroom tab you wish to leave</p>
         <p id="previous3" style="cursor: pointer; color: crimson">Go to previous</p>
     </div>
 </body>

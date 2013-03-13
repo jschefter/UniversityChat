@@ -21,25 +21,24 @@ To install our application, you must first allow your device to run unsigned app
 to the settings on your device, clicking on the security tab, and checking the box to allow installation of apps from unknown sources.
 Once you have done this, simply download and run the 'University Chat.apk' file on your device, found above.
 <br /><br />
-<h2>Make sure the 'Unknown sources' box is enabled!</h2>
+<h3>Make sure the 'Unknown sources' box is enabled!</h3>
  <img src="AndroidLatest/unknownsources.jpg" alt="Make sure the 'Unknown sources' box is enabled!" height="400" width="240"> 
  <br />
 
 <h1>User Guide</h1>
- <h2>Upon installing the app you will be greeted with a login screen.</h2>
+ <h3>Upon installing the app you will be greeted with a login screen.</h3>
  <img src="AndroidLatest/main.jpg" alt="Upon installing the app you will be greeted with a login screen." height="400" width="240"> 
  <br /><br />
- <h2>After logging in you will see a list of avaliable chat channels.</h2>
+ <h3>After logging in you will see a list of avaliable chat channels.</h3>
  <img src="AndroidLatest/channels.jpg" alt="After logging in you will see a list of avaliable chat channels." height="400" width="240"> 
  <br /><br />
-  <h2>Press the menu button on your device to access core settings and functionality.</h2>
+  <h3>Press the menu button on your device to access core settings and functionality.</h3>
  <img src="AndroidLatest/menu.jpg" alt="Press the menu button on your device to access core settings and functionality." height="400" width="240"> 
  <br /><br />
- <h2>Swipe right to see the main chat screen!</h2>
+ <h3>Swipe right to see the main chat screen!</h3>
  <img src="AndroidLatest/chat.jpg" alt="Swipe right to see the main chat screen!" height="400" width="240"> 
  <br /><br />
- <h2>Swipe right again to see the list of users!</h2>
+ <h3>Swipe right again to see the list of users!</h3>
  <img src="AndroidLatest/users.jpg" alt="Swipe right again to see the list of users!" height="400" width="240"> 
 <br />
-// TODO
 </asp:Content>
