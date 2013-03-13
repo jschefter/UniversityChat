@@ -22,21 +22,30 @@ namespace UniversityChat {
         protected global::System.Web.UI.WebControls.Label UserName;
         
         /// <summary>
-        /// ToolkitScriptManager1 control.
+        /// uploadFile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ToolkitScriptManager ToolkitScriptManager1;
+        protected global::System.Web.UI.WebControls.FileUpload uploadFile;
         
         /// <summary>
-        /// AjaxUpload1 control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AjaxFileUpload AjaxUpload1;
+        protected global::System.Web.UI.WebControls.LinkButton btnUpload;
+        
+        /// <summary>
+        /// fileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label fileName;
     }
 }

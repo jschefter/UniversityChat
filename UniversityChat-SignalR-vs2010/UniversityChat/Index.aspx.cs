@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace UniversityChat
 {
@@ -25,6 +26,53 @@ namespace UniversityChat
             }
         }
 
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            if (!uploadFile.HasFile)
+                return;
+
+            fileName.Text = "Uploaded " + uploadFile.FileName + "Content Type " + uploadFile.PostedFile.ContentType;
+
+            byte[] fileSize = new byte[uploadFile.PostedFile.ContentLength];
+            HttpPostedFile uploadedFile = uploadFile.PostedFile;
+            uploadedFile.InputStream.Read(fileSize, 0, (int)uploadFile.PostedFile.ContentLength);
+
+            string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
+            SqlConnection connection = new SqlConnection(connectionSource);
+
+            using (connection)
+            {
+                connection.Open();
+
+                SqlCommand uploadFileCommand = new SqlCommand();
+                uploadFileCommand.CommandText = "INSERT INTO [ucdatabase].[UniversityChat].[File] ([UploadDate], [FileName], [MimeType], [BinaryData]) VALUES (@UploadDate, @FileName, @MimeType, @BinaryData)";
+                uploadFileCommand.CommandType = CommandType.Text;
+                uploadFileCommand.Connection = connection;
+
+                SqlParameter uploadDate = new SqlParameter("@UploadDate", SqlDbType.DateTime);
+                uploadDate.Value = DateTime.Now;
+                uploadFileCommand.Parameters.Add(uploadDate);
+
+                SqlParameter uploadFileName = new SqlParameter("@FileName", SqlDbType.Text);
+                uploadFileName.Value = uploadFile.FileName;
+                uploadFileCommand.Parameters.Add(uploadFileName);
+
+                SqlParameter mimeType = new SqlParameter("@MimeType", SqlDbType.Text);
+                mimeType.Value = uploadFile.PostedFile.ContentType;
+                uploadFileCommand.Parameters.Add(mimeType);
+
+                SqlParameter uploadData = new SqlParameter("@BinaryData", SqlDbType.Image);
+                uploadData.Value = fileSize;
+                uploadFileCommand.Parameters.Add(uploadData);
+
+                SqlDataReader uploadFileCommandReader = uploadFileCommand.ExecuteReader();
+                uploadFileCommandReader.Read();
+                uploadFileCommandReader.Close();
+            }
+            connection.Close();
+        }
+
+        /*
         protected void ajaxUpload1_OnUploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
         {
             //// Generate file path
@@ -91,5 +139,6 @@ namespace UniversityChat
             br.Close();
             fs.Close();
         }
+        */
     }
 }

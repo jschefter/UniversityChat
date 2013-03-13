@@ -115,7 +115,7 @@ namespace UniversityChat
                 else
                 {
                     if (classId == "")
-                        sqlString = string.Format("SELECT [LogDateTimeStamp], [UserId], [Text] FROM [ucdatabase].[UniversityChat].[History] WHERE [LogDateTimeStamp] BETWEEN '{0}' AND '{1}' ORDER BY [LogDateTimeStamp];", dateFrom, dateTo);
+                        sqlString = string.Format("SELECT [LogDateTimeStamp], [UserId]NickName, [Text] FROM [ucdatabase].[UniversityChat].[History] WHERE [LogDateTimeStamp] BETWEEN '{0}' AND '{1}' ORDER BY [LogDateTimeStamp];", dateFrom, dateTo);
                     else
                         sqlString = string.Format("SELECT [LogDateTimeStamp], [UserId], [Text] FROM [ucdatabase].[UniversityChat].[History] WHERE [LogDateTimeStamp] BETWEEN '{0}' AND '{1}' AND [RoomId] = '{2}' ORDER BY [LogDateTimeStamp];", dateFrom, dateTo, classId);
                 }
