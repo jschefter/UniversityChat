@@ -87,11 +87,12 @@ namespace UniversityChat
             connection.Close();
 
             Response.ClearContent();
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + file.FileName);
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + file.FileName.Replace(",", ""));
             BinaryWriter binaryWriter = new BinaryWriter(Response.OutputStream);
             binaryWriter.Write(file.BinaryData);
-            binaryWriter.Close();
             Response.ContentType = file.FileType;
+            Response.Flush();
+            binaryWriter.Close();
             Response.End();
         }
     }
