@@ -52,6 +52,33 @@
         });
     });
 
+    // Privacy & Terms Page 2
+    $('#toPrivacyBox2').click(function () {
+        $('#privacyBox').fadeOut('fast', function () {
+            $('#privacyBox2').fadeIn('fast');
+            $('#privacyBox').hide();
+            $('#privacyBox').css('top', '200px');
+        });
+    });
+
+    $('#toPrivacyBox').click(function () {
+        $('#privacyBox2').fadeOut('fast', function () {
+            $('#privacyBox2').hide();
+            $('#privacyBox2').css('top', '200px');
+            $('#privacyBox').fadeIn('fast');
+        });
+    });
+
+    $('#boxclose3a').click(function () {
+        $('#boxMenu').fadeOut('fast');
+        $('#arrowBox').fadeOut('fast');
+        $('#privacyBox2').fadeOut('fast', function () {
+            $('privacyBox2').hide();
+            $('#publicChannelBox').css('top', '200px');
+            $('#overlayOrange').fadeOut('fast');
+        });
+    });
+
     // Help overlay
     $('#help').click(function () {
         $('#overlayOrange').fadeIn('fast', function () {
@@ -154,6 +181,7 @@
         $('#privateChannelCommandsBox').fadeOut('fast');
         $('#helpBox').fadeOut('fast');
         $('#privacyBox').fadeOut('fast');
+        $('#privacyBox2').fadeOut('fast');
         $('#aboutBox').fadeIn('fast');
     });
 
@@ -176,6 +204,7 @@
         $('#privateChannelCommandsBox').fadeOut('fast');
         $('#aboutBox').fadeOut('fast');
         $('#privacyBox').fadeOut('fast');
+        $('#privacyBox2').fadeOut('fast');
         $('#helpBox').fadeIn('fast');
     });
 });
