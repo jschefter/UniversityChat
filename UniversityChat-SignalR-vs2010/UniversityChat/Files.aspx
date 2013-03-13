@@ -16,6 +16,9 @@
         <ItemTemplate>
             <tr class="myRow">
                 <td>
+                    <asp:LinkButton runat="server" ID="fileID" Text="Download" OnCommand="downloadLink_Click" CommandArgument="<%#((UploadedFile)Container.DataItem).ID%>"></asp:LinkButton>
+                </td>
+                <td>
                     <%#((UploadedFile)Container.DataItem).LogTime%>
                 </td>
                 <td>

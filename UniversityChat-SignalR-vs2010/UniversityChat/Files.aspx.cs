@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
 
@@ -11,18 +12,20 @@ namespace UniversityChat
 {
     public class UploadedFile
     {
-        public UploadedFile(string logTime, string fileName, string fileType, string binaryData)
+        public UploadedFile(string id, string logTime, string fileName, string fileType, byte[] binaryData)
         {
+            ID = id;
             LogTime = logTime;
             FileName = fileName;
             FileType = fileType;
             BinaryData = binaryData;
         }
 
+        public string ID { get; set; }
         public string LogTime { get; set; }
         public string FileName { get; set; }
         public string FileType { get; set; }
-        public string BinaryData { get; set; }
+        public byte[] BinaryData { get; set; }
     }
 
     public partial class Files : System.Web.UI.Page
@@ -31,8 +34,7 @@ namespace UniversityChat
         {
             List<UploadedFile> files = new List<UploadedFile>();
 
-            string connectionSource =
-                    ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
+            string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
             SqlConnection connection = new SqlConnection(connectionSource);
 
             using (connection)
@@ -45,8 +47,10 @@ namespace UniversityChat
 
                 while (fileReader.Read())
                 {
-                    // LogDateTimeStamp, UserId, Text
-                    files.Add(new UploadedFile(fileReader[1].ToString(), fileReader[2].ToString(), fileReader[3].ToString(), fileReader[4].ToString()));
+                    // LogDateTimeStamp, FileName, FileType, Binary Data
+                    files.Add(new UploadedFile(fileReader[0].ToString(), fileReader[1].ToString(),
+                                               fileReader[2].ToString(), fileReader[3].ToString(),
+                                               (byte[]) fileReader[4]));
                 }
                 fileReader.Close();
             }
@@ -55,6 +59,40 @@ namespace UniversityChat
             // Bind the chat logs to the repeater
             LogRepeater.DataSource = files;
             LogRepeater.DataBind();
+        }
+
+        protected void downloadLink_Click(object sender, CommandEventArgs e)
+        {
+            string id = e.CommandArgument.ToString();
+
+            string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
+            SqlConnection connection = new SqlConnection(connectionSource);
+
+            UploadedFile file;
+            using (connection)
+            {
+                connection.Open();
+                SqlCommand fileCommand;
+                string sqlFileString =
+                    string.Format("SELECT * FROM [ucdatabase].[UniversityChat].[File] WHERE [FileId] = '{0}';", id);
+                fileCommand = new SqlCommand(sqlFileString, connection);
+                SqlDataReader fileReader = fileCommand.ExecuteReader();
+
+                fileReader.Read();
+                file = new UploadedFile(fileReader[0].ToString(), fileReader[1].ToString(),
+                                               fileReader[2].ToString(), fileReader[3].ToString(),
+                                               (byte[]) fileReader[4]);
+                fileReader.Close();
+            }
+            connection.Close();
+
+            Response.ClearContent();
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + file.FileName);
+            BinaryWriter binaryWriter = new BinaryWriter(Response.OutputStream);
+            binaryWriter.Write(file.BinaryData);
+            binaryWriter.Close();
+            Response.ContentType = file.FileType;
+            Response.End();
         }
     }
 }
