@@ -25,6 +25,8 @@
             <asp:Label ID="oldPasswordLabel" runat="server" Text="Enter your old password to make the changes: "></asp:Label>
             <asp:TextBox ID="oldPasswordBox" runat="server" TextMode="Password"></asp:TextBox> <br />
             <asp:Button ID="submitButton" runat="server" Text="Submit" OnClick="btnSubmit_Click"/> <br /> <br />
+            
+            <asp:LinkButton runat="server" ID="adminLink" Visible="False" Text="Admin Profile" OnCommand="adminLink_Click"></asp:LinkButton> <br /> <br />
         </form>
         
         <asp:Label ID="resultLabel" runat="server"></asp:Label>

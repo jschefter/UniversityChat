@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -76,7 +77,7 @@ namespace UniversityChat
 
         protected void RemoveUser_Click(object sender, EventArgs e)
         {
-            if (string.Equals(roomName.Text, "Select User"))
+            if (string.Equals(userName.Text, "Select User"))
             {
                 resultLabel.Text = "No changes made.";
                 return;
@@ -143,10 +144,54 @@ namespace UniversityChat
             RefreshDropDownList();
         }
 
+        protected void ChangeRoleId_Click(object sender, EventArgs e)
+        {
+            if (string.Equals(userName.Text, "Select User"))
+            {
+                resultLabel.Text = "Invalid user.";
+                return;
+            }
+
+            string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
+            SqlConnection connection = new SqlConnection(connectionSource);
+
+            using (connection)
+            {
+                connection.Open();
+
+                // Change role ID for selected user
+                SqlCommand changeRoleIdCommand;
+                string sqlChangeRoleIdString = string.Format("UPDATE [ucdatabase].[UniversityChat].[Users] SET [UserRoleId] = '{0}' WHERE [NickName] = '{1}';", roleID.SelectedIndex, userName.Text);
+                changeRoleIdCommand = new SqlCommand(sqlChangeRoleIdString, connection);
+                SqlDataReader changeRoleIdReader = changeRoleIdCommand.ExecuteReader();
+                changeRoleIdReader.Close();
+            }
+            connection.Close();
+
+            switch (roleID.SelectedIndex)
+            {
+                case (0):
+                    resultLabel.Text = "User '" + userName.Text + "' is now an Admin.";
+                    break;
+                case (1):
+                    resultLabel.Text = "User '" + userName.Text + "' is now a moderator.";
+                    break;
+                case (2):
+                    resultLabel.Text = "User '" + userName.Text + "' is now an user.";
+                    break;
+                case (3):
+                    resultLabel.Text = "User '" + userName.Text + "' is now a guest.";
+                    break;
+            }
+        }
+
         private void RefreshDropDownList()
         {
             string name = Page.User.Identity.Name;
             string roleId;
+
+            for (int i = 0; i < 4; i++)
+                roleID.Items.Insert(i, new ListItem(i.ToString(CultureInfo.InvariantCulture)));
 
             string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
             SqlConnection connection = new SqlConnection(connectionSource);

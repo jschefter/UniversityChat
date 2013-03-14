@@ -13,7 +13,9 @@
         <h3>User Settings</h3>
         <asp:DropDownList id="userName" runat="server"/>
         <asp:Button ID="Button1" runat="server" Text="Delete User" OnClick="RemoveUser_Click"/> <br /> <br />
-        
+        <asp:DropDownList ID="roleID" runat="server"/>
+        <asp:Button runat="server" Text="Change Role ID for User" OnClick="ChangeRoleId_Click"/> <br /> <br />
+
         <asp:Label ID="resultLabel" runat="server"></asp:Label>
     </div>
 </asp:Content>

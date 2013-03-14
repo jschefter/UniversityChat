@@ -31,7 +31,7 @@ namespace UniversityChat
         {
             if (!IsPostBack)
             {
-                TempUser user;
+                string roleId;
 
                 string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
                 SqlConnection connection = new SqlConnection(connectionSource);
@@ -39,17 +39,30 @@ namespace UniversityChat
                 using (connection)
                 {
                     connection.Open();
-                    SqlCommand userCommand;
-                    string sqlUserString = string.Format("SELECT [NickName], [Email], [Password] FROM [ucdatabase].[UniversityChat].[Users] WHERE [NickName] = '{0}';", Page.User.Identity.Name);
-                    userCommand = new SqlCommand(sqlUserString, connection);
-                    SqlDataReader userReader = userCommand.ExecuteReader();
 
-                    userReader.Read();
-                    user = new TempUser(userReader[0].ToString(), userReader[1].ToString(), userReader[2].ToString());
-                    userReader.Close();
+                    // Find the role id of the user
+                    SqlCommand roleIdCommand;
+                    string sqlRoleIdString = string.Format("SELECT [UserRoleId] FROM [ucdatabase].[UniversityChat].[Users] WHERE [NickName] = '{0}';", Page.User.Identity.Name);
+                    roleIdCommand = new SqlCommand(sqlRoleIdString, connection);
+                    SqlDataReader roleIdReader = roleIdCommand.ExecuteReader();
+
+                    roleIdReader.Read();
+                    roleId = roleIdReader[0].ToString();
+                    roleIdReader.Close();
                 }
                 connection.Close();
+
+                // Check if the user is an admin or a mod
+                if (string.Equals("0", roleId) || string.Equals("1", roleId))
+                {
+                    adminLink.Visible = true;
+                }
             }
+        }
+
+        protected void adminLink_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Admin.aspx");
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
