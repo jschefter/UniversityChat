@@ -142,6 +142,7 @@
     <Content Include="Scripts\jquery-ui-1.10.0.custom.min.js" />
     <Content Include="Scripts\web-client-chat-ui.js" />
     <Content Include="Admin.aspx" />
+    <Content Include="UserProfile.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -251,6 +252,13 @@
     </Compile>
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

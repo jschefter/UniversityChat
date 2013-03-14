@@ -27,5 +27,10 @@ namespace UniversityChat
         {
            Response.Redirect("~/Logout.aspx");
         }
+
+        protected void LinkToUserProfile_Click(object sender, EventArgs e)
+        {
+           Response.Redirect("~/UserProfile.aspx");
+        }
     }
 }

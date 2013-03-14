@@ -145,9 +145,38 @@ namespace UniversityChat
 
         private void RefreshDropDownList()
         {
+            string name = Page.User.Identity.Name;
+            string roleId;
+
             string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
             SqlConnection connection = new SqlConnection(connectionSource);
 
+            using (connection)
+            {
+                connection.Open();
+
+                SqlCommand userCommand;
+                string sqlUserString = string.Format("SELECT [UserRoleId] FROM [ucdatabase].[UniversityChat].[Users] WHERE [NickName] = '{0}';", name);
+                userCommand = new SqlCommand(sqlUserString, connection);
+                SqlDataReader userReader = userCommand.ExecuteReader();
+
+                userReader.Read();
+                roleId = userReader[0].ToString();
+                userReader.Close();
+            }
+            connection.Close();
+
+            if (string.Equals("0", roleId) || string.Equals("1", roleId))
+                RefreshAdminSettings(connection, connectionSource);
+            else
+            {
+                resultLabel.Text = "You do not have the permission to use these controls!";
+            }
+        }
+
+        private void RefreshAdminSettings(SqlConnection connection, string connectionSource)
+        {
+            connection = new SqlConnection(connectionSource);
             using (connection)
             {
                 connection.Open();
