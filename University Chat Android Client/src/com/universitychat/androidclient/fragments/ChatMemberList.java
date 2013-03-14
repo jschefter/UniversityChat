@@ -2,6 +2,7 @@ package com.universitychat.androidclient.fragments;
 
 import com.universitychat.androidclient.R;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class ChatMemberList extends Fragment
     {
 		System.out.println("member list oncreateview called");
     	View v = inflater.inflate(R.layout.fragment_chat_member_list, container,false);
+    	v.setBackgroundColor(Color.DKGRAY);
     	numUsers = (TextView) v.findViewById(R.id.textView_num_users);
     	memberList = (ListView) v.findViewById(R.id.member_list);
     	
@@ -59,9 +61,9 @@ public class ChatMemberList extends Fragment
 	
 	public void setChatMemberList(String[] newMemberList)
 	{
-		System.out.println("setChatMemberList called");
-		for(int i = 0; i < newMemberList.length; i++)
-			System.out.println(newMemberList[i]);
+//		System.out.println("setChatMemberList called");
+//		for(int i = 0; i < newMemberList.length; i++)
+//			System.out.println(newMemberList[i]);
 		
 		chatMemberArray = newMemberList;
 		memberList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, chatMemberArray));

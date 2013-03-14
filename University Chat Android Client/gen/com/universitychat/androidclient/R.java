@@ -25,7 +25,7 @@ public final class R {
         public static final int buttonSendMessage=0x7f070021;
         public static final int chkbx_user_save_login=0x7f070006;
         public static final int editChatMessage=0x7f070020;
-        public static final int editText1=0x7f070016;
+        public static final int editText1=0x7f070019;
         public static final int editTextEmail=0x7f07000f;
         public static final int editTextFName=0x7f070010;
         public static final int editTextLName=0x7f070011;
@@ -33,8 +33,8 @@ public final class R {
         public static final int editTextUserName=0x7f07000c;
         public static final int editTextVPassword=0x7f07000e;
         public static final int editText_change_host=0x7f070015;
-        public static final int list_chat_private_room=0x7f070019;
-        public static final int list_chat_public_room=0x7f070017;
+        public static final int list_chat_private_room=0x7f070018;
+        public static final int list_chat_public_room=0x7f070016;
         public static final int member_list=0x7f07001d;
         public static final int menu_about=0x7f070029;
         public static final int menu_change_connection_host=0x7f07002a;
@@ -47,7 +47,7 @@ public final class R {
         public static final int pager=0x7f070001;
         public static final int scrollView1=0x7f070014;
         public static final int textView1=0x7f070007;
-        public static final int textView2=0x7f070018;
+        public static final int textView2=0x7f070017;
         public static final int textViewChat=0x7f07001f;
         public static final int textView_chat_room_header=0x7f07001e;
         public static final int textView_lbl_members=0x7f07001a;

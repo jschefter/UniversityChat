@@ -36,7 +36,7 @@ public class ChatActivity extends FragmentActivity
     private final int CHATROOM_FRAGMENT = 1;
     private final int MEMBERLIST_FRAGMENT = 2;
     private WebView webView;
-    private String username;
+    private String userName;
     private String password;
     private String currentChannel;
     private String newHost;
@@ -62,16 +62,32 @@ public class ChatActivity extends FragmentActivity
         Bundle extras = getIntent().getExtras();
         String[] userCredentials = extras.getStringArray("user_credentials");
         newHost = extras.getString("newHost");
-        username = userCredentials[0];
+        userName = userCredentials[0];
         password = userCredentials[1];
-        currentChannel = "";
         
-        if(newHost.equals("") || newHost == null) //new host not provided by user, connect to default host
-        	URL = (Constants.DEFAULT_HOST + Constants.DEFAULT_HOST_EXT);
-        else
-        	URL = (newHost + Constants.DEFAULT_HOST_EXT);
+//        try
+//        {
+//        	currentChannel = savedInstanceState.getString("currentChannel");
+//        	System.out.println("oncreate: saved instance try");
+//        }
+//        catch(Exception e)
+//        {
+//        	System.out.println("oncreate: saved instance catch");
+//        	currentChannel = "";
+//        }
         
+//        if(currentChannel == null)
+        	currentChannel = "";
+        
+        //Toast.makeText(getApplicationContext(), "CurrentChannel is null: " + (currentChannel == null), Toast.LENGTH_SHORT).show();
+
+//        if(newHost.equals("") || newHost == null) //new host not provided by user, connect to default host
+//        	URL = (Constants.DEFAULT_HOST + Constants.DEFAULT_HOST_EXT);
+//        else
+//        	URL = (newHost + Constants.DEFAULT_HOST_EXT);
+        URL = "http://universitychat.azurewebsites.net/Android.html";
         initializeWebView();
+        webView.loadUrl(URL);	// connect to service (start the hub).
         
         /** Getting a reference to the ViewPager defined the layout file */
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -86,21 +102,20 @@ public class ChatActivity extends FragmentActivity
         
         if(savedInstanceState == null) //create new fragments to use
         {
-        	//initializeWebView();
 	        fragments.add(Fragment.instantiate(this, ChatRoomList.class.getName()));
 	        fragments.add(Fragment.instantiate(this, ChatRoom.class.getName()));
 	        fragments.add(Fragment.instantiate(this, ChatMemberList.class.getName()));
-	        //webView.loadUrl(URL);	// connect to service (start the hub).
-	        webView.loadUrl(URL);
         }
         else //or retrieve stored fragments
         {
-        	
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoomList.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoom.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatMemberList.class.getName()));
-        	//webView.loadUrl(URL);
-        	//webView.restoreState(savedInstanceState);
+        	currentChannel = savedInstanceState.getString("currentChannel");
+        	userName = savedInstanceState.getString("userName");
+//        	outgoingWebEvents.joinChannel(currentChannel);
+        	String joinChannelUrl = String.format("javascript:joinChannel('%s', '%s')", currentChannel, userName);
+        	webView.loadUrl(joinChannelUrl);
         }
          
         /** Instantiating FragmentPagerAdapter */
@@ -110,9 +125,41 @@ public class ChatActivity extends FragmentActivity
         viewPager.setAdapter(pagerAdapter);
         
         viewPager.setCurrentItem(ROOMLIST_FRAGMENT);
-        
-        //webView.loadUrl(URL);	// connect to service (start the hub).
-        
+//        Toast.makeText(getApplicationContext(), "CurrentChannel oncreate: " + currentChannel, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "username oncreate: " + userName, Toast.LENGTH_SHORT).show();
+    }
+    
+    //Storing Fragments to be retrieved after screen orientation changes
+    @Override
+    protected void onSaveInstanceState(Bundle outState) 
+    {
+    	getSupportFragmentManager().putFragment(outState, ChatRoomList.class.getName(), pagerAdapter.getItem(ROOMLIST_FRAGMENT));
+        getSupportFragmentManager().putFragment(outState, ChatRoom.class.getName(), pagerAdapter.getItem(CHATROOM_FRAGMENT));
+        getSupportFragmentManager().putFragment(outState, ChatMemberList.class.getName(), pagerAdapter.getItem(MEMBERLIST_FRAGMENT));
+        outState.putString("currentChannel", currentChannel);
+        outState.putString("userName", userName);
+        System.out.println("UN on save: " + userName);
+//        outgoingWebEvents.leaveChannel(currentChannel);
+        //System.out.println("onSaveInst - Leave Channel Called");
+        String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
+    	webView.loadUrl(leaveChannelUrl);
+        super.onSaveInstanceState(outState);
+    }
+    
+    @Override
+    protected void onPause()
+    {
+//    	Toast.makeText(getApplicationContext(), "CurrentChannel onPause: " + currentChannel, Toast.LENGTH_SHORT).show();
+//    	outgoingWebEvents.leaveChannel(currentChannel);
+    	System.out.println("ChatActivity onPause called");
+    	super.onPause();
+    }
+    
+    @Override
+    protected void onStop()
+    {
+    	super.onStop();
+    	System.out.println("ChatActivity onStop called");
     }
     
     @Override
@@ -242,7 +289,7 @@ public class ChatActivity extends FragmentActivity
         		System.out.println("AF--SL: " + sharedPref.getString("savedlogin", ""));
 				
 				// leave current channel...
-        		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+        		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
             	webView.loadUrl(leaveChannelUrl);
 				
             	//Launch Login Window and destroy this activity
@@ -254,7 +301,7 @@ public class ChatActivity extends FragmentActivity
         	//Temporary for debug	
         	case R.id.menu_kill_app:
         		// leave current channel...
-        		String leaveChannelUrl2 = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+        		String leaveChannelUrl2 = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
             	webView.loadUrl(leaveChannelUrl2);
             	
             	//destroy this activity
@@ -270,21 +317,7 @@ public class ChatActivity extends FragmentActivity
     {
     	viewPager.setCurrentItem(CHATROOM_FRAGMENT);
     }
-    
-    
-    //Storing Fragments to be retrieved after screen orientation changes
-    @Override
-    protected void onSaveInstanceState(Bundle outState) 
-    {
-    	
-        super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, ChatRoomList.class.getName(), pagerAdapter.getItem(ROOMLIST_FRAGMENT));
-        getSupportFragmentManager().putFragment(outState, ChatRoom.class.getName(), pagerAdapter.getItem(CHATROOM_FRAGMENT));
-        getSupportFragmentManager().putFragment(outState, ChatMemberList.class.getName(), pagerAdapter.getItem(MEMBERLIST_FRAGMENT));
-        //webView.saveState(outState);
-        
-    }
-    
+
     @Override   
     protected void onRestoreInstanceState(Bundle savedInstanceState) 
     {
@@ -354,13 +387,12 @@ public class ChatActivity extends FragmentActivity
     	public void joinChannel(String channelName)
         {
     		///---Need to verify user doesnt rejoin current channel, need a method get get current channel
-    		if(currentChannel.equals(channelName)) {
+    		if(currentChannel.equals(channelName))
     			return;
-    		}
     		    		
     		// leave current channel if in one.
     		if(!currentChannel.isEmpty()) {
-	    		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, username);
+	    		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
 	        	webView.loadUrl(leaveChannelUrl);
     		}
         	
@@ -372,12 +404,30 @@ public class ChatActivity extends FragmentActivity
         	
     		// join desired channel...
         	currentChannel = channelName;
-        	String joinChannelUrl = String.format("javascript:joinChannel('%s', '%s')", currentChannel, username);
+        	String joinChannelUrl = String.format("javascript:joinChannel('%s', '%s')", currentChannel, userName);
         	webView.loadUrl(joinChannelUrl);
         	
         	//change view to chat room
         	jumpToChat();  	
         }
+    	
+    	public void leaveChannel(String channelName)
+    	{
+    		///---Need to verify user doesnt leave a channel they are not in
+    		if(currentChannel.equals(channelName))
+    			return;
+    		
+    		// leave current channel if in one.
+    		if(!currentChannel.isEmpty()) 
+    		{
+	    		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
+	        	webView.loadUrl(leaveChannelUrl);
+    		}
+    		
+    		//clear chat history
+//        	clearChatHistory();
+    		
+    	}
     	
     	// called from UI when user clicks on "send message" button.
         public void sendMessage(String message)
@@ -387,14 +437,14 @@ public class ChatActivity extends FragmentActivity
                 // send message to server.
             	//System.out.println(String.format("Sending message to channel: %s, %s", message, currentChannel));
 //            	String message2 = message.replace("'", "\\'");
-                String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, username, message);
+                String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, userName, message);
                 webView.loadUrl(sendMessageUrl);
-                //appendMessageToChat(username, message);
+                //appendMessageToChat(userName, message);
             }
         }
         
         public void startHub() {
-        	String startHubUrl = String.format("javascript:startHub('%s')", username);
+        	String startHubUrl = String.format("javascript:startHub('%s')", userName);
             webView.loadUrl(startHubUrl);
         }
     }

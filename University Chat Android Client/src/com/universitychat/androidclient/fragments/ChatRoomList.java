@@ -48,6 +48,7 @@ public class ChatRoomList extends Fragment
 		outgoingWebEvents = chatActivity.getOutgoingWebEvents();
 		
     	View v = inflater.inflate(R.layout.fragment_chat_list, container,false);
+    	v.setBackgroundColor(Color.DKGRAY);
     	publicList = (ListView) v.findViewById(R.id.list_chat_public_room);
     	privateList = (ListView) v.findViewById(R.id.list_chat_private_room);
     	
@@ -55,6 +56,8 @@ public class ChatRoomList extends Fragment
     	//single chat room support, temporary until implement multiple room support
     	publicList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     	privateList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    	
+    	publicList.setBackgroundColor(Color.DKGRAY);
     	
 //    	//soon to be implemeneted
 //    	publicList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -78,12 +81,12 @@ public class ChatRoomList extends Fragment
 				outgoingWebEvents.joinChannel(roomName);
 				ChatRoom.setChatRoomName(roomName);
 				
-				//Support for selected item background highlighting
-				if(oldListPosition > -1)
-					parent.getChildAt(oldListPosition).setBackgroundColor(Color.BLACK);
-				
-				oldListPosition = position;
-				parent.getChildAt(position).setBackgroundColor(Color.GRAY);
+//				//Support for selected item background highlighting
+//				if(oldListPosition > -1)
+//					parent.getChildAt(oldListPosition).setBackgroundColor(Color.BLACK);
+//				
+//				oldListPosition = position;
+//				parent.getChildAt(position).setBackgroundColor(Color.GRAY);
 			}
 		});
     	if(oldListPosition > -1)
@@ -113,9 +116,9 @@ public class ChatRoomList extends Fragment
 	
 	public void updatePublicRoomList(String[] roomList)
 	{
-		System.out.println("Room List Size: " + roomList.length);
-		for(int i = 0; i < roomList.length; i++)
-			System.out.println(roomList[i]);
+//		System.out.println("Room List Size: " + roomList.length);
+//		for(int i = 0; i < roomList.length; i++)
+//			System.out.println(roomList[i]);
 		publicRooms = roomList;
 		publicList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, publicRooms));
 		

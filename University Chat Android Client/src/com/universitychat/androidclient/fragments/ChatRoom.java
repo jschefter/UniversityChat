@@ -30,17 +30,50 @@ public class ChatRoom extends Fragment
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        currentChatRoomName = null;
         
-        if(savedInstanceState == null)
-        	currentChatRoomName = null;
-        else
+        if(savedInstanceState != null)
         {
         	enableButtons();
         	chatText = savedInstanceState.getString("chatText");
         	currentChatRoomName = savedInstanceState.getString("currentChatRoomName");
+        }
+        
+        System.out.println("chat room oncreate called");
+        
+    }
+	
+	@Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+    {      
+		ChatActivity chatActivity = (ChatActivity)getActivity();
+		outgoingWebEvents = chatActivity.getOutgoingWebEvents();
+		
+    	View v = inflater.inflate(R.layout.fragment_chat_window, container,false);
+        editMessage = (EditText)v.findViewById(R.id.editChatMessage);
+        buttonSendMessage = (Button)v.findViewById(R.id.buttonSendMessage);
+        textViewChat = (TextView)v.findViewById(R.id.textViewChat);
+        textChatRoomName = (TextView)v.findViewById(R.id.textView_chat_room_header);
+        textViewChat.setMovementMethod(new ScrollingMovementMethod());
+        
+//        if(currentChatRoomName != null) //if there exists a current chat room session
+        if(savedInstanceState != null) //if there exists a current chat room session
+        {
+        	enableButtons();
+        	textViewChat.append(chatText);
         	setChatRoomName(currentChatRoomName);
         }
         
+        buttonSendMessage.setOnClickListener(new View.OnClickListener() 
+        {
+            @Override
+            public void onClick(View v) 
+            {
+            	outgoingWebEvents.sendMessage(getUserMsg());
+            }
+        });
+        System.out.println("chat room oncreateVIEW called");
+        return v;
     }
 	
 	@Override
@@ -110,34 +143,5 @@ public class ChatRoom extends Fragment
 		super.onPause();
 	}
 	
-	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-    {      
-		ChatActivity chatActivity = (ChatActivity)getActivity();
-		outgoingWebEvents = chatActivity.getOutgoingWebEvents();
-		
-    	View v = inflater.inflate(R.layout.fragment_chat_window, container,false);
-        editMessage = (EditText)v.findViewById(R.id.editChatMessage);
-        buttonSendMessage = (Button)v.findViewById(R.id.buttonSendMessage);
-        textViewChat = (TextView)v.findViewById(R.id.textViewChat);
-        textChatRoomName = (TextView)v.findViewById(R.id.textView_chat_room_header);
-        textViewChat.setMovementMethod(new ScrollingMovementMethod());
-        
-        if(currentChatRoomName != null) //if there exists a current chat room session
-        {
-        	enableButtons();
-        	textViewChat.append(chatText);
-        }
-        
-        buttonSendMessage.setOnClickListener(new View.OnClickListener() 
-        {
-            @Override
-            public void onClick(View v) 
-            {
-            	outgoingWebEvents.sendMessage(getUserMsg());
-            }
-        });
-
-        return v;
-    }
+	
 }
