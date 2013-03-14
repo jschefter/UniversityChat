@@ -205,8 +205,13 @@ namespace UniversityChat
                 userCommand = new SqlCommand(sqlUserString, connection);
                 SqlDataReader userReader = userCommand.ExecuteReader();
 
-                userReader.Read();
-                roleId = userReader[0].ToString();
+                if (userReader.Read())
+                    roleId = userReader[0].ToString();
+                else
+                {
+                    Response.Redirect("~/Index.aspx");
+                    return;
+                }
                 userReader.Close();
             }
             connection.Close();
