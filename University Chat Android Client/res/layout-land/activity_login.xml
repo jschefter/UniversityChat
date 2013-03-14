@@ -75,6 +75,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="65dp"
             android:layout_marginTop="0dp"
+            android:enabled="false"
             android:onClick="loginAttempt"
             android:text="@string/loginAnon_btn" />
 

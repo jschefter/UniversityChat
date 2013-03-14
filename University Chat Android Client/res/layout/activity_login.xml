@@ -91,6 +91,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:enabled="false"
             android:onClick="loginAttempt"
             android:text="@string/loginAnon_btn" />
 
