@@ -1,17 +1,47 @@
 ﻿<%@ Page Title="University Chat Files" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Files.aspx.cs" Inherits="UniversityChat.Files" %>
 <%@ Import Namespace="UniversityChat" %>
 
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        th, td {
+            padding: 2px 4px;
+            border: none;
+        }
+        
+        table {
+            border-spacing: 0px;
+        }
+        
+        tr.myRow {
+            border: none;
+        }
+        
+        tr.myRow:nth-child(even) {
+            background-color: LightGray;
+        }
+    </style>
+</asp:Content>
+
 <asp:Content ID="ChatContent" ContentPlaceHolderID="MainContent" runat="server">
     <div>
-        <h1>Files Uploaded</h1>
+        <h1>Files</h1>
         <br />
         
         <asp:Repeater ID="LogRepeater" runat="server">
         <HeaderTemplate>
             <table>
-                <tr>
-                <td>Files in database:</td>
-                </tr>
+                <td>
+                    
+                </td>
+                <td>
+                    <h3>Date</h3>
+                </td>
+                <td>
+                    <h3>File Name</h3>
+                </td>
+                <td>
+                    <h3>File type</h3>
+                </td>
         </HeaderTemplate>
         <ItemTemplate>
             <tr class="myRow">

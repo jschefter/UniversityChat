@@ -78,10 +78,12 @@ namespace UniversityChat
                 fileCommand = new SqlCommand(sqlFileString, connection);
                 SqlDataReader fileReader = fileCommand.ExecuteReader();
 
-                fileReader.Read();
-                file = new UploadedFile(fileReader[0].ToString(), fileReader[1].ToString(),
+                if (fileReader.Read())
+                {
+                    file = new UploadedFile(fileReader[0].ToString(), fileReader[1].ToString(),
                                                fileReader[2].ToString(), fileReader[3].ToString(),
                                                (byte[]) fileReader[4]);
+                }
                 fileReader.Close();
             }
             connection.Close();

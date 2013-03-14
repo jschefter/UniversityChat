@@ -143,8 +143,8 @@ namespace UniversityChat
                     nickNameCommand = new SqlCommand(sqlNickNameString, connection);
                     SqlDataReader nickNameReader = nickNameCommand.ExecuteReader();
 
-                    nickNameReader.Read();
-                    chatLogs[i].UserId = nickNameReader[0].ToString();
+                    while (nickNameReader.Read())
+                        chatLogs[i].UserId = nickNameReader[0].ToString();
                     nickNameReader.Close();
                 }
 
