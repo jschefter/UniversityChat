@@ -28,14 +28,23 @@ namespace UniversityChat
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
+            // Return if no file is selected
             if (!uploadFile.HasFile)
+            {
+                fileUploadStatus.Text = "No file selected!";
                 return;
+            }
 
-            fileName.Text = "Uploaded " + uploadFile.FileName + "Content Type " + uploadFile.PostedFile.ContentType;
+            // 2MB File Upload Limit
+            if (uploadFile.PostedFile.ContentLength > 2 * 1024 * 1024)
+            {
+                fileUploadStatus.Text = "File size exceeds the limit of 2MB, please try uploading files below 2MB.";
+                return;
+            }
 
             byte[] fileSize = new byte[uploadFile.PostedFile.ContentLength];
             HttpPostedFile uploadedFile = uploadFile.PostedFile;
-            uploadedFile.InputStream.Read(fileSize, 0, (int)uploadFile.PostedFile.ContentLength);
+            uploadedFile.InputStream.Read(fileSize, 0, uploadFile.PostedFile.ContentLength);
 
             string connectionSource = ConfigurationManager.ConnectionStrings["ucdatabaseConnectionString2"].ToString();
             SqlConnection connection = new SqlConnection(connectionSource);
@@ -43,6 +52,8 @@ namespace UniversityChat
             using (connection)
             {
                 connection.Open();
+
+                #region Inserting the file into the database
 
                 SqlCommand uploadFileCommand = new SqlCommand();
                 uploadFileCommand.CommandText = "INSERT INTO [ucdatabase].[UniversityChat].[File] ([UploadDate], [FileName], [MimeType], [BinaryData]) VALUES (@UploadDate, @FileName, @MimeType, @BinaryData)";
@@ -68,8 +79,13 @@ namespace UniversityChat
                 SqlDataReader uploadFileCommandReader = uploadFileCommand.ExecuteReader();
                 uploadFileCommandReader.Read();
                 uploadFileCommandReader.Close();
+
+                #endregion
             }
             connection.Close();
+
+            // Tell the user that the file has been successfully uploaded
+            fileUploadStatus.Text = "Uploaded '" + uploadFile.FileName + "'.";
         }
 
         /*

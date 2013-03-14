@@ -31,8 +31,8 @@
                     <div><a id="show-upload">Upload a File</a><a id="hide-upload">Close Upload</a></div>
                     <div id="upload-ui">
                         <asp:FileUpload ID="uploadFile" runat="server"/>
-                        <asp:LinkButton ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click"/>
-                        <asp:Label runat="server" ID="fileName"></asp:Label>
+                        <asp:LinkButton ID="btnUpload" runat="server" Text="Upload" OnClick="btnUpload_Click"/> <br />
+                        <asp:Label runat="server" ID="fileUploadStatus"></asp:Label>
                     </div>
                     <input type="text" id="message" disabled="disabled" placeholder="Type your message here and press Enter" />
                     <input type="submit" id="sendmessage" value="Send" />
