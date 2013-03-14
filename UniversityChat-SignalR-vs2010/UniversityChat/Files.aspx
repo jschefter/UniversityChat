@@ -27,6 +27,8 @@
         <h1>Files</h1>
         <br />
         
+        <asp:Label runat="server" ID="resultLabel"></asp:Label>
+        
         <asp:Repeater ID="LogRepeater" runat="server">
         <HeaderTemplate>
             <table>

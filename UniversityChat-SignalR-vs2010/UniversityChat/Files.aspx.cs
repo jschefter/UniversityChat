@@ -84,6 +84,11 @@ namespace UniversityChat
                                                fileReader[2].ToString(), fileReader[3].ToString(),
                                                (byte[]) fileReader[4]);
                 }
+                else
+                {
+                    resultLabel.Text = "Failed to download file.";
+                    return;
+                }
                 fileReader.Close();
             }
             connection.Close();
