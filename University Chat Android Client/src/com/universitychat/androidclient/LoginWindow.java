@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -70,19 +71,19 @@ public class LoginWindow extends Activity
 		//check if user set host
 		SharedPreferences sharedPref1 = getSharedPreferences(Constants.HOST_PREF,Context.MODE_PRIVATE);
 		newHostURL = sharedPref1.getString("hostURL","");
-		System.out.println("hostURL after shared pref get: " + newHostURL);
+//		System.out.println("hostURL after shared pref get: " + newHostURL);
 		
 		//check if user opted to save log in info and use it if valid
 		SharedPreferences sharedPref2 = getSharedPreferences(Constants.LOG_IN_PREF,Context.MODE_PRIVATE);
 		String savedLogin = sharedPref2.getString("savedlogin","");
 		if(savedLogin.equals("yes"))
 		{
-			System.out.println("attempt to re-login user");
+//			System.out.println("attempt to re-login user");
 			userCredentials = new String[2];
 			userCredentials[0] = sharedPref2.getString("username","");
-			userCredentials[1] = sharedPref2.getString("password","");
-			System.out.println("Saved UN: " + userCredentials[0]);
-			System.out.println("Saved PW: " + userCredentials[1]);
+//			userCredentials[1] = sharedPref2.getString("password","");
+//			System.out.println("Saved UN: " + userCredentials[0]);
+//			System.out.println("Saved PW: " + userCredentials[1]);
 			loginFlag = 0;
 			new AuthenticationTask().execute(userCredentials[0], userCredentials[1]);
 		}
@@ -181,8 +182,27 @@ public class LoginWindow extends Activity
 	
 	public void startSignUpActivity(View view)
 	{
-		Intent signUpIntent = new Intent(this, SignupActivity.class);
-		startActivity(signUpIntent);
+//		Intent signUpIntent = new Intent(this, SignupActivity.class);
+//		startActivity(signUpIntent);
+		
+		builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.signup_header_text);
+		builder.setMessage(R.string.prompt_feedback_redirection);
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int id) {
+	        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SIGNUP_URL));
+	        		startActivity(browserIntent);
+	           }});
+		
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	           public void onClick(DialogInterface dialog, int id) {
+	               dialog.cancel();
+	           }});
+	       
+		dialog = builder.create();
+		dialog.setCancelable(true); //cancelable by back button
+		dialog.setCanceledOnTouchOutside(false); //non-cancelable by click outside
+		dialog.show();
 	}
 	
 	public void loginAttempt(View view)
@@ -233,7 +253,7 @@ public class LoginWindow extends Activity
 				else //user has supplied host URL
 					url = new URL(newHostURL + Constants.DEFAULT_LOGIN_EXT);
 			
-				System.out.println("Login Host: " + url.toString());
+//				System.out.println("Login Host: " + url.toString());
 				
 				HttpURLConnection connection = null;
 				InputStream inputStream = null;
@@ -264,7 +284,7 @@ public class LoginWindow extends Activity
 				connection.disconnect();
 				
 				String result = sb.toString();
-				System.out.println(result);
+//				System.out.println(result);
 				return result.equals("Authenticated")? true : false;
 			}
 			catch (Exception e)

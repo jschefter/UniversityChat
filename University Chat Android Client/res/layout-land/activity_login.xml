@@ -50,6 +50,7 @@
             android:id="@+id/btn_login"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:onClick="loginAttempt"
             android:text="@string/login_btn" />
@@ -58,6 +59,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="65dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="OR"
@@ -69,6 +71,7 @@
             android:id="@+id/btn_loginAnonymous"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="65dp"
             android:layout_marginTop="0dp"
             android:onClick="loginAttempt"

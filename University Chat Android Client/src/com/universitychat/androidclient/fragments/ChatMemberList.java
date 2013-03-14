@@ -23,7 +23,7 @@ public class ChatMemberList extends Fragment
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        System.out.println("member list oncreate called");
+//        System.out.println("member list oncreate called");
         
         if (savedInstanceState != null)
         	chatMemberArray = savedInstanceState.getStringArray("chatMemberArray");
@@ -40,7 +40,7 @@ public class ChatMemberList extends Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-		System.out.println("member list oncreateview called");
+//		System.out.println("member list oncreateview called");
     	View v = inflater.inflate(R.layout.fragment_chat_member_list, container,false);
     	v.setBackgroundColor(Color.DKGRAY);
     	numUsers = (TextView) v.findViewById(R.id.textView_num_users);

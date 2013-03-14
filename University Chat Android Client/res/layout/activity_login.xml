@@ -68,31 +68,38 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="OR"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp"
-        android:typeface="normal" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_loginAnonymous"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="10dp"
-        android:onClick="loginAttempt"
-        android:text="@string/loginAnon_btn" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="OR"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="30sp"
+            android:typeface="normal" />
+
+        <Button
+            android:id="@+id/btn_loginAnonymous"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="loginAttempt"
+            android:text="@string/loginAnon_btn" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView_signuplink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_weight="20"
         android:clickable="true"
         android:gravity="center_horizontal"

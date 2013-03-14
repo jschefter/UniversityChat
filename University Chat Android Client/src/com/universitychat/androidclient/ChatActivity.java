@@ -47,6 +47,7 @@ public class ChatActivity extends FragmentActivity
     private String URL;
     private AlertDialog.Builder builder;
 	private AlertDialog dialog;
+	private boolean enableCreateChannel;
 
     /**
      * Called when the activity is first created.
@@ -64,28 +65,15 @@ public class ChatActivity extends FragmentActivity
         newHost = extras.getString("newHost");
         userName = userCredentials[0];
         password = userCredentials[1];
-        
-//        try
-//        {
-//        	currentChannel = savedInstanceState.getString("currentChannel");
-//        	System.out.println("oncreate: saved instance try");
-//        }
-//        catch(Exception e)
-//        {
-//        	System.out.println("oncreate: saved instance catch");
-//        	currentChannel = "";
-//        }
-        
-//        if(currentChannel == null)
-        	currentChannel = "";
-        
-        //Toast.makeText(getApplicationContext(), "CurrentChannel is null: " + (currentChannel == null), Toast.LENGTH_SHORT).show();
+        enableCreateChannel = false;
+        currentChannel = "";
 
-//        if(newHost.equals("") || newHost == null) //new host not provided by user, connect to default host
-//        	URL = (Constants.DEFAULT_HOST + Constants.DEFAULT_HOST_EXT);
-//        else
-//        	URL = (newHost + Constants.DEFAULT_HOST_EXT);
-        URL = "http://universitychat.azurewebsites.net/Android.html";
+        if(newHost.equals("") || newHost == null) //new host not provided by user, connect to default host
+        	URL = (Constants.DEFAULT_HOST + Constants.DEFAULT_HOST_EXT);
+        else
+        	URL = (newHost + Constants.DEFAULT_HOST_EXT);
+//        URL = "http://universitychat.azurewebsites.net/Android.html";
+        
         initializeWebView();
         webView.loadUrl(URL);	// connect to service (start the hub).
         
@@ -105,14 +93,17 @@ public class ChatActivity extends FragmentActivity
 	        fragments.add(Fragment.instantiate(this, ChatRoomList.class.getName()));
 	        fragments.add(Fragment.instantiate(this, ChatRoom.class.getName()));
 	        fragments.add(Fragment.instantiate(this, ChatMemberList.class.getName()));
+	        
         }
         else //or retrieve stored fragments
         {
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoomList.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatRoom.class.getName()));
         	fragments.add(getSupportFragmentManager().getFragment(savedInstanceState, ChatMemberList.class.getName()));
+        	enableCreateChannel = true;
         	currentChannel = savedInstanceState.getString("currentChannel");
         	userName = savedInstanceState.getString("userName");
+        	enableCreateChannel = savedInstanceState.getBoolean("enableCreateChannel");
 //        	outgoingWebEvents.joinChannel(currentChannel);
         	String joinChannelUrl = String.format("javascript:joinChannel('%s', '%s')", currentChannel, userName);
         	webView.loadUrl(joinChannelUrl);
@@ -125,8 +116,6 @@ public class ChatActivity extends FragmentActivity
         viewPager.setAdapter(pagerAdapter);
         
         viewPager.setCurrentItem(ROOMLIST_FRAGMENT);
-//        Toast.makeText(getApplicationContext(), "CurrentChannel oncreate: " + currentChannel, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(getApplicationContext(), "username oncreate: " + userName, Toast.LENGTH_SHORT).show();
     }
     
     //Storing Fragments to be retrieved after screen orientation changes
@@ -138,7 +127,8 @@ public class ChatActivity extends FragmentActivity
         getSupportFragmentManager().putFragment(outState, ChatMemberList.class.getName(), pagerAdapter.getItem(MEMBERLIST_FRAGMENT));
         outState.putString("currentChannel", currentChannel);
         outState.putString("userName", userName);
-        System.out.println("UN on save: " + userName);
+        outState.putBoolean("enableCreateChannel", enableCreateChannel);
+//        System.out.println("UN on save: " + userName);
 //        outgoingWebEvents.leaveChannel(currentChannel);
         //System.out.println("onSaveInst - Leave Channel Called");
         String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
@@ -151,7 +141,7 @@ public class ChatActivity extends FragmentActivity
     {
 //    	Toast.makeText(getApplicationContext(), "CurrentChannel onPause: " + currentChannel, Toast.LENGTH_SHORT).show();
 //    	outgoingWebEvents.leaveChannel(currentChannel);
-    	System.out.println("ChatActivity onPause called");
+//    	System.out.println("ChatActivity onPause called");
     	super.onPause();
     }
     
@@ -159,7 +149,7 @@ public class ChatActivity extends FragmentActivity
     protected void onStop()
     {
     	super.onStop();
-    	System.out.println("ChatActivity onStop called");
+//    	System.out.println("ChatActivity onStop called");
     }
     
     @Override
@@ -179,6 +169,17 @@ public class ChatActivity extends FragmentActivity
 		getMenuInflater().inflate(R.menu.menu_chat, menu);
 		return true;
 	}
+    
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) 
+    {
+    	if (enableCreateChannel)
+    		menu.getItem(1).setEnabled(true);
+    	else
+    		menu.getItem(1).setEnabled(false);
+    	
+        return true;
+    }
     
   //Handle event handling for individual menu items
     @Override
@@ -226,31 +227,31 @@ public class ChatActivity extends FragmentActivity
         		dialog.show();
         		return true;
  
-        	//Temporary for debug
-        	case R.id.menu_remove_channel:
-        		builder = new AlertDialog.Builder(this);
-        		LayoutInflater layInf2 =LayoutInflater.from(this);
-                View view2 = layInf2.inflate(R.layout.edit_text, null);
-                final TextView editText2 = (TextView) view2.findViewById(R.id.editText_change_host);
-                
-                builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
-     	           public void onClick(DialogInterface dialog, int id) {
-     	               outgoingWebEvents.deleteChannel(editText2.getText().toString());
-     	           }});
-     	       
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-      	           public void onClick(DialogInterface dialog, int id) {
-      	               dialog.cancel();
-      	           }});
-      	       
-                builder.setView(view2);
-        		builder.setTitle(R.string.menu_remove_channel);
-        		builder.setCancelable(true);
-        		dialog = builder.create();
-        		dialog.setCancelable(true); //cancelable by back button
-        		dialog.setCanceledOnTouchOutside(false); //non-cancelable by click outside
-        		dialog.show();
-        		return true;
+//        	//Temporary for debug
+//        	case R.id.menu_remove_channel:
+//        		builder = new AlertDialog.Builder(this);
+//        		LayoutInflater layInf2 =LayoutInflater.from(this);
+//                View view2 = layInf2.inflate(R.layout.edit_text, null);
+//                final TextView editText2 = (TextView) view2.findViewById(R.id.editText_change_host);
+//                
+//                builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+//     	           public void onClick(DialogInterface dialog, int id) {
+//     	               outgoingWebEvents.deleteChannel(editText2.getText().toString());
+//     	           }});
+//     	       
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//      	           public void onClick(DialogInterface dialog, int id) {
+//      	               dialog.cancel();
+//      	           }});
+//      	       
+//                builder.setView(view2);
+//        		builder.setTitle(R.string.menu_remove_channel);
+//        		builder.setCancelable(true);
+//        		dialog = builder.create();
+//        		dialog.setCancelable(true); //cancelable by back button
+//        		dialog.setCanceledOnTouchOutside(false); //non-cancelable by click outside
+//        		dialog.show();
+//        		return true;
         		
         	case R.id.menu_feedback:
         		builder = new AlertDialog.Builder(this);
@@ -258,7 +259,7 @@ public class ChatActivity extends FragmentActivity
         		builder.setMessage(R.string.prompt_feedback_redirection);
         		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
         	           public void onClick(DialogInterface dialog, int id) {
-        	        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.FEEDBACK_URL));
+        	        	   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SIGNUP_URL));
         	        		startActivity(browserIntent);
         	           }});
         		
@@ -277,16 +278,16 @@ public class ChatActivity extends FragmentActivity
         	case R.id.menu_sign_out:
         		SharedPreferences sharedPref = getSharedPreferences(Constants.LOG_IN_PREF,Context.MODE_PRIVATE);
         		SharedPreferences.Editor editor = sharedPref.edit();
-        		System.out.println("B4--UN: " + sharedPref.getString("username", ""));
-        		System.out.println("B4--PW: " + sharedPref.getString("password", ""));
-        		System.out.println("B4--SL: " + sharedPref.getString("savedlogin", ""));
+//        		System.out.println("B4--UN: " + sharedPref.getString("username", ""));
+//        		System.out.println("B4--PW: " + sharedPref.getString("password", ""));
+//        		System.out.println("B4--SL: " + sharedPref.getString("savedlogin", ""));
         		editor.putString("username", ""); //clear stored info
 				editor.putString("password", ""); //clear stored info
 				editor.putString("savedlogin", "no");
 				editor.commit();
-				System.out.println("AF--UN: " + sharedPref.getString("username", ""));
-        		System.out.println("AF--PW: " + sharedPref.getString("password", ""));
-        		System.out.println("AF--SL: " + sharedPref.getString("savedlogin", ""));
+//				System.out.println("AF--UN: " + sharedPref.getString("username", ""));
+//        		System.out.println("AF--PW: " + sharedPref.getString("password", ""));
+//        		System.out.println("AF--SL: " + sharedPref.getString("savedlogin", ""));
 				
 				// leave current channel...
         		String leaveChannelUrl = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
@@ -298,15 +299,15 @@ public class ChatActivity extends FragmentActivity
 				this.finish(); 
         		return true;
         		
-        	//Temporary for debug	
-        	case R.id.menu_kill_app:
-        		// leave current channel...
-        		String leaveChannelUrl2 = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
-            	webView.loadUrl(leaveChannelUrl2);
-            	
-            	//destroy this activity
-            	this.finish();
-        		return true;
+//        	//Temporary for debug	
+//        	case R.id.menu_kill_app:
+//        		// leave current channel...
+//        		String leaveChannelUrl2 = String.format("javascript:leaveChannel('%s', '%s')", currentChannel, userName);
+//            	webView.loadUrl(leaveChannelUrl2);
+//            	
+//            	//destroy this activity
+//            	this.finish();
+//        		return true;
         		
         	default:
         		return super.onOptionsItemSelected(item);
@@ -409,6 +410,8 @@ public class ChatActivity extends FragmentActivity
         	
         	//change view to chat room
         	jumpToChat();  	
+        	
+        	enableCreateChannel = true;
         }
     	
     	public void leaveChannel(String channelName)
@@ -436,8 +439,9 @@ public class ChatActivity extends FragmentActivity
             {
                 // send message to server.
             	//System.out.println(String.format("Sending message to channel: %s, %s", message, currentChannel));
-//            	String message2 = message.replace("'", "\\'");
-                String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, userName, message);
+            	String message2 = message.replace("'", "\\'");
+            	String message3 = message2.replaceAll("\\\\", "\\\\\\\\");
+                String sendMessageUrl = String.format("javascript:sendMessage('%s', '%s', '%s')", currentChannel, userName, message2);
                 webView.loadUrl(sendMessageUrl);
                 //appendMessageToChat(userName, message);
             }
@@ -467,7 +471,7 @@ public class ChatActivity extends FragmentActivity
     	@JavascriptInterface
         public void hubStartDone()
         {
-        	System.out.println("incomming from JS: Hub start is done");
+//        	System.out.println("incomming from JS: Hub start is done");
         	// signalR hub has been started.
         	// this would be where add/remove channel buttons would be enabled.
         }
@@ -475,7 +479,7 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void broadcastMessageToChat(final String channelName, final String username, final String message) 
         {
-        	System.out.println(String.format("incomming from JS: channel: %s, user: %s, message: %s", channelName, username, message));
+//        	System.out.println(String.format("incomming from JS: channel: %s, user: %s, message: %s", channelName, username, message));
         	
         	// make sure the message is for the current channel.
         	if(channelName.equals(currentChannel)) {
@@ -493,7 +497,7 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void setChannelList(final String[] channelList)
         {
-        	System.out.println("incomming from JS: Got new channel list");
+//        	System.out.println("incomming from JS: Got new channel list");
         	
         	chatWindowActivityHandler.post(new Runnable() 
             {
@@ -508,7 +512,7 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void setUserList(final String[] chatUserList)
         {
-        	System.out.println("incomming from JS: Got new chat user list");
+//        	System.out.println("incomming from JS: Got new chat user list");
         	
         	chatWindowActivityHandler.post(new Runnable() 
             {
@@ -523,7 +527,7 @@ public class ChatActivity extends FragmentActivity
         @JavascriptInterface
         public void joinChatComplete() 
         {
-        	System.out.println("incomming from JS: join chat complete");
+//        	System.out.println("incomming from JS: join chat complete");
         	
             chatWindowActivityHandler.post(new Runnable() 
             {

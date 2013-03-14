@@ -1,17 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/menu_create_channel"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/menu_create_channel"/>
-    
-    <item
-        android:id="@+id/menu_remove_channel"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/menu_remove_channel"/>
-    
     <item
         android:id="@+id/menu_chat_about"
         android:orderInCategory="100"
@@ -19,10 +6,10 @@
         android:title="@string/menu_about"/>
     
     <item
-        android:id="@+id/menu_sign_out"
+        android:id="@+id/menu_create_channel"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/menu_sign_out"/>
+        android:title="@string/menu_create_channel"/>
     
     <item
         android:id="@+id/menu_feedback"
@@ -31,10 +18,8 @@
         android:title="@string/menu_feedback"/>
     
     <item
-        android:id="@+id/menu_kill_app"
+        android:id="@+id/menu_sign_out"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/menu_kill_app"/>
-    
-    
+        android:title="@string/menu_sign_out"/>
 </menu>

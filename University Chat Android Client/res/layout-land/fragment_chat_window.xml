@@ -35,7 +35,7 @@
         <Button
             android:id="@+id/buttonSendMessage"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:enabled="false"
             android:hint="@string/send_btn"

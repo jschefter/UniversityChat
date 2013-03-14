@@ -110,7 +110,7 @@ public class ChatRoomList extends Fragment
 	@Override
 	public void onPause()
 	{
-		System.out.println("on pause chatroom called");
+//		System.out.println("on pause chatroom called");
 		super.onPause();
 	}
 	
@@ -122,7 +122,7 @@ public class ChatRoomList extends Fragment
 		publicRooms = roomList;
 		publicList.setAdapter(new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, publicRooms));
 		
-		System.out.println("update public room list called");
+//		System.out.println("update public room list called");
 	}
 	
 	public void updatePrivateRoomList(String[] roomList)

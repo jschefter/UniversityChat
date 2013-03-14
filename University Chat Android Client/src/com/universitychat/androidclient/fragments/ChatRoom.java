@@ -39,7 +39,7 @@ public class ChatRoom extends Fragment
         	currentChatRoomName = savedInstanceState.getString("currentChatRoomName");
         }
         
-        System.out.println("chat room oncreate called");
+//        System.out.println("chat room oncreate called");
         
     }
 	
@@ -56,8 +56,8 @@ public class ChatRoom extends Fragment
         textChatRoomName = (TextView)v.findViewById(R.id.textView_chat_room_header);
         textViewChat.setMovementMethod(new ScrollingMovementMethod());
         
-//        if(currentChatRoomName != null) //if there exists a current chat room session
-        if(savedInstanceState != null) //if there exists a current chat room session
+        if(currentChatRoomName != null) //if there exists a current chat room session
+//        if(savedInstanceState != null) //if there exists a current chat room session
         {
         	enableButtons();
         	textViewChat.append(chatText);
@@ -72,7 +72,7 @@ public class ChatRoom extends Fragment
             	outgoingWebEvents.sendMessage(getUserMsg());
             }
         });
-        System.out.println("chat room oncreateVIEW called");
+//        System.out.println("chat room oncreateVIEW called");
         return v;
     }
 	

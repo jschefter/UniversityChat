@@ -28,7 +28,7 @@
     <string name="num_users">000</string>
     <string name="lbl_users">Users</string>
     <string name="about_title">About</string>
-    <string name="about_content">Univerisity Chat Application created for CSS490 at University of Washington Bothell</string>
+    <string name="about_content">University Chat was created by:\nShane Honanie\nDarren Korman\nJames Schefter\nKevin Pun\nChris Fox\nAhmad Salama\nKelvin Hsieh\n\nCheck out our website at\nhttp://universitychat.azurewebsites.net/</string>
     <string name="prompt_close">Close</string>
     <string name="menu_about">About</string>
     <string name="menu_change_host">Change Host</string>
