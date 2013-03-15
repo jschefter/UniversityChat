@@ -18,7 +18,6 @@ function WebClientChatUI($containingElement, chatDataSource) {
         chatDataSource.RegisterUserInterface(self);
 
         $chatTabs.tabs({
-            heightStyle: "fill",
             activate: function (event, ui) {
                 // show the user list for the activated tab.
                 var newTab = ui.newTab.find("a").html();
@@ -124,7 +123,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 $chatTabs.show();
                 $chatTabs.find(".tabs").append('<li class="' + channelName + '"><a href="#' + channelName + '">' + channelName + '</a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>');
                 $chatTabs.find(".content").append('<div id="' + channelName + '"></div>');
-                $chatTabs.tabs("refresh");
+                refreshChatTabs();
 
                 $userLists.append("<ul class='" + channelName + "' />");
 
@@ -145,7 +144,7 @@ function WebClientChatUI($containingElement, chatDataSource) {
 
                 $chatTabs.find(".tabs").find("." + channelName).remove();
                 $chatTabs.find(".content").find("#" + channelName).remove();
-                $chatTabs.tabs("refresh");
+                refreshChatTabs();
 
                 $userLists.find("." + channelName).remove();
 
@@ -163,6 +162,13 @@ function WebClientChatUI($containingElement, chatDataSource) {
                 chatDataSource.LeaveChannel(channelName, userName);
             }
         });
+    };
+
+    var refreshChatTabs = function () {
+        $chatTabs.tabs("refresh");
+        var tabsHeight = $chatTabs.find(".tabs").height();
+        var contentHeight = $chatTabs.height() - tabsHeight - 10;   // 10 is for content padding.
+        $chatTabs.find(".content").height(contentHeight);
     };
 
     this.SetConnectedUserCount = function (userCount) {
