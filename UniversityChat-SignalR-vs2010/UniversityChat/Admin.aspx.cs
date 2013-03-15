@@ -190,6 +190,7 @@ namespace UniversityChat
             string name = Page.User.Identity.Name;
             string roleId;
 
+            roleID.Items.Clear();
             for (int i = 0; i < 4; i++)
                 roleID.Items.Insert(i, new ListItem(i.ToString(CultureInfo.InvariantCulture)));
 
