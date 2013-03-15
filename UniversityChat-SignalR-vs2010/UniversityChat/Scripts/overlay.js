@@ -1,4 +1,14 @@
 ﻿$(function () {
+    // Log Page
+    $('#logs').click(function () {
+        window.location.replace("/Log.aspx");
+    });
+
+    // Files Page
+    $('#files').click(function () {
+        window.location.replace("/Files.aspx");
+    });
+
     // Welcome overlay
     $('#welcome').click(function () {
         $('#overlay').fadeIn('fast', function () {

@@ -187,14 +187,13 @@ body {
 }
 
 #chat-tabs {
-    height: 380px;
+    height: 390px;
 }
 
 #chat-tabs .content > div {
     overflow-y: scroll;
     background-color: white;
     padding: 5px;
-    height: inherit;
 }
 
 #chat-input {
@@ -241,7 +240,7 @@ body {
 .arrow {
     position: fixed;
     top: 220px;
-    left: 10%;
+    left: 4%;
     z-index: 100;
     display: none;
 }
@@ -250,7 +249,7 @@ body {
     position: fixed;
     top: 220px;
     height: 100px;
-    left: 15%;
+    left: 10%;
     background-color: #fff;
     color: #7F7F7F;
     z-index: 100;

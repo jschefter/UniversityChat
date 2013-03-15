@@ -49,8 +49,8 @@
             <a href="https://github.com/jschefter/universitychat" title="View our project source on GitHub" style="color: darksalmon;" target="_blank">Github</a> |
             <a href="AndroidInfo.aspx" title="Android Guide and Info" style="color: crimson;" target="_blank">Android Info</a> | 
             <a id="help" title="Get help for University Chat" style="cursor: pointer; color: #8fbc8f;">Help</a> |
-            <a id="logs" href="~/Log.aspx"title="Get the chat logs" style="cursor: pointer; color: #00008b;">Logs</a> |
-            <a id="files" href="~/Files.aspx" title="Get the files" style="cursor: pointer; color: #b22222;">Files</a>
+            <a id="logs" title="Get the chat logs" style="cursor: pointer; color: #00008b;">Logs</a> |
+            <a id="files" title="Get the files" style="cursor: pointer; color: #b22222;">Files</a>
         </footer>
     </form>
     </div>
