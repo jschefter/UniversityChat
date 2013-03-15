@@ -1,12 +1,12 @@
 ﻿$(function () {
     // Log Page
     $('#logs').click(function () {
-        window.location.replace("/Log.aspx");
+        window.open("/Log.aspx");
     });
 
     // Files Page
     $('#files').click(function () {
-        window.location.replace("/Files.aspx");
+        window.open("/Files.aspx");
     });
 
     // Welcome overlay
