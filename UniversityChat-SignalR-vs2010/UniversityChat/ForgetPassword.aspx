@@ -20,6 +20,7 @@
     </div>
     <div>
         <br/>
-        <asp:Button ID="buttonSubmit" runat="server" Text="Email me!" onclick="btnSubmit_Click" />
+        <asp:Button ID="buttonSubmit" runat="server" Text="Email me!" onclick="btnSubmit_Click" /> <br /> <br />
+        <asp:Label runat="server" ID="resultLabel"></asp:Label>
     </div>
 </asp:Content>

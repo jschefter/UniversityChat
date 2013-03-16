@@ -11,6 +11,7 @@
     <asp:Panel runat="server" ID="AnonPanel" Visible="false">
         <h1>University Chat Login</h1>
         <p>Log in using your username and password below, or <asp:Hyperlink runat="server" ID="LinkToRegister" NavigateUrl="~/Register.aspx" Text="Register for an account"></asp:Hyperlink>.</p>
+        <p>If you have forgotten your password, please go <asp:HyperLink runat="server" Text="here" NavigateUrl="~/ForgetPassword.aspx"></asp:HyperLink></p>
         <div class="login-box">
             <p><span class="label">User Name:</span><asp:TextBox runat="server" ID="UserName"></asp:TextBox></p>
             <p><span class="label">Password:</span><asp:TextBox runat="server" ID="Password" TextMode="Password"></asp:TextBox></p>
